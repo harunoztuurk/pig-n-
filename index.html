@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Şifre Kırıcı - Gizem Zeydanlı</title>
+    <meta name="description" content="Cyberpunk temalı matematik bulmacası - Şifre Kırıcı">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Orbitron:wght@700;900&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="index.css">
+</head>
+
+<body>
+    <div class="scanline"></div>
+    <div class="wrapper">
+
+        <header class="header">
+            <h1 class="title">ŞİFRE KIRICI: GİZEMLİ SEMBOL 1</h1>
+            <div class="subtitle">// MATEMATİK DEDEKTİFLERİ İŞ BAŞINA //</div>
+        </header>
+
+        <div class="divider"></div>
+
+        <main class="main-layout">
+
+            <!-- SOL -->
+            <section class="left-panel">
+                <div class="section-label">[ 1. AŞAMA: SAYILARI YERLEŞTİR ]</div>
+                <div class="steps">
+                    <h3>▸ ADIMLAR</h3>
+                    <ol class="step-list">
+                        <li><span class="step-num">01</span><span>Başlangıçtan <span class="bold">(A1)</span> <span
+                                    class="bold">4</span> birim <span class="dir">güneye</span> ve <span
+                                    class="bold">2</span> birim <span class="dir">doğuya</span> git; oraya <span
+                                    class="bold">3</span> yaz.</span></li>
+                        <li><span class="step-num">02</span><span><span class="bold">3</span>'ten <span
+                                    class="bold">4</span> birim <span class="dir">kuzeye</span> ve <span
+                                    class="bold">3</span> birim <span class="dir">doğuya</span> git; oraya <span
+                                    class="bold">(.)</span> koy.</span></li>
+                        <li><span class="step-num">03</span><span>Noktadan <span class="bold">3</span> birim <span
+                                    class="dir">güneye</span> ve <span class="bold">5</span> birim <span
+                                    class="dir">batıya</span> git; oraya <span class="bold">1</span> yaz.</span></li>
+                        <li><span class="step-num">04</span><span><span class="bold">1</span>'den <span
+                                    class="bold">6</span> birim <span class="dir">doğuya</span> git; oraya <span
+                                    class="bold">4</span> yaz.</span></li>
+                        <li><span class="step-num">05</span><span><span class="bold">4</span>'ten <span
+                                    class="bold">6</span> birim <span class="dir">batıya</span> git; zaten yazdığın
+                                <span class="bold">1</span>'in üzerindesin.</span></li>
+                        <li><span class="step-num">06</span><span><span class="bold">1</span>'den <span
+                                    class="bold">4</span> birim <span class="dir">doğuya</span> ve <span
+                                    class="bold">1</span> birim <span class="dir">güneye</span> git; oraya <span
+                                    class="bold">5</span> yaz.</span></li>
+                        <li><span class="step-num">07</span><span><span class="bold">5</span>'ten <span
+                                    class="bold">4</span> birim <span class="dir">kuzeye</span> ve <span
+                                    class="bold">3</span> birim <span class="dir">batıya</span> git; oraya <span
+                                    class="bold">9</span> yaz.</span></li>
+                        <li><span class="step-num">08</span><span><span class="bold">9</span>'dan <span
+                                    class="bold">2</span> birim <span class="dir">güneye</span> ve <span
+                                    class="bold">3</span> birim <span class="dir">doğuya</span> git; oraya <span
+                                    class="bold">2</span> yaz.</span></li>
+                        <li><span class="step-num">09</span><span><span class="bold">2</span>'den <span
+                                    class="bold">2</span> birim <span class="dir">batıya</span> git; oraya <span
+                                    class="bold">6</span> yaz.</span></li>
+                    </ol>
+                </div>
+
+                <div class="section-label">[ 2. AŞAMA: ŞİFREYİ BİRLEŞTİR ]</div>
+                <div class="connect-box">
+                    <h3>▸ BAĞLANTI SIRALARI</h3>
+                    <ul class="connect-list">
+                        <li><span class="dot"
+                                style="background:var(--yellow);box-shadow:0 0 6px var(--yellow)"></span><span
+                                style="color:var(--yellow)">1 → 3 → 5 → 4</span><span class="connection-hint">bir yayla
+                                birleştir</span></li>
+                        <li><span class="dot"
+                                style="background:var(--green);box-shadow:0 0 6px var(--green)"></span><span
+                                style="color:var(--green)">3 → 6 → 9</span><span class="connection-hint">sayılarını
+                                birleştir</span></li>
+                        <li><span class="dot" style="background:var(--pink);box-shadow:0 0 6px var(--pink)"></span><span
+                                style="color:var(--pink)">5 → 2 → (.)</span><span class="connection-hint">nokta
+                                işaretini birleştir</span></li>
+                    </ul>
+                </div>
+
+                <div class="color-box" id="colorBox">
+                    <h3>▸ ÇİZGİ RENGİ</h3>
+                    <div class="color-options">
+                        <div class="color-opt selected" style="background:#ffe600" data-color="#ffe600"
+                            onclick="selectColor(this)"></div>
+                        <div class="color-opt" style="background:#00ff88" data-color="#00ff88"
+                            onclick="selectColor(this)"></div>
+                        <div class="color-opt" style="background:#ff2d78" data-color="#ff2d78"
+                            onclick="selectColor(this)"></div>
+                        <div class="color-opt" style="background:#00f5ff" data-color="#00f5ff"
+                            onclick="selectColor(this)"></div>
+                        <div class="color-opt" style="background:#ffffff" data-color="#ffffff"
+                            onclick="selectColor(this)"></div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SAĞ -->
+            <section class="right-panel">
+                <div class="section-label">[ KOORDİNAT TABLOSU ]</div>
+
+                <div class="mode-tabs">
+                    <button class="mode-tab active" id="tabInput" onclick="setMode('input')">✎ SAYI GİR</button>
+                    <button class="mode-tab" id="tabDraw" onclick="setMode('draw')">✦ ÇİZ</button>
+                </div>
+
+                <div class="grid-container">
+                    <div class="grid-outer">
+                        <div class="col-labels">
+                            <div class="col-label">A</div>
+                            <div class="col-label">B</div>
+                            <div class="col-label">C</div>
+                            <div class="col-label">D</div>
+                            <div class="col-label">E</div>
+                            <div class="col-label">F</div>
+                            <div class="col-label">G</div>
+                        </div>
+                        <div class="row-labels">
+                            <div class="row-label">1</div>
+                            <div class="row-label">2</div>
+                            <div class="row-label">3</div>
+                            <div class="row-label">4</div>
+                            <div class="row-label">5</div>
+                        </div>
+                        <div class="grid-stack">
+                            <table class="grid-table">
+                                <tbody id="gridBody"></tbody>
+                            </table>
+                            <canvas id="drawCanvas" width="420" height="300"></canvas>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- LIVE ENTRY BOX -->
+                <div class="entry-box" id="entryBox">
+                    <div class="entry-box-label">▸ GİRİLEN SAYILAR</div>
+                    <div class="entry-slots" id="entrySlots"></div>
+                </div>
+
+                <div class="btn-row" id="inputBtns">
+                    <button class="btn check-btn" onclick="checkAnswers()">▸ KONTROL ET</button>
+                    <button class="btn reset-btn" onclick="resetGrid()">▸ TEMİZLE</button>
+                </div>
+                <div class="btn-row" id="drawBtns" style="display:none">
+                    <button class="btn undo-btn" onclick="undoLast()">↩ GERİ AL</button>
+                    <button class="btn reset-btn" onclick="resetCanvas()">✕ TEMİZLE</button>
+                </div>
+
+                <div class="score-msg" id="scoreMsg"></div>
+                <div class="hint" id="hintMsg">Hücreye tıkla ve sayıyı yaz.</div>
+            </section>
+
+        </main>
+
+        <div class="divider"></div>
+        <footer class="footer">
+            <div class="footer-row">
+                <span class="answer-label">BU GİZEMLİ SEMBOL NEDİR?</span>
+                <div class="answer-blank"></div>
+            </div>
+            <div class="copyright-wrap">
+                <div class="copyright"><span class="tm">TM</span> Müfit ŞAN tarafından tasarlanmıştır.</div>
+            </div>
+        </footer>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+
+</html>
