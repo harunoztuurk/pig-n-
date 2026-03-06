@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <!-- OYUN BAŞLIĞI BURAYA -->
+    <title>Veri Avı - Pi Günü</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Orbitron:wght@700;900&display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet" href="../../css/global.css">
+    <link rel="stylesheet" href="style.css">
+
+    <!-- Vercel Speed Insights -->
+    <script>
+        window.si = window.si || function () { (window.siq = window.siq || []).push(arguments); };
+    </script>
+    <script defer src="/_vercel/speed-insights/script.js"></script>
+</head>
+
+<body>
+    <div class="scanline"></div>
+    <div class="wrapper">
+        <nav class="back-nav">
+            <a href="../../index.html" class="btn back-btn">◂ ANA MENÜYE DÖN</a>
+        </nav>
+
+        <header class="header">
+            <h1 class="title">VERİ AVI: Pİ İHLALİ</h1>
+            <div class="subtitle">// SİSTEME SIZMAK İÇİN Pİ DİZİLİMLERİNİ DEĞERLENDİR //</div>
+
+            <!-- KRONOMETRE (ZAMANLAYICI) -->
+            <div
+                style="margin-top: 15px; font-size: 1.2rem; color: var(--yellow); text-shadow: 0 0 10px rgba(255, 230, 0, 0.4);">
+                [ GEÇEN SÜRE: <span id="gameTimerDisplay">00:00</span> ]
+            </div>
+        </header>
+
+        <div class="divider"></div>
+
+        <!-- ANA OYUN İSKELETİZİ BURAYA KURUN -->
+        <main class="game-container split-layout">
+            <!-- Sol Panel: Hex Matrisi -->
+            <div class="matrix-panel">
+                <div class="section-label">[ Pİ MATRİSİ ]</div>
+                <div id="matrixGrid" class="matrix-grid"></div>
+            </div>
+
+            <!-- Sağ Panel: Hedefler ve Tampon -->
+            <div class="info-panel">
+                <div class="section-label">[ KURULAN Pİ DİZİLİMİ ]</div>
+                <div class="buffer-display" style="min-height: 50px;">
+                    <div id="bufferSquares" class="buffer-squares" style="flex-wrap: wrap;">
+                        <!-- Seçilen pi rakamları buraya dolacak -->
+                    </div>
+                    <button id="resetBufferBtn" class="btn back-btn" style="margin-top: 10px;">TEMİZLE // BAŞA
+                        DÖN</button>
+                </div>
+
+                <div class="section-label" style="margin-top: 25px;">[ İLERLEME DURUMU ]</div>
+                <div id="currentProgress" class="targets-list" style="padding: 15px; font-size: 1rem; color: #fff;">
+                    Sıradaki Beklenen Rakam: <span id="nextExpectedDigit"
+                        style="color: var(--pink); font-size: 1.4rem; font-weight: bold; margin-left:10px;">3</span>
+                    <br><br>
+                    Anlık Kazanılan Puan: <span id="currentScoreDisplay"
+                        style="color: var(--yellow); font-size: 1.4rem; font-weight: bold; margin-left:10px;">0</span>
+                </div>
+
+                <!-- LİDERLİK TABLOSU -->
+                <div class="section-label" style="margin-top: 25px;">[ DİĞER AJANLARIN VERİLERİ ]</div>
+                <div id="leaderboardList" class="targets-list" style="max-height: 150px; overflow-y: auto;">
+                    <div style="color: rgba(0, 245, 255, 0.5); font-size: 0.85rem; padding: 10px; text-align: center;">
+                        Şifrelenmiş veritabanı taranıyor...</div>
+                </div>
+            </div>
+        </main>
+
+        <div class="divider"></div>
+        <footer class="footer">
+            <div class="copyright-wrap">
+                <div class="copyright"><span class="tm">TM</span> <a href="#" target="_blank" class="author-link">Müfit
+                        ŞAN</a> tarafından tasarlanmıştır.</div>
+            </div>
+        </footer>
+    </div>
+
+    <!-- UTILS VE APP.JS -->
+    <script src="../../js/utils.js"></script>
+    <script src="app.js"></script>
+</body>
+
+</html>

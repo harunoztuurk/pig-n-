@@ -1,0 +1,13 @@
+{
+  "name": "sifre-kirici-gizem",
+  "version": "1.0.0",
+  "description": "Cyberpunk themed password breaker math puzzle optimized for all devices.",
+  "main": "index.html",
+  "scripts": {
+    "start": "npx serve .",
+    "dev": "npx serve ."
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}

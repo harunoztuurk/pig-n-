@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Oyun Merkezi - Pi Günü</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Orbitron:wght@700;900&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="css/global.css">
+    <link rel="stylesheet" href="css/hub.css">
+
+    <!-- Vercel Speed Insights -->
+    <script>
+        window.si = window.si || function () { (window.siq = window.siq || []).push(arguments); };
+    </script>
+    <script defer src="/_vercel/speed-insights/script.js"></script>
+</head>
+
+<body>
+    <div class="scanline"></div>
+    <div class="wrapper">
+        <header class="header">
+            <h1 class="title">OYUN MERKEZİ</h1>
+            <div class="subtitle">// SİSTEME HOŞ GELDİNİZ //</div>
+
+            <div id="user-profile" style="display: none; margin-top: 15px;">
+                <span style="color: rgba(0, 245, 255, 0.7); font-size: 0.8rem; letter-spacing: 1px;">
+                    ▸ OYUNCU: <strong id="playerNameDisplay" style="color: var(--pink);">???</strong> |
+                    ▸ TOPLAM PUAN: <strong id="totalScoreDisplay" style="color: var(--yellow);">0</strong>
+                </span>
+                <button onclick="GameUtils.logoutUser()"
+                    style="margin-left: 12px; background: transparent; border: 1px dashed var(--pink); color: var(--pink); padding: 4px 10px; font-size: 0.7rem; cursor: pointer; border-radius: 4px; transition: all 0.3s; font-family: inherit;">ÇIKIŞ
+                    YAP / HESAP DEĞİŞTİR</button>
+            </div>
+        </header>
+
+        <div class="divider"></div>
+
+        <main class="hub-container" style="display:flex; flex-wrap:wrap; gap:30px; margin-top:30px;">
+            <!-- Sol Panel: Tüm Oyunlar -->
+            <div class="hub-grid" id="gameHub" style="flex:2; min-width:300px;">
+                <!-- Oyunlar JS ile eklenecek -->
+            </div>
+
+            <!-- Sağ Panel: Genel Liderlik Tablosu -->
+            <aside class="global-leaderboard" style="flex:1; min-width:280px; max-width:400px;">
+                <div
+                    style="background: rgba(0,0,0,0.6); border: 1px solid var(--pink); border-radius: 8px; padding: 20px;">
+                    <h2
+                        style="color: var(--pink); font-size: 1.1rem; border-bottom: 1px dashed var(--pink); padding-bottom: 10px; margin-top: 0;">
+                        GLOBAL AJAN VERİTABANI</h2>
+                    <div id="globalLeaderboardList" style="margin-top: 15px; font-size: 0.9rem;">
+                        <span style="color: #777;">Yükleniyor...</span>
+                    </div>
+                </div>
+            </aside>
+        </main>
+
+        <div class="divider"></div>
+
+        <footer class="footer">
+            <div class="copyright-wrap">
+                <div class="copyright"><span class="tm">TM</span> <a href="#" target="_blank" class="author-link">Müfit
+                        ŞAN</a> tarafından tasarlanmıştır.</div>
+            </div>
+        </footer>
+    </div>
+
+    <!-- OYUNCU GİRİŞ MODALI -->
+    <div id="playerModal" class="player-modal" style="display: none;">
+        <div class="modal-content">
+            <div class="modal-tabs">
+                <button class="modal-tab active" data-tab="register">YENİ KAYIT</button>
+                <button class="modal-tab" data-tab="login">MEVCUT HESAP</button>
+            </div>
+            <h2 class="modal-title" id="modalTitle">SİSTEME KAYIT</h2>
+            <p class="modal-desc" id="modalDesc">Lütfen yeni bir kod adı belirleyin.</p>
+            <input type="text" id="playerNameInput" class="modal-input" placeholder="Örn: Ninja_01"
+                autocomplete="off" />
+            <div id="modalError" class="modal-error" style="display: none;"></div>
+            <button id="loginBtn" class="btn modal-btn">KAYDI TAMAMLA</button>
+        </div>
+    </div>
+    <script src="js/utils.js"></script>
+    <script src="js/main.js"></script>
+</body>
+
+</html>
