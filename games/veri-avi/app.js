@@ -297,4 +297,9 @@ document.getElementById('resetBufferBtn').addEventListener('click', () => {
     initGame();
 });
 
-window.addEventListener('load', initGame);
+window.addEventListener('load', async () => {
+    if (typeof GameUtils !== 'undefined' && GameUtils.syncWithDatabase) {
+        await GameUtils.syncWithDatabase();
+    }
+    initGame();
+});

@@ -215,7 +215,16 @@ function renderGlobalLeaderboard() {
     });
 }
 
-function initHub() {
+async function initHub() {
+    const listEl = document.getElementById('globalLeaderboardList');
+    if (listEl) {
+        listEl.innerHTML = '<span style="color:var(--cyan); font-weight:bold;">SİSTEME BAĞLANILIYOR...</span>';
+    }
+
+    if (typeof GameUtils !== 'undefined' && GameUtils.syncWithDatabase) {
+        await GameUtils.syncWithDatabase();
+    }
+
     checkUserAndRender();
 }
 

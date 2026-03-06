@@ -1,7 +1,10 @@
 // ═══════════════════════════════════════════════════════════
 //  GLOBAL USER PROFILE INJECTION
 // ═══════════════════════════════════════════════════════════
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("DOMContentLoaded", async () => {
+  if (typeof GameUtils !== 'undefined' && GameUtils.syncWithDatabase) {
+    await GameUtils.syncWithDatabase();
+  }
   initGameProfile();
 });
 

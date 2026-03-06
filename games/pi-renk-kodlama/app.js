@@ -405,7 +405,10 @@ function renderLocalLeaderboard() {
 // -----------------------------
 // BAŞLATICILAR
 // -----------------------------
-window.addEventListener('load', () => {
+window.addEventListener('load', async () => {
+    if (typeof GameUtils !== 'undefined' && GameUtils.syncWithDatabase) {
+        await GameUtils.syncWithDatabase();
+    }
     renderPhase1();
     renderPhase2();
     renderPhase3();

@@ -113,10 +113,13 @@ async function requestMicPermission() {
 }
 
 // --- Setup ---
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("DOMContentLoaded", async () => {
     updateDigits();
     renderGroups();
     renderReferenceTable();
+    if (typeof GameUtils !== 'undefined' && GameUtils.syncWithDatabase) {
+        await GameUtils.syncWithDatabase();
+    }
     initGameProfile(); // utils.js wrapper
     renderBoard();
 });

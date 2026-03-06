@@ -125,6 +125,40 @@ window.GameUtils = {
     },
 
     /**
+     * Vercel KV veritabanı ile lokal verileri eşitler.
+     */
+    syncWithDatabase: async function () {
+        try {
+            const res = await fetch('/api/get-scores');
+            if (res.ok) {
+                const globalData = await res.json();
+                if (globalData && !globalData._error) {
+                    let localData = this._getUsersData();
+                    let merged = { ...globalData };
+
+                    // Basit merge: Lokalde daha yüksek bir skor varsa ez
+                    for (let user in localData) {
+                        if (!merged[user]) merged[user] = {};
+                        for (let game in localData[user]) {
+                            let locS = parseInt(localData[user][game] || 0);
+                            let globS = parseInt(merged[user][game] || 0);
+                            if (locS > globS) {
+                                merged[user][game] = locS;
+                            }
+                        }
+                    }
+                    this._saveUsersData(merged);
+                    console.log("Veritabanı senkronizasyonu başarılı.");
+                    return merged;
+                }
+            }
+        } catch (e) {
+            console.warn("Senkronizasyon hatası:", e);
+        }
+        return null;
+    },
+
+    /**
      * Oynanan oyundan kazanılan yeni puanı aktif kullanıcı adına yazar
      */
     saveScore: function (gameId, score) {
@@ -140,6 +174,17 @@ window.GameUtils = {
                 usersData[currentPlayer][gameId] = score;
                 this._saveUsersData(usersData);
                 console.log(`${currentPlayer} oyuncusunun ${gameId} skoru güncellendi: ${score}`);
+
+                // Arka planda Vercel KV'ye gönder (senkron olmayan - UI'ı bloklamaz)
+                fetch('/api/save-score', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ player: currentPlayer, gameId: gameId, score: score })
+                }).then(res => res.json())
+                    .then(data => {
+                        if (data.success) console.log("Global veritabanına kaydedildi.");
+                    })
+                    .catch(err => console.warn("Global kayıt hatası:", err));
             }
         } catch (e) {
             console.error("Local storage hatası:", e);

@@ -339,7 +339,10 @@ function renderLocalLeaderboard() {
 }
 
 window.addEventListener('resize', handleResize);
-window.addEventListener('load', () => {
+window.addEventListener('load', async () => {
+    if (typeof GameUtils !== 'undefined' && GameUtils.syncWithDatabase) {
+        await GameUtils.syncWithDatabase();
+    }
     buildGrid();
     handleResize();
     initTimerAndLeaderboard();
