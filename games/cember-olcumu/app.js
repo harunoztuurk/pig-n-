@@ -214,12 +214,14 @@ function buildResultBox(id) {
 const rc = document.getElementById('rollCanvas');
 const rctx = rc.getContext('2d');
 const RULER_D = 4;
-const PAD_R = 46;
+const PAD_R = 64;
 
 function initRollCanvas() {
   // Give the canvas a bit more breathing room on the right side so the circle doesn't clip
   rc.width = Math.max(rc.parentElement.clientWidth - 50, 250);
-  rc.height = 220;
+  // Calculate PPU to determine the needed height so the circle top never clips
+  const tempPPU = (rc.width - PAD_R * 2) / RULER_D;
+  rc.height = Math.max(220, tempPPU + 100);
   styleProgBar(currentP);
   drawRoll(animT < 0.5 ? 2 * animT * animT : -1 + (4 - 2 * animT) * animT);
 }
