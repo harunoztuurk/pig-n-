@@ -125,9 +125,8 @@ function initGameProfile() {
     if (typeof GameUtils !== 'undefined') {
         const p = document.getElementById("userProfile");
         p.innerHTML = `
-            <span class="hub-user-icon">👤</span>
-            <span class="hub-username">${GameUtils.getUserName() || 'Misafir'}</span>
-            <span style="color:var(--text);margin-left:10px;">🏆 Puan: ${GameUtils.getScore("pi-melody")}</span>
+            <span style="margin-right:8px;">👤 ${GameUtils.getUserName() || 'Misafir'}</span>
+            <span style="color:var(--gold, #F9CA24);">🏆 ${GameUtils.getScore("pi-melody")}</span>
         `;
     }
 }
@@ -142,8 +141,14 @@ function renderGroups() {
     const c = document.getElementById("groupBtns");
     c.innerHTML = "";
     for (let i = 0; i < 10; i++) {
+        const isAct = state.groupIndex === i;
+        const border = isAct ? "2px solid #6C5CE7" : "1px solid rgba(255,255,255,0.1)";
+        const bg = isAct ? "#6C5CE7" : "rgba(255,255,255,0.04)";
+        const weight = isAct ? 700 : 400;
+
         const b = document.createElement("button");
-        b.className = `grp-btn ${state.groupIndex === i ? 'active' : ''}`;
+        b.className = `grp-btn`;
+        b.style = `border:${border}; background:${bg}; font-weight:${weight};`;
         b.textContent = i + 1;
         b.onclick = () => {
             if (typeof GameUtils !== 'undefined') GameUtils.playSound('click');
@@ -157,7 +162,7 @@ function renderReferenceTable() {
     const c = document.getElementById("refItems");
     let html = "";
     Object.entries(NOTE_MAP).forEach(([d, v]) => {
-        html += `<div class="ref-item">
+        html += `<div style="display: flex; align-items: center; gap: 4px; padding: 4px 7px; background: rgba(255,255,255,0.04); border-radius: 6px; font-size: 0.66rem;">
             <span style="color: ${v.color}; font-weight: 700;">${d}</span>
             <span style="color: rgba(255,255,255,0.2);">→</span>
             <span style="color: rgba(255,255,255,0.75);">${v.sol}</span>
@@ -168,7 +173,7 @@ function renderReferenceTable() {
 
     const speechSupported = !!(window.SpeechRecognition || window.webkitSpeechRecognition);
     if (!speechSupported) {
-        document.getElementById("micControls").classList.add("hidden");
+        document.getElementById("micControls").style.display = "none";
     }
 }
 
@@ -186,42 +191,53 @@ function renderControls() {
     const btnReset = document.getElementById("btnReset");
 
     // Play Button
-    btnPlay.disabled = state.isPlaying || state.stepMode;
+    const playDis = state.isPlaying || state.stepMode;
+    btnPlay.disabled = playDis;
     btnPlay.textContent = state.isPlaying ? "⏳ Çalıyor..." : "▶ Tümünü Çal";
+    btnPlay.style.background = playDis ? "rgba(255,255,255,0.07)" : "linear-gradient(135deg,#6C5CE7,#a29bfe)";
+    btnPlay.style.cursor = playDis ? "not-allowed" : "pointer";
+    btnPlay.style.opacity = playDis ? 0.5 : 1;
+    btnPlay.style.boxShadow = playDis ? "none" : "0 0 24px rgba(108,92,231,0.4)";
 
     // Step Button
-    btnStep.disabled = state.isPlaying;
-    btnStep.className = `btn-accent ${state.stepMode && state.waitingInput ? 'waiting' : ''}`;
+    const stepDis = state.isPlaying;
+    btnStep.disabled = stepDis;
     btnStep.innerHTML = !state.stepMode ? "🎯 Adım Adım Çal" : (state.waitingInput ? "▶ Devam Et" : "🔁 Tekrar Çal");
+    btnStep.style.background = state.stepMode ? (state.waitingInput ? "linear-gradient(135deg,#00B894,#00CEC9)" : "linear-gradient(135deg,#E55039,#ff7675)") : "linear-gradient(135deg,#E55039,#ff7675)";
+    btnStep.style.cursor = stepDis ? "not-allowed" : "pointer";
+    btnStep.style.opacity = stepDis ? 0.5 : 1;
+    btnStep.style.boxShadow = state.stepMode && state.waitingInput ? "0 0 24px rgba(0,184,148,0.4)" : "0 0 24px rgba(229,80,57,0.4)";
 
     // Reset
-    if (state.stepMode) btnReset.classList.remove("hidden");
-    else btnReset.classList.add("hidden");
+    btnReset.style.display = state.stepMode ? "inline-block" : "none";
+}
 
-    // Listeners (only attach once via HTML is bad pattern for dynamic, using explicit assignments)
-    btnPlay.onclick = playAll;
-    btnStep.onclick = state.stepMode ? (state.waitingInput ? continueStep : replayStep) : startStepMode;
-    btnReset.onclick = resetAll;
+window.handleStepBtn = function () {
+    if (state.stepMode) {
+        if (state.waitingInput) continueStep();
+        else replayStep();
+    } else {
+        startStepMode();
+    }
+}
 
-    const btnCheck = document.getElementById("btnCheck");
-    btnCheck.onclick = checkAnswers;
-
-    // Modes
-    document.getElementById("btnModeSelect").onclick = () => { setInputMode("select"); };
-    document.getElementById("btnModeVoice").onclick = () => { handleMicMode(); };
+window.setInputMode = function (m) {
+    state.inputMode = m;
+    stopListening();
+    renderMicState();
 }
 
 function renderStepInfo() {
     const el = document.getElementById("stepInfo");
     if (state.stepMode) {
-        el.classList.remove("hidden");
+        el.style.display = "block";
         if (state.waitingInput) {
             el.innerHTML = `<strong style="color: #E55039">🎤 ${state.currentStep + 1}. nota çaldı.</strong> Nota adını gir, sonra <strong>"▶ Devam Et"</strong> butonuna bas.`;
         } else {
             el.innerHTML = `<span style="color: rgba(255,255,255,0.4)">Nota çalınıyor...</span>`;
         }
     } else {
-        el.classList.add("hidden");
+        el.style.display = "none";
     }
 }
 
@@ -235,59 +251,41 @@ function renderVisualizer() {
         const isCurrent = state.stepMode && i === state.currentStep;
 
         const node = document.createElement("div");
-        node.className = "vis-node";
 
-        let bg = "rgba(255,255,255,0.05)";
-        let border = "1px solid rgba(255,255,255,0.08)";
-        let color = "rgba(255,255,255,0.15)";
-        let transform = "scale(1)";
-        let shadow = "none";
-        let text = "·";
+        let bg = isActive ? v.color : (isDone ? "rgba(255,255,255,0.12)" : "rgba(255,255,255,0.05)");
+        let border = `1px solid ${isActive ? v.color : (isCurrent && !isActive ? "rgba(229,80,57,0.6)" : "rgba(255,255,255,0.08)")}`;
+        let col = isDone ? "rgba(255,255,255,0.4)" : "rgba(255,255,255,0.15)";
+        if (isActive) col = "#fff";
+        let transform = isActive ? "scale(1.22)" : "scale(1)";
+        let shadow = isActive ? `0 0 18px ${v.color}88` : "none";
 
-        if (isActive) {
-            bg = v.color;
-            border = `1px solid ${v.color}`;
-            transform = "scale(1.22)";
-            shadow = `0 0 18px ${v.color}88`;
-            color = "#fff";
-            text = "♪";
-        } else if (isDone) {
-            bg = "rgba(255,255,255,0.12)";
-            color = "rgba(255,255,255,0.4)";
-            text = "✓";
-        } else if (isCurrent) {
-            border = "1px solid rgba(229,80,57,0.6)";
-        }
+        node.style = `width: 34px; height: 34px; border-radius: 8px; background: ${bg}; border: ${border}; display: flex; align-items: center; justify-content: center; font-size: 0.72rem; color: ${col}; transition: all 0.12s; transform: ${transform}; box-shadow: ${shadow};`;
 
-        node.style.background = bg;
-        node.style.border = border;
-        node.style.color = color;
-        node.style.transform = transform;
-        node.style.boxShadow = shadow;
-        node.textContent = text;
+        node.textContent = isActive ? "♪" : (isDone ? "✓" : "·");
         c.appendChild(node);
     });
 }
 
 function renderMicState() {
-    document.getElementById("btnModeSelect").className = `mode-btn ${state.inputMode === "select" ? 'active' : ''}`;
-    document.getElementById("btnModeVoice").className = `mode-btn ${state.inputMode === "voice" ? 'active' : ''}`;
+    document.getElementById("btnModeSelect").style.background = state.inputMode === "select" ? "#6C5CE7" : "rgba(255,255,255,0.07)";
+    document.getElementById("btnModeVoice").style.background = state.inputMode === "voice" ? "#E55039" : "rgba(255,255,255,0.07)";
 
     const vh = document.getElementById("voiceHelp");
     const err = document.getElementById("micError");
 
     if (state.inputMode === "voice") {
-        vh.classList.remove("hidden");
-        document.getElementById("voiceStatus").textContent = state.voiceStatus;
-        err.classList.add("hidden");
+        vh.style.display = "block";
+        const vS = document.getElementById("voiceStatus");
+        vS.textContent = state.voiceStatus;
+        vS.style.color = state.listeningIdx !== null ? "#F9CA24" : "#aaa";
+        err.style.display = "none";
     } else {
-        vh.classList.add("hidden");
-        if (state.micPermission === false) err.classList.remove("hidden");
-        else err.classList.add("hidden");
+        vh.style.display = "none";
+        if (state.micPermission === false) err.style.display = "block";
+        else err.style.display = "none";
     }
 
-    // Re-render notes grid because button states change
-    renderInputs(false); // don't redraw everything, just inputs
+    renderInputs(false);
 }
 
 function renderInputs(full = true) {
@@ -300,7 +298,6 @@ function renderInputs(full = true) {
     }
 
     for (let i = 0; i < 14; i++) {
-        // Evaluate states
         const resN = state.noteResults[i];
         const resD = state.digitResults[i];
         const isListen = state.listeningIdx === i;
@@ -310,53 +307,41 @@ function renderInputs(full = true) {
         // NOTE CELL
         if (full) {
             const cw = document.createElement("div");
-            cw.className = "cell-wrapper";
+            cw.style = "display: flex; flex-direction: column; align-items: center; gap: 3px;";
             cw.id = `cell-note-${i}`;
             ng.appendChild(cw);
         }
 
         const cwN = document.getElementById(`cell-note-${i}`);
-        let nHtml = `<span class="cell-idx">${i + 1}</span>`;
+        let nHtml = `<span style="font-size: 0.48rem; color: rgba(255,255,255,0.18);">${i + 1}</span>`;
         if (state.inputMode === "select") {
             const disabled = state.stepMode && (i > state.currentStep || (!state.waitingInput && i === state.currentStep));
-            let border = "1px solid rgba(255,255,255,0.12)";
-            let bg = "rgba(255,255,255,0.05)";
-            if (isCurrentStep && state.waitingInput) border = "2px solid #E55039";
-            else if (resN !== null) {
-                border = resN ? "2px solid #00B894" : "2px solid #FF6B6B";
-                bg = resN ? "rgba(0,184,148,0.15)" : "rgba(255,107,107,0.15)";
-            }
-            if (isFutureStep) { bg = "rgba(255,255,255,0.02)"; border = "1px solid rgba(255,255,255,0.05)"; }
+            let border = (isCurrentStep && state.waitingInput) ? "2px solid #E55039" : (resN === null ? "1px solid rgba(255,255,255,0.12)" : (resN ? "2px solid #00B894" : "2px solid #FF6B6B"));
+            let bg = isFutureStep ? "rgba(255,255,255,0.02)" : (resN === null ? "rgba(255,255,255,0.05)" : (resN ? "rgba(0,184,148,0.15)" : "rgba(255,107,107,0.15)"));
+            let col = isFutureStep ? "rgba(255,255,255,0.15)" : "#fff";
+            let cur = isFutureStep ? "not-allowed" : "pointer";
+            let opc = isFutureStep ? 0.4 : 1;
 
             let op = `<option value="">—</option>`;
             NOTE_OPTIONS.forEach(opt => {
                 op += `<option value="${opt}" ${state.noteAnswers[i] === opt ? 'selected' : ''}>${opt}</option>`;
             });
 
-            nHtml += `<select class="note-select" style="border:${border};background:${bg};opacity:${isFutureStep ? 0.4 : 1};" ${disabled ? 'disabled' : ''} onchange="setNote(${i}, this.value)">${op}</select>`;
+            nHtml += `<select class="note-select" style="border:${border};background:${bg};opacity:${opc};color:${col};cursor:${cur}" ${disabled ? 'disabled' : ''} onchange="setNote(${i}, this.value)">${op}</select>`;
         } else {
-            let border = "1px solid rgba(255,255,255,0.12)";
-            let bg = "rgba(255,255,255,0.05)";
-            let txt = state.noteAnswers[i] ? state.noteAnswers[i] : "🎤";
-            let cls = "note-mic";
+            let border = isListen ? "2px solid #E55039" : ((isCurrentStep && state.waitingInput) ? "2px solid #E55039" : (resN === null ? "1px solid rgba(255,255,255,0.12)" : (resN ? "2px solid #00B894" : "2px solid #FF6B6B")));
+            let bg = isListen ? "rgba(229,80,57,0.2)" : (isFutureStep ? "rgba(255,255,255,0.02)" : (resN === null ? "rgba(255,255,255,0.05)" : (resN ? "rgba(0,184,148,0.15)" : "rgba(255,107,107,0.15)")));
+            let txt = isListen ? "🎙" : (state.noteAnswers[i] ? state.noteAnswers[i] : "🎤");
+            let fz = (state.noteAnswers[i] && !isListen) ? "0.56rem" : "1rem";
+            let cur = isFutureStep ? "not-allowed" : "pointer";
+            let opc = isFutureStep ? 0.3 : 1;
+            let cls = `note-mic ${isListen ? 'mic-pulse' : ''}`;
 
-            if (isListen) {
-                border = "2px solid #E55039";
-                bg = "rgba(229,80,57,0.2)";
-                txt = "🎙";
-                cls += " mic-pulse";
-            } else if (isCurrentStep && state.waitingInput) {
-                border = "2px solid #E55039";
-            } else if (resN !== null) {
-                border = resN ? "2px solid #00B894" : "2px solid #FF6B6B";
-                bg = resN ? "rgba(0,184,148,0.15)" : "rgba(255,107,107,0.15)";
-            }
-
-            nHtml += `<button class="${cls}" style="border:${border};background:${bg};opacity:${isFutureStep ? 0.3 : 1};font-size:${state.noteAnswers[i] && !isListen ? '0.56rem' : '1rem'}" ${isFutureStep ? 'disabled' : ''} onclick="!${isFutureStep} && startListening(${i})">${txt}</button>`;
+            nHtml += `<button class="${cls}" style="border:${border};background:${bg};opacity:${opc};cursor:${cur};font-size:${fz}" ${isFutureStep ? 'disabled' : ''} onclick="!${isFutureStep} && startListening(${i})">${txt}</button>`;
         }
 
         if (state.checked && resN !== null) {
-            nHtml += `<span class="cell-result" style="color: ${resN ? '#00B894' : '#FF6B6B'}">${resN ? '✓' : NOTE_MAP[state.currentDigits[i]].sol}</span>`;
+            nHtml += `<span style="font-size: 0.52rem; color: ${resN ? '#00B894' : '#FF6B6B'}">${resN ? '✓' : NOTE_MAP[state.currentDigits[i]].sol}</span>`;
         }
         cwN.innerHTML = nHtml;
 
@@ -364,20 +349,21 @@ function renderInputs(full = true) {
         // DIGIT CELL
         if (full) {
             const cwD = document.createElement("div");
-            cwD.className = "cell-wrapper";
+            cwD.style = "display: flex; flex-direction: column; align-items: center; gap: 3px;";
             cwD.id = `cell-dig-${i}`;
             dg.appendChild(cwD);
         }
         const cwD = document.getElementById(`cell-dig-${i}`);
-        let dHtml = `<span class="cell-idx">${i + 1}</span>`;
+        let dHtml = `<span style="font-size: 0.48rem; color: rgba(255,255,255,0.18);">${i + 1}</span>`;
         let dBorder = resD === null ? "1px solid rgba(255,255,255,0.12)" : (resD ? "2px solid #00B894" : "2px solid #FF6B6B");
-        let dBg = resD === null ? "rgba(255,255,255,0.05)" : (resD ? "rgba(0,184,148,0.15)" : "rgba(255,107,107,0.15)");
-        if (isFutureStep) dBg = "rgba(255,255,255,0.02)";
+        let dBg = isFutureStep ? "rgba(255,255,255,0.02)" : (resD === null ? "rgba(255,255,255,0.05)" : (resD ? "rgba(0,184,148,0.15)" : "rgba(255,107,107,0.15)"));
+        let cur = isFutureStep ? "not-allowed" : "text";
+        let dOpc = isFutureStep ? 0.3 : 1;
 
-        dHtml += `<input type="text" maxlength="1" class="digit-input" value="${state.digitAnswers[i]}" ${isFutureStep ? 'disabled' : ''} style="border:${dBorder};background:${dBg};opacity:${isFutureStep ? 0.3 : 1}" oninput="setDigit(${i}, this.value)" />`;
+        dHtml += `<input type="text" maxlength="1" class="digit-input" value="${state.digitAnswers[i]}" ${isFutureStep ? 'disabled' : ''} style="border:${dBorder};background:${dBg};opacity:${dOpc};cursor:${cur}" oninput="setDigit(${i}, this.value)" />`;
 
         if (state.checked && resD !== null) {
-            dHtml += `<span class="cell-result" style="color: ${resD ? '#00B894' : '#FF6B6B'}">${resD ? '✓' : state.currentDigits[i]}</span>`;
+            dHtml += `<span style="font-size: 0.52rem; color: ${resD ? '#00B894' : '#FF6B6B'}">${resD ? '✓' : state.currentDigits[i]}</span>`;
         }
         cwD.innerHTML = dHtml;
     }
@@ -386,7 +372,7 @@ function renderInputs(full = true) {
 function renderResult() {
     const rb = document.getElementById("resultBox");
     if (!state.checked) {
-        rb.classList.add("hidden");
+        rb.style.display = "none";
         return;
     }
 
@@ -408,7 +394,7 @@ function renderResult() {
     });
     document.getElementById("resGroup").innerHTML = gHtml;
 
-    rb.classList.remove("hidden");
+    rb.style.display = "block";
 }
 
 // --- Logic ---

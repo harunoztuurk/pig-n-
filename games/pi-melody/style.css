@@ -1,4 +1,15 @@
-/* Özel pi-melody.css dosyası: Global proje temasıyla uyumlu ama pi-melody dinamiklerine sahip CSS */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background: #07070f;
+    /* EXACT match to react's bg */
+    margin: 0;
+}
+
 @keyframes micPulse {
 
     0%,
@@ -15,232 +26,57 @@
     animation: micPulse 1.2s infinite;
 }
 
-.hidden {
-    display: none !important;
-}
-
-.game-main {
+/* Back Button & User Profile Container (Injected nicely above the rest) */
+.back-btn-container {
+    width: 100%;
+    max-width: 620px;
+    margin-bottom: 20px;
     display: flex;
-    flex-direction: column;
+    justify-content: space-between;
     align-items: center;
-    width: 100%;
-    max-width: 650px;
-    margin: 0 auto;
-    font-family: 'Courier New', Courier, monospace;
+    font-family: 'Courier New', monospace;
 }
 
-.game-title {
-    text-align: center;
+.back-btn-raw {
+    color: rgba(255, 255, 255, 0.5);
+    text-decoration: none;
+    font-size: 0.8rem;
+    padding: 6px 12px;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 6px;
+    transition: all 0.2s;
+    background: transparent;
 }
 
-.game-title h1 {
-    font-size: clamp(1.5rem, 5vw, 2.5rem);
-    font-weight: 700;
-    font-family: Georgia, serif;
-    margin: 0;
+.back-btn-raw:hover {
     color: #fff;
+    background: rgba(255, 255, 255, 0.1);
 }
 
-.game-title .highlight {
-    color: #6C5CE7;
-}
-
-.game-title p {
-    font-size: 0.75rem;
-    color: rgba(255, 255, 255, 0.4);
-    margin-top: 5px;
-    letter-spacing: 0.15em;
-}
-
-.sec-label {
-    font-size: 0.56rem;
-    color: rgba(255, 255, 255, 0.35);
-    letter-spacing: 0.2em;
-    text-align: center;
-    margin-bottom: 7px;
-    text-transform: uppercase;
-}
-
-/* Group Selector */
-.group-selector {
-    margin-bottom: 18px;
-    width: 100%;
-}
-
-.group-btns {
+.user-profile-mini {
     display: flex;
-    gap: 6px;
-    flex-wrap: wrap;
-    justify-content: center;
+    align-items: center;
+    font-size: 0.8rem;
+    color: rgba(255, 255, 255, 0.8);
+    background: rgba(255, 255, 255, 0.05);
+    padding: 6px 12px;
+    border-radius: 6px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Custom classes for hover states that react used inherently or JS needs */
+button {
+    transition: all 0.2s;
 }
 
 .grp-btn {
     width: 34px;
     height: 34px;
     border-radius: 7px;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    background: rgba(255, 255, 255, 0.04);
     color: #fff;
     font-family: inherit;
     font-size: 0.8rem;
     cursor: pointer;
-    font-weight: 400;
-    transition: all 0.2s;
-}
-
-.grp-btn.active {
-    border: 2px solid #6C5CE7;
-    background: #6C5CE7;
-    font-weight: 700;
-}
-
-/* Reference Table */
-.ref-table {
-    background: rgba(255, 255, 255, 0.03);
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    border-radius: 12px;
-    padding: 12px 15px;
-    margin-bottom: 16px;
-    width: 100%;
-}
-
-.ref-items {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 5px;
-}
-
-.ref-item {
-    display: flex;
-    align-items: center;
-    gap: 4px;
-    padding: 4px 7px;
-    background: rgba(255, 255, 255, 0.04);
-    border-radius: 6px;
-    font-size: 0.66rem;
-}
-
-/* Controls */
-.controls-row {
-    display: flex;
-    gap: 10px;
-    margin-bottom: 18px;
-    flex-wrap: wrap;
-    justify-content: center;
-    width: 100%;
-}
-
-.btn-main,
-.btn-accent {
-    padding: 11px 28px;
-    border-radius: 50px;
-    border: none;
-    color: #fff;
-    font-size: 0.88rem;
-    font-family: inherit;
-    letter-spacing: 0.08em;
-    cursor: pointer;
-    transition: all 0.2s;
-}
-
-.btn-main {
-    background: linear-gradient(135deg, #6C5CE7, #a29bfe);
-    box-shadow: 0 0 24px rgba(108, 92, 231, 0.4);
-}
-
-.btn-accent {
-    background: linear-gradient(135deg, #E55039, #ff7675);
-    box-shadow: 0 0 24px rgba(229, 80, 57, 0.4);
-}
-
-.btn-accent.waiting {
-    background: linear-gradient(135deg, #00B894, #00CEC9);
-    box-shadow: 0 0 24px rgba(0, 184, 148, 0.4);
-}
-
-.btn-main:disabled,
-.btn-accent:disabled {
-    background: rgba(255, 255, 255, 0.07);
-    cursor: not-allowed;
-    opacity: 0.5;
-    box-shadow: none;
-}
-
-.btn-outline {
-    padding: 11px 18px;
-    border-radius: 50px;
-    border: 1px solid rgba(255, 255, 255, 0.15);
-    background: transparent;
-    color: rgba(255, 255, 255, 0.5);
-    font-size: 0.8rem;
-    font-family: inherit;
-    cursor: pointer;
-}
-
-/* Step Info */
-.step-info {
-    margin-bottom: 16px;
-    padding: 10px 18px;
-    background: rgba(229, 80, 57, 0.1);
-    border: 1px solid rgba(229, 80, 57, 0.3);
-    border-radius: 10px;
-    font-size: 0.75rem;
-    color: rgba(255, 255, 255, 0.65);
-    width: 100%;
-    text-align: center;
-}
-
-/* Visualizer */
-.visualizer {
-    display: flex;
-    gap: 4px;
-    margin-bottom: 20px;
-    flex-wrap: wrap;
-    justify-content: center;
-    width: 100%;
-}
-
-.vis-node {
-    width: 34px;
-    height: 34px;
-    border-radius: 8px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 0.72rem;
-    transition: all 0.12s;
-    background: rgba(255, 255, 255, 0.05);
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    color: rgba(255, 255, 255, 0.15);
-}
-
-/* Node states set in JS via explicit styles */
-
-/* Core Board */
-.game-core {
-    width: 100%;
-}
-
-.step-box {
-    background: rgba(255, 255, 255, 0.03);
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    border-radius: 14px;
-    padding: 15px;
-    margin-bottom: 12px;
-}
-
-.step-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-bottom: 12px;
-    flex-wrap: wrap;
-    gap: 8px;
-}
-
-.sub-controls {
-    display: flex;
-    gap: 5px;
 }
 
 .mode-btn {
@@ -250,82 +86,18 @@
     font-size: 0.6rem;
     font-family: inherit;
     cursor: pointer;
-    background: rgba(255, 255, 255, 0.07);
     color: #fff;
-}
-
-.mode-btn.active#btnModeSelect {
-    background: #6C5CE7;
-}
-
-.mode-btn.active#btnModeVoice {
-    background: #E55039;
-}
-
-.voice-help {
-    margin-bottom: 10px;
-    padding: 9px 12px;
-    background: rgba(229, 80, 57, 0.08);
-    border: 1px solid rgba(229, 80, 57, 0.25);
-    border-radius: 9px;
-    font-size: 0.64rem;
-    color: rgba(255, 255, 255, 0.55);
-    line-height: 1.7;
-}
-
-.voice-help strong {
-    color: rgba(255, 255, 255, 0.85);
-}
-
-.voice-status {
-    margin-top: 6px;
-    font-weight: 700;
-    color: #aaa;
-}
-
-.mic-error {
-    margin-bottom: 10px;
-    padding: 9px 12px;
-    background: rgba(255, 107, 107, 0.1);
-    border: 1px solid rgba(255, 107, 107, 0.3);
-    border-radius: 9px;
-    font-size: 0.62rem;
-    color: #FF6B6B;
-}
-
-/* Grids */
-.notes-grid,
-.digits-grid {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 6px;
-    justify-content: center;
-}
-
-.cell-wrapper {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 3px;
-}
-
-.cell-idx {
-    font-size: 0.48rem;
-    color: rgba(255, 255, 255, 0.18);
 }
 
 .note-select {
     width: 54px;
     padding: 7px 1px;
     border-radius: 8px;
+    color: #fff;
     font-size: 0.58rem;
     text-align: center;
     outline: none;
     font-family: inherit;
-    background: rgba(255, 255, 255, 0.05);
-    border: 1px solid rgba(255, 255, 255, 0.12);
-    color: #fff;
-    cursor: pointer;
 }
 
 .note-mic {
@@ -333,16 +105,12 @@
     height: 40px;
     border-radius: 8px;
     outline: none;
+    color: #fff;
     font-family: inherit;
     font-weight: 600;
     display: flex;
     align-items: center;
     justify-content: center;
-    background: rgba(255, 255, 255, 0.05);
-    border: 1px solid rgba(255, 255, 255, 0.12);
-    color: #fff;
-    cursor: pointer;
-    font-size: 1rem;
 }
 
 .digit-input {
@@ -350,77 +118,9 @@
     height: 40px;
     text-align: center;
     border-radius: 8px;
-    background: rgba(255, 255, 255, 0.05);
-    border: 1px solid rgba(255, 255, 255, 0.12);
     color: #fff;
     font-size: 1.1rem;
     font-weight: 700;
     outline: none;
     font-family: inherit;
-}
-
-.cell-result {
-    font-size: 0.52rem;
-}
-
-/* Check Button */
-.btn-check {
-    width: 100%;
-    padding: 13px;
-    border-radius: 12px;
-    border: none;
-    background: linear-gradient(135deg, #00B894, #00CEC9);
-    color: #fff;
-    font-size: 0.92rem;
-    font-family: inherit;
-    font-weight: 700;
-    letter-spacing: 0.1em;
-    cursor: pointer;
-    box-shadow: 0 0 24px rgba(0, 184, 148, 0.25);
-    margin-top: 10px;
-}
-
-/* Result Box */
-.result-box {
-    margin-top: 14px;
-    padding: 18px;
-    border-radius: 14px;
-    text-align: center;
-    margin-bottom: 20px;
-}
-
-.res-icon {
-    font-size: 1.8rem;
-    margin-bottom: 6px;
-}
-
-.res-score {
-    font-size: 1.4rem;
-    font-weight: 700;
-    margin-bottom: 5px;
-}
-
-.res-msg {
-    font-size: 0.76rem;
-    color: rgba(255, 255, 255, 0.55);
-}
-
-.res-detail {
-    margin-top: 8px;
-    font-size: 0.64rem;
-    color: rgba(255, 255, 255, 0.3);
-}
-
-.res-group {
-    margin-top: 11px;
-    font-size: 0.64rem;
-    color: rgba(255, 255, 255, 0.4);
-}
-
-.footer-note {
-    margin-top: 30px;
-    font-size: 0.55rem;
-    color: rgba(255, 255, 255, 0.1);
-    letter-spacing: 0.1em;
-    text-align: center;
 }
