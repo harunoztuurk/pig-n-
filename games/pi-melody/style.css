@@ -98,6 +98,18 @@ button {
     text-align: center;
     outline: none;
     font-family: inherit;
+    /* Remove default appearance occasionally causing background flash/clip */
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+}
+
+/* Give the dropdown items a dark background instead of default white */
+.note-select option {
+    background-color: #0c0c16;
+    color: #ffffff;
+    padding: 10px;
+    font-size: 0.8rem;
 }
 
 .note-mic {
