@@ -2,27 +2,28 @@
 //  PRESET TANIMLARI
 // ═══════════════════════════════════════════════════════════
 const PRESETS = [
-  { id:0, name:'KÜÇÜK',  r:     100_000, step: 0.5, color: '#3a78cc', textColor: '#fff' },
-  { id:1, name:'ORTA',   r:   1_000_000, step: 0.5, color: '#c8992a', textColor: '#000' },
-  { id:2, name:'BÜYÜK',  r:  10_000_000, step: 0.5, color: '#d93838', textColor: '#fff' },
+  { id: 0, name: 'KÜÇÜK', r: 100_000, step: 0.5, color: '#3a78cc', textColor: '#fff' },
+  { id: 1, name: 'ORTA', r: 1_000_000, step: 0.5, color: '#c8992a', textColor: '#000' },
+  { id: 2, name: 'BÜYÜK', r: 10_000_000, step: 0.5, color: '#d93838', textColor: '#fff' },
 ];
 
 // Sonuçları sakla
 const results = { 0: null, 1: null, 2: null };
 
 let currentP = 0;   // aktif preset
-let animT    = 0;
-let animId   = null;
-let playing  = false;
+let animT = 0;
+let animId = null;
+let playing = false;
 const ANIM_MS = 5500;
 
+// Orijinal mantıkta utils.js ve puan sistemi var bunu bozmadan bırakalım
 document.addEventListener("DOMContentLoaded", () => {
-    // Sayfa yüklendiğinde skoru yansıtsın
-    setTimeout(() => {
-        if(typeof GameUtils !== 'undefined' && GameUtils.playSound) {
-            GameUtils.playSound('hover');
-        }
-    }, 500);
+  // Sayfa yüklendiğinde skoru yansıtsın
+  setTimeout(() => {
+    if (typeof GameUtils !== 'undefined' && GameUtils.playSound) {
+      GameUtils.playSound('hover');
+    }
+  }, 500);
 });
 
 // ═══════════════════════════════════════════════════════════
@@ -30,7 +31,7 @@ document.addEventListener("DOMContentLoaded", () => {
 // ═══════════════════════════════════════════════════════════
 function switchPreset(id) {
   currentP = id;
-  if(typeof GameUtils !== 'undefined') GameUtils.playSound('click');
+  if (typeof GameUtils !== 'undefined') GameUtils.playSound('click');
   // Tab renkleri
   document.querySelectorAll('.tab').forEach((t, i) => {
     t.className = 'tab' + (i === id ? ` active-${id}` : '');
@@ -51,7 +52,7 @@ function renderPreset(id) {
     </div>
     <div class="preset-cell">
       <div class="label">ÇAP (2r)</div>
-      <div class="value col${id}">${(2*p.r).toLocaleString()} px</div>
+      <div class="value col${id}">${(2 * p.r).toLocaleString()} px</div>
     </div>
     <div class="preset-cell">
       <div class="label">ADIM</div>
@@ -59,17 +60,18 @@ function renderPreset(id) {
     </div>
     <div class="preset-cell">
       <div class="label">TOPLAM ADIM</div>
-      <div class="value col${id}">~${Math.round(2*p.r/p.step/1000)}k</div>
+      <div class="value col${id}">~${Math.round(2 * p.r / p.step / 1000)}k</div>
     </div>
     <div class="preset-cell">
       <div class="label">BEKLENEN HATA</div>
-      <div class="value col${id}">~${(p.step*p.step/p.r).toExponential(1)}</div>
+      <div class="value col${id}">~${(p.step * p.step / p.r).toExponential(1)}</div>
     </div>
   `;
 
   // Buton renklerini güncelle
-  document.querySelectorAll('.btn-row.custom .btn').forEach(b => {
+  document.querySelectorAll('.btn').forEach(b => {
     b.className = b.className.replace(/btn-\d/g, '').trim() + ` btn-${id}`;
+    if (b.classList.contains('go')) b.classList.add('go');
   });
 
   // Aşamaları sıfırla
@@ -115,9 +117,9 @@ function showComputedResult(id) {
 //  HESAPLAMA  —  Math.PI YOK
 // ═══════════════════════════════════════════════════════════
 async function startCompute() {
-  if(typeof GameUtils !== 'undefined') GameUtils.playSound('click');
-  const p   = PRESETS[currentP];
-  const id  = currentP;
+  if (typeof GameUtils !== 'undefined') GameUtils.playSound('click');
+  const p = PRESETS[currentP];
+  const id = currentP;
   document.getElementById('compBtn').disabled = true;
 
   const CHUNK = 500_000;
@@ -142,12 +144,12 @@ async function startCompute() {
       const pct = (i / TOTAL * 100).toFixed(0);
       document.getElementById('compProg').style.width = pct + '%';
       document.getElementById('compLabel').textContent =
-        `Yürünüyor… ${(i/1000).toFixed(0)}k / ${(TOTAL/1000).toFixed(0)}k adım (${pct}%)`;
+        `Yürünüyor… ${(i / 1000).toFixed(0)}k / ${(TOTAL / 1000).toFixed(0)}k adım (${pct}%)`;
       await new Promise(r => setTimeout(r, 0));
     }
   }
 
-  const circ  = halfCirc * 2;
+  const circ = halfCirc * 2;
   const ratio = circ / (2 * p.r);
   results[id] = { circ, ratio, r: p.r, step: p.step };
 
@@ -155,7 +157,7 @@ async function startCompute() {
   document.getElementById('compLabel').textContent =
     `✓ Tamamlandı — çevre: ${circ.toFixed(4)} px → oran: ${ratio.toFixed(12)}`;
 
-  if(typeof GameUtils !== 'undefined') GameUtils.playSound('success');
+  if (typeof GameUtils !== 'undefined') GameUtils.playSound('success');
 
   // Aşama B
   document.getElementById('phaseA').style.display = 'none';
@@ -167,13 +169,13 @@ async function startCompute() {
 }
 
 function buildResultBox(id) {
-  const p  = PRESETS[id];
-  const r  = results[id];
-  const c  = p.color;
+  const p = PRESETS[id];
+  const r = results[id];
+  const c = p.color;
   document.getElementById('resultBox').innerHTML = `
-    <span class="sy">Ölçülen yarı çevre:</span> <span class="big" style="color:${c}">${(r.circ/2).toFixed(4)} px</span><br>
+    <span class="sy">Ölçülen yarı çevre:</span> <span class="big" style="color:${c}">${(r.circ / 2).toFixed(4)} px</span><br>
     <span class="sy">Çevre (2 × yarı):</span> <span class="big" style="color:${c}">${r.circ.toFixed(4)} px</span><br>
-    <span class="sy">Çap (2r):</span> <span class="big" style="color:${c}">${(2*p.r).toLocaleString()} px</span><br>
+    <span class="sy">Çap (2r):</span> <span class="big" style="color:${c}">${(2 * p.r).toLocaleString()} px</span><br>
     <span class="sy">Çevre ÷ Çap =</span> <span class="big" style="color:${c}">${r.ratio.toFixed(12)}</span>
   `;
   document.getElementById('resultBox').classList.add('vis');
@@ -182,19 +184,19 @@ function buildResultBox(id) {
 // ═══════════════════════════════════════════════════════════
 //  ANİMASYON
 // ═══════════════════════════════════════════════════════════
-const rc   = document.getElementById('rollCanvas');
+const rc = document.getElementById('rollCanvas');
 const rctx = rc.getContext('2d');
 const RULER_D = 4;
-const PAD_R   = 36;
+const PAD_R = 36;
 
 function initRollCanvas() {
-  rc.width  = Math.max(rc.parentElement.clientWidth - 44, 300);
+  rc.width = Math.max(rc.parentElement.clientWidth - 44, 500);
   rc.height = 220;
   styleProgBar(currentP);
-  drawRoll(animT < 0.5 ? 2*animT*animT : -1+(4-2*animT)*animT);
+  drawRoll(animT < 0.5 ? 2 * animT * animT : -1 + (4 - 2 * animT) * animT);
 }
 window.addEventListener('resize', () => {
-  if (results[currentP]) { rc.width = Math.max(rc.parentElement.clientWidth - 44, 300); drawRoll(Math.min(animT,1)); }
+  if (results[currentP]) { rc.width = Math.max(rc.parentElement.clientWidth - 44, 500); drawRoll(Math.min(animT, 1)); }
 });
 
 function drawRoll(te) {
@@ -204,18 +206,18 @@ function drawRoll(te) {
 
   const W = rc.width, H = rc.height;
   rctx.clearRect(0, 0, W, H);
-  rctx.fillStyle = 'rgba(0,0,0,0.3)';
+  rctx.fillStyle = '#060810';
   rctx.fillRect(0, 0, W, H);
 
-  const PPU  = (W - PAD_R * 2) / RULER_D;
+  const PPU = (W - PAD_R * 2) / RULER_D;
   const R_PX = 0.5 * PPU;
-  const RY   = H - 58;
-  const X0   = PAD_R + R_PX;
+  const RY = H - 58;
+  const X0 = PAD_R + R_PX;
 
-  const trav_d  = r.ratio * te;
+  const trav_d = r.ratio * te;
   const trav_px = trav_d * PPU;
 
-  // Çizgi iz
+  // Kırmızı iz
   if (te > 0) {
     rctx.save();
     rctx.strokeStyle = p.color; rctx.lineWidth = 5; rctx.lineCap = 'round';
@@ -230,12 +232,12 @@ function drawRoll(te) {
   drawRulerD(PPU, X0, RY + 3, W - PAD_R - X0 + R_PX, 40, p.color);
 
   // Çember
-  const angle = 2 * Math.PI * te;
+  const angle = 2 * Math.PI * te;  // SADECE GÖRSELİ döndürmek için
   const cx = X0 + trav_px, cy = RY - R_PX;
 
   rctx.save();
   rctx.shadowColor = '#00000050'; rctx.shadowBlur = 18; rctx.shadowOffsetY = 6;
-  rctx.fillStyle   = p.color + '18';
+  rctx.fillStyle = p.color + '18';
   rctx.strokeStyle = p.color; rctx.lineWidth = 2.5;
   rctx.beginPath(); rctx.arc(cx, cy, R_PX, 0, 6.2832);
   rctx.fill(); rctx.stroke();
@@ -243,14 +245,14 @@ function drawRoll(te) {
 
   rctx.strokeStyle = p.color + '40'; rctx.lineWidth = 1;
   rctx.beginPath();
-  rctx.moveTo(cx-8,cy); rctx.lineTo(cx+8,cy);
-  rctx.moveTo(cx,cy-8); rctx.lineTo(cx,cy+8);
+  rctx.moveTo(cx - 8, cy); rctx.lineTo(cx + 8, cy);
+  rctx.moveTo(cx, cy - 8); rctx.lineTo(cx, cy + 8);
   rctx.stroke();
 
   const kx = cx + R_PX * Math.cos(-1.5708 + angle);
   const ky = cy + R_PX * Math.sin(-1.5708 + angle);
-  rctx.strokeStyle = p.color; rctx.lineWidth = 1.5; rctx.setLineDash([5,4]);
-  rctx.beginPath(); rctx.moveTo(cx,cy); rctx.lineTo(kx,ky); rctx.stroke();
+  rctx.strokeStyle = p.color; rctx.lineWidth = 1.5; rctx.setLineDash([5, 4]);
+  rctx.beginPath(); rctx.moveTo(cx, cy); rctx.lineTo(kx, ky); rctx.stroke();
   rctx.setLineDash([]);
 
   rctx.fillStyle = p.color; rctx.strokeStyle = '#060810'; rctx.lineWidth = 2;
@@ -259,51 +261,57 @@ function drawRoll(te) {
   rctx.fillStyle = p.color + '88'; rctx.font = '11px JetBrains Mono'; rctx.textAlign = 'center';
   rctx.fillText('r = 0.5d', cx, cy - R_PX - 10);
 
-  rctx.strokeStyle = 'rgba(255,255,255,0.2)'; rctx.lineWidth = 1; rctx.setLineDash([3,5]);
-  rctx.beginPath(); rctx.moveTo(cx, cy+R_PX); rctx.lineTo(cx, RY); rctx.stroke();
+  rctx.strokeStyle = '#1a2540'; rctx.lineWidth = 1; rctx.setLineDash([3, 5]);
+  rctx.beginPath(); rctx.moveTo(cx, cy + R_PX); rctx.lineTo(cx, RY); rctx.stroke();
   rctx.setLineDash([]);
 
+  if (te > 0 && te < 1) {
+    rctx.fillStyle = '#4a5878'; rctx.font = '11px JetBrains Mono'; rctx.textAlign = 'left';
+    rctx.fillText(`tur %${(te * 100).toFixed(1)}  →  cetvel: ${trav_d.toFixed(6)} d`, PAD_R, 20);
+  }
   if (te >= 1) {
-    rctx.fillStyle = 'var(--cyan)'; rctx.font = 'bold 12px JetBrains Mono'; rctx.textAlign = 'left';
+    rctx.fillStyle = '#38b870'; rctx.font = 'bold 12px JetBrains Mono'; rctx.textAlign = 'left';
     rctx.fillText('✓ TAM TUR TAMAMLANDI', PAD_R, 20);
     // Ok
     rctx.save();
     rctx.strokeStyle = p.color; rctx.fillStyle = p.color; rctx.lineWidth = 2.5;
     rctx.shadowColor = p.color + '80'; rctx.shadowBlur = 10;
-    rctx.beginPath(); rctx.moveTo(X0+trav_px, RY-6); rctx.lineTo(X0+trav_px, RY-36); rctx.stroke();
+    rctx.beginPath(); rctx.moveTo(X0 + trav_px, RY - 6); rctx.lineTo(X0 + trav_px, RY - 36); rctx.stroke();
     rctx.beginPath();
-    rctx.moveTo(X0+trav_px,   RY-36);
-    rctx.lineTo(X0+trav_px-7, RY-24);
-    rctx.lineTo(X0+trav_px+7, RY-24);
+    rctx.moveTo(X0 + trav_px, RY - 36);
+    rctx.lineTo(X0 + trav_px - 7, RY - 24);
+    rctx.lineTo(X0 + trav_px + 7, RY - 24);
     rctx.closePath(); rctx.fill();
     rctx.font = 'bold 12px JetBrains Mono'; rctx.textAlign = 'center';
-    rctx.fillText(`${r.ratio.toFixed(5)} d`, X0+trav_px, RY-42);
+    rctx.fillText(`${r.ratio.toFixed(5)} d`, X0 + trav_px, RY - 42);
     rctx.restore();
   }
 }
 
 function drawRulerD(ppu, x0, y0, rw, rh, color) {
-  const g = rctx.createLinearGradient(x0,y0,x0,y0+rh);
-  g.addColorStop(0,'rgba(0,0,0,0.8)'); g.addColorStop(0.5,'rgba(0,10,20,0.8)'); g.addColorStop(1,'rgba(0,0,0,0.8)');
+  const g = rctx.createLinearGradient(x0, y0, x0, y0 + rh);
+  g.addColorStop(0, '#181200'); g.addColorStop(0.5, '#221800'); g.addColorStop(1, '#0c0800');
   rctx.fillStyle = g; rctx.strokeStyle = color + 'aa'; rctx.lineWidth = 1;
-  rctx.fillRect(x0,y0,rw,rh); rctx.strokeRect(x0,y0,rw,rh);
-  const sub = 100, tpx = ppu / sub, tot = Math.ceil(rw/tpx)+sub+1;
+  rctx.fillRect(x0, y0, rw, rh); rctx.strokeRect(x0, y0, rw, rh);
+  const sub = 100, tpx = ppu / sub, tot = Math.ceil(rw / tpx) + sub + 1;
   for (let i = 0; i <= tot; i++) {
     const x = x0 + i * tpx;
-    if (x > x0+rw+1) break;
-    const isD = i%sub===0, isT = i%10===0&&!isD, isF = i%5===0&&!isT&&!isD;
-    const th = isD?rh*.65:isT?rh*.40:isF?rh*.24:rh*.13;
-    rctx.strokeStyle = isD?color:isT?color+'55':color+'28'; rctx.lineWidth = isD?1.4:0.6;
-    rctx.beginPath(); rctx.moveTo(x,y0); rctx.lineTo(x,y0+th); rctx.stroke();
+    if (x > x0 + rw + 1) break;
+    const isD = i % sub === 0, isT = i % 10 === 0 && !isD, isF = i % 5 === 0 && !isT && !isD;
+    const th = isD ? rh * .65 : isT ? rh * .40 : isF ? rh * .24 : rh * .13;
+    rctx.strokeStyle = isD ? color : isT ? color + '55' : color + '28'; rctx.lineWidth = isD ? 1.4 : 0.6;
+    rctx.beginPath(); rctx.moveTo(x, y0); rctx.lineTo(x, y0 + th); rctx.stroke();
     if (isD) {
       rctx.fillStyle = color; rctx.font = '11px JetBrains Mono'; rctx.textAlign = 'center';
-      rctx.fillText(i/sub, x, y0+rh-3);
+      rctx.fillText(i / sub, x, y0 + rh - 3);
     }
   }
+  rctx.fillStyle = color + '55'; rctx.font = '9px JetBrains Mono'; rctx.textAlign = 'right';
+  rctx.fillText('d (çap birimi)', x0 + rw - 2, y0 + rh - 3);
 }
 
 function toggleAnim() {
-  if(typeof GameUtils !== 'undefined') GameUtils.playSound('click');
+  if (typeof GameUtils !== 'undefined') GameUtils.playSound('click');
   const id = currentP;
   if (animT >= 1) {
     animT = 0;
@@ -312,7 +320,7 @@ function toggleAnim() {
     document.getElementById('accumBox').classList.remove('vis');
     document.getElementById('zoomGrid').innerHTML = '';
     drawRoll(0);
-    document.getElementById('animBtn').textContent = '▶ A. OYNAT';
+    document.getElementById('animBtn').textContent = '▶ ANİMASYONU OYNAT';
     return;
   }
   if (playing) {
@@ -325,13 +333,13 @@ function toggleAnim() {
   const startT = animT;
   function loop(now) {
     animT = Math.min(startT + (now - t0) / ANIM_MS, 1);
-    const te = animT < 0.5 ? 2*animT*animT : -1+(4-2*animT)*animT;
+    const te = animT < 0.5 ? 2 * animT * animT : -1 + (4 - 2 * animT) * animT;
     drawRoll(te);
-    document.getElementById('animProg').style.width = (animT*100)+'%';
+    document.getElementById('animProg').style.width = (animT * 100) + '%';
     if (animT < 1) {
       const r = results[id];
       document.getElementById('animStatus').textContent =
-        `%${(te*100).toFixed(0)} tur — cetvel ${(r.ratio*te).toFixed(6)} d gösteriyor`;
+        `%${(te * 100).toFixed(0)} tur — cetvel ${(r.ratio * te).toFixed(6)} d gösteriyor`;
       animId = requestAnimationFrame(loop);
     } else {
       playing = false; drawRoll(1);
@@ -345,7 +353,7 @@ function toggleAnim() {
 }
 
 function skipAnim() {
-  if(typeof GameUtils !== 'undefined') GameUtils.playSound('click');
+  if (typeof GameUtils !== 'undefined') GameUtils.playSound('click');
   cancelAnimationFrame(animId); playing = false; animT = 1;
   drawRoll(1);
   document.getElementById('animProg').style.width = '100%';
@@ -361,10 +369,10 @@ function skipAnim() {
 const MAX_ZL = 10;
 
 function getLevel(ratio, i) {
-  const pow   = Math.pow(10, i);
-  const span  = 1 / pow;
-  const rMin  = Math.floor(ratio * pow) / pow;
-  const rMax  = rMin + span;
+  const pow = Math.pow(10, i);
+  const span = 1 / pow;
+  const rMin = Math.floor(ratio * pow) / pow;
+  const rMax = rMin + span;
   const digit = Math.floor(ratio * pow) % 10;
   return { i, pow, span, rMin, rMax, digit };
 }
@@ -378,28 +386,28 @@ function showZoom(id) {
 
 function buildZRow(id, idx) {
   if (idx >= MAX_ZL) {
-      // OYUNU TAMAMLAMA EKLENTİSİ: En büyük preset hesaplandıysa ve puan alınmadıysa 100 puan ver
-      if (id === 2 && typeof GameUtils !== 'undefined') {
-          let score = GameUtils.getScore("cember-olcumu");
-          if (score < 100) {
-              GameUtils.saveScore("cember-olcumu", 100);
-              setTimeout(() => {
-                  GameUtils.showModal("SIR ÇÖZÜLDÜ", "Maksimum hassasiyette (10 milyon piksel) hesaplama yaptınız.\\nMatematiğin güzelliklerine tanık oldunuz!\\n\\n+100 Puan", true);
-              }, 1200);
-          }
+    // OYUNU TAMAMLAMA EKLENTİSİ: En büyük preset hesaplandıysa ve puan alınmadıysa 100 puan ver
+    if (id === 2 && typeof GameUtils !== 'undefined') {
+      let score = GameUtils.getScore("cember-olcumu");
+      if (score < 100) {
+        GameUtils.saveScore("cember-olcumu", 100);
+        setTimeout(() => {
+          GameUtils.showModal("SIR ÇÖZÜLDÜ", "Maksimum hassasiyette (10 milyon piksel) hesaplama yaptınız.\\nMatematiğin güzelliklerine tanık oldunuz!\\n\\n+100 Puan", true);
+        }, 1200);
       }
-      return;
+    }
+    return;
   }
-  const p   = PRESETS[id];
+  const p = PRESETS[id];
   const rat = results[id].ratio;
-  const lv  = getLevel(rat, idx);
+  const lv = getLevel(rat, idx);
 
   const row = document.createElement('div');
   row.className = 'zoom-row';
 
   const lbl = document.createElement('div');
   lbl.className = 'zlbl';
-  lbl.innerHTML = `<span class="mag" style="color:${p.color}">×${lv.pow >= 1e6 ? (lv.pow/1e6)+'M' : lv.pow >= 1e3 ? (lv.pow/1e3)+'k' : lv.pow}</span><span class="sub">yakın</span>`;
+  lbl.innerHTML = `<span class="mag" style="color:${p.color}">×${lv.pow >= 1e6 ? (lv.pow / 1e6) + 'M' : lv.pow >= 1e3 ? (lv.pow / 1e3) + 'k' : lv.pow}</span><span class="sub">yakın</span>`;
   row.appendChild(lbl);
 
   const zc = document.createElement('canvas');
@@ -414,12 +422,11 @@ function buildZRow(id, idx) {
 
   setTimeout(() => {
     zc.width = zc.offsetWidth || 680;
-    if(zc.width < 100) zc.width = 250; // mobile fallback
     drawZRuler(zc, lv, p.color, rat);
     dg.textContent = lv.digit;
     updateAccum(id, idx);
     requestAnimationFrame(() => row.classList.add('show'));
-    if(typeof GameUtils !== 'undefined') GameUtils.playSound('click'); // tik sesi
+    if (typeof GameUtils !== 'undefined') GameUtils.playSound('click');
     setTimeout(() => buildZRow(id, idx + 1), 650);
   }, 30);
 }
@@ -428,49 +435,49 @@ function drawZRuler(canvas, lv, color, ratio) {
   const W = canvas.width, H = canvas.height;
   const ctx = canvas.getContext('2d');
   ctx.clearRect(0, 0, W, H);
-  const P = 26, rx0 = P, rw = W - P*2;
+  const P = 26, rx0 = P, rw = W - P * 2;
   const ry = H - 22, rh = 30;
   const span = lv.span, mainT = 10, subT = 10;
 
-  const g = ctx.createLinearGradient(rx0,ry,rx0,ry+rh);
-  g.addColorStop(0,'rgba(0,0,0,0.8)'); g.addColorStop(0.5,'rgba(0,10,20,0.8)'); g.addColorStop(1,'rgba(0,0,0,0.8)');
+  const g = ctx.createLinearGradient(rx0, ry, rx0, ry + rh);
+  g.addColorStop(0, '#181000'); g.addColorStop(0.5, '#221600'); g.addColorStop(1, '#0c0800');
   ctx.fillStyle = g; ctx.strokeStyle = color + 'aa'; ctx.lineWidth = 1;
-  ctx.fillRect(rx0,ry,rw,rh); ctx.strokeRect(rx0,ry,rw,rh);
+  ctx.fillRect(rx0, ry, rw, rh); ctx.strokeRect(rx0, ry, rw, rh);
 
   for (let i = 0; i <= mainT; i++) {
-    const x = rx0 + rw * (i/mainT);
+    const x = rx0 + rw * (i / mainT);
     for (let j = 1; j < subT; j++) {
-      const xj = rx0 + rw * ((i+j/subT)/mainT);
-      if (xj > rx0+rw) break;
-      ctx.strokeStyle = color+'25'; ctx.lineWidth = 0.5;
-      ctx.beginPath(); ctx.moveTo(xj,ry); ctx.lineTo(xj,ry+rh*(j===5?.35:.18)); ctx.stroke();
+      const xj = rx0 + rw * ((i + j / subT) / mainT);
+      if (xj > rx0 + rw) break;
+      ctx.strokeStyle = color + '25'; ctx.lineWidth = 0.5;
+      ctx.beginPath(); ctx.moveTo(xj, ry); ctx.lineTo(xj, ry + rh * (j === 5 ? .35 : .18)); ctx.stroke();
     }
     ctx.strokeStyle = color; ctx.lineWidth = 1.3;
-    ctx.beginPath(); ctx.moveTo(x,ry); ctx.lineTo(x,ry+rh*.62); ctx.stroke();
-    const val = lv.rMin + span*(i/mainT);
+    ctx.beginPath(); ctx.moveTo(x, ry); ctx.lineTo(x, ry + rh * .62); ctx.stroke();
+    const val = lv.rMin + span * (i / mainT);
     const dec = lv.i + 2;
-    ctx.fillStyle = color; ctx.font = `${Math.max(7,11-lv.i)}px JetBrains Mono`;
+    ctx.fillStyle = color; ctx.font = `${Math.max(7, 11 - lv.i)}px JetBrains Mono`;
     ctx.textAlign = 'center';
-    ctx.fillText(val.toFixed(dec), x, ry+rh-3);
+    ctx.fillText(val.toFixed(dec), x, ry + rh - 3);
   }
 
   // Kırmızı ok — ratio'nun bu penceredeki yeri
   const frac = (ratio - lv.rMin) / span;
-  const piX  = rx0 + rw * Math.max(0, Math.min(1, frac));
+  const piX = rx0 + rw * Math.max(0, Math.min(1, frac));
   ctx.save();
   ctx.strokeStyle = '#d93838'; ctx.lineWidth = 2.5;
   ctx.shadowColor = '#d9383890'; ctx.shadowBlur = 10;
-  ctx.beginPath(); ctx.moveTo(piX,ry-2); ctx.lineTo(piX,ry+rh+2); ctx.stroke();
+  ctx.beginPath(); ctx.moveTo(piX, ry - 2); ctx.lineTo(piX, ry + rh + 2); ctx.stroke();
   ctx.fillStyle = '#d93838';
-  ctx.beginPath(); ctx.moveTo(piX,ry-14); ctx.lineTo(piX-6,ry-2); ctx.lineTo(piX+6,ry-2); ctx.closePath(); ctx.fill();
+  ctx.beginPath(); ctx.moveTo(piX, ry - 14); ctx.lineTo(piX - 6, ry - 2); ctx.lineTo(piX + 6, ry - 2); ctx.closePath(); ctx.fill();
   ctx.restore();
 
-  ctx.fillStyle = 'var(--cyan)'; ctx.font = '9px JetBrains Mono'; ctx.textAlign = 'left';
-  ctx.fillText(`[${lv.rMin.toFixed(lv.i+1)} … ${lv.rMax.toFixed(lv.i+1)}]`, rx0, 13);
+  ctx.fillStyle = '#4a5878'; ctx.font = '9px JetBrains Mono'; ctx.textAlign = 'left';
+  ctx.fillText(`[${lv.rMin.toFixed(lv.i + 1)} … ${lv.rMax.toFixed(lv.i + 1)}]`, rx0, 13);
 }
 
 function updateAccum(id, idx) {
-  const p   = PRESETS[id];
+  const p = PRESETS[id];
   const val = results[id].ratio.toFixed(15);
   const dotI = val.indexOf('.');
   let html = `<span class="sy">? = </span>`;
@@ -478,14 +485,14 @@ function updateAccum(id, idx) {
     const ch = val[i];
     if (ch === '.') { html += `<span class="sy">.</span>`; continue; }
     const dp = i > dotI ? i - dotI - 1 : -1;
-    if (dp < 0)        html += `<span class="lk">${ch}</span>`;
+    if (dp < 0) html += `<span class="lk">${ch}</span>`;
     else if (dp < idx) html += `<span class="lk">${ch}</span>`;
-    else if (dp===idx) html += `<span class="fr" style="color:${p.color}">${ch}</span>`;
-    else               html += `<span class="bl">?</span>`;
+    else if (dp === idx) html += `<span class="fr" style="color:${p.color}">${ch}</span>`;
+    else html += `<span class="bl">?</span>`;
   }
   document.getElementById('accumNum').innerHTML = html;
   document.getElementById('accumNote').textContent =
-    `${p.name} çap (r=${p.r.toLocaleString()}) ile ${idx+1} ondalık basamak okundu.`;
+    `${p.name} çap (r=${p.r.toLocaleString()}) ile ${idx + 1} ondalık basamak okundu.`;
 }
 
 // ═══════════════════════════════════════════════════════════
@@ -508,13 +515,13 @@ function updateCompareBox() {
     // Sayıyı renklendir: doğru/yanlış
     let dhtml = '';
     for (let i = 0; i < rat.length; i++) {
-      if (i >= ref.length) { dhtml += `<span style="color:var(--text-dim)">${rat[i]}</span>`; continue; }
+      if (i >= ref.length) { dhtml += `<span style="color:#4a5878">${rat[i]}</span>`; continue; }
       if (rat[i] === ref[i]) dhtml += `<span class="lk m">${rat[i]}</span>`;
       else { dhtml += `<span class="w m">${rat[i]}</span>`; break; }
     }
     return `
       <div class="cmp-row">
-        <div class="cmp-label" style="color:${p.color}">${p.name}<br><span style="color:var(--cyan);opacity:0.6;font-size:0.65rem">r=${p.r.toLocaleString()}</span></div>
+        <div class="cmp-label" style="color:${p.color}">${p.name}<br><span style="color:var(--dim);font-size:0.65rem">r=${p.r.toLocaleString()}</span></div>
         <div class="cmp-digits">${dhtml}</div>
       </div>`;
   }).join('');

@@ -6,13 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Çember Ölçümü - Pi Günü</title>
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
-        href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Orbitron:wght@700;900&family=Playfair+Display:ital,wght@0,700;1,400&family=JetBrains+Mono:wght@400;700&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=JetBrains+Mono:wght@400;700&display=swap"
         rel="stylesheet">
-
-    <link rel="stylesheet" href="../../css/global.css">
     <link rel="stylesheet" href="style.css">
 
     <!-- Vercel Speed Insights -->
@@ -23,102 +19,86 @@
 </head>
 
 <body>
-    <div class="scanline"></div>
-    <div class="wrapper">
-        <nav class="back-nav">
-            <a href="../../index.html" class="btn back-btn">◂ ANA MENÜYE DÖN</a>
-        </nav>
 
-        <header class="header">
-            <h1 class="title">ÇEMBER ÖLÇÜMÜ</h1>
-            <div class="subtitle">// GİZEMLİ SAYIYI BUL //</div>
-        </header>
-
-        <div class="divider"></div>
-
-        <main class="game-container" style="max-width: 800px; margin: 0 auto; padding: 20px 0;">
-            <div class="hdr-custom">
-                <p>Kullanılan araçlar: <code>y = &#x221A;(r&sup2; - x&sup2;)</code> &middot;
-                    <code>d = &#x221A;(dx&sup2;+dy&sup2;)</code><br>
-                    <strong style="color:var(--red)">Math.PI yok &middot; Açı yok &middot; Trigonometri yok</strong><br>
-                    Çap büyüdükçe hata küçülür &rarr; daha fazla basamak!
-                </p>
-            </div>
-
-            <!-- Tab bar -->
-            <div class="tabs" id="tabBar">
-                <button class="tab active-0" onclick="switchPreset(0)">
-                    &#x1F535; KÜÇÜK<br><span style="font-size:0.65rem">r = 100 000</span>
-                </button>
-                <button class="tab" onclick="switchPreset(1)">
-                    &#x1F7E1; ORTA<br><span style="font-size:0.65rem">r = 1 000 000</span>
-                </button>
-                <button class="tab" onclick="switchPreset(2)">
-                    &#x1F534; BÜYÜK<br><span style="font-size:0.65rem">r = 10 000 000</span>
-                </button>
-            </div>
-
-            <!-- Main card -->
-            <div class="card" id="mainCard">
-                <!-- Preset info -->
-                <div class="preset-bar" id="presetBar"></div>
-
-                <!-- PHASE A -->
-                <div id="phaseA">
-                    <p class="stitle">&#x2460; Ölçümü Başlat</p>
-                    <div class="prog-outer">
-                        <div class="prog-inner" id="compProg"></div>
-                    </div>
-                    <div class="prog-label" id="compLabel">Hazır. Ölç düğmesine bas.</div>
-                    <div class="btn-row custom">
-                        <button class="btn go" id="compBtn" onclick="startCompute()">&#x2699; ÖLÇÜM BAŞLAT</button>
-                    </div>
-                </div>
-
-                <!-- PHASE B -->
-                <div id="phaseB" style="display:none">
-                    <p class="stitle">&#x2461; Çember bir tur yuvarlanıyor</p>
-                    <canvas id="rollCanvas" class="roll" height="220"></canvas>
-                    <div class="anim-prog-wrap">
-                        <div class="anim-prog-fill" id="animProg"></div>
-                    </div>
-                    <div class="anim-status" id="animStatus">&mdash;</div>
-                    <div class="result-box" id="resultBox"></div>
-                    <div class="btn-row custom">
-                        <button class="btn" id="animBtn" onclick="toggleAnim()">&#x25B6; A. OYNAT</button>
-                        <button class="btn" id="skipBtn" onclick="skipAnim()">&#x23ED; ATLA</button>
-                    </div>
-                </div>
-
-                <!-- PHASE C -->
-                <div class="zoom-section" id="phaseC">
-                    <p class="stitle" style="margin-top:18px">&#x2462; Cetveli yakınlaştır &mdash; her basamağı oku</p>
-                    <div class="zoom-grid" id="zoomGrid"></div>
-                    <div class="accum" id="accumBox">
-                        <div class="accum-title">Şimdiye kadar okunan sayı</div>
-                        <div class="accum-num" id="accumNum"></div>
-                        <div class="accum-note" id="accumNote"></div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Comparison box -->
-            <div id="compareBox" style="display:none;">
-                <div class="cmp-title">Karşılaştırma &mdash; Çap büyüdükçe ne olur?</div>
-                <div id="cmpRows"></div>
-            </div>
-
-        </main>
-
-        <div class="divider"></div>
-        <footer class="footer">
-            <div class="copyright-wrap">
-                <div class="copyright"><span class="tm">TM</span> Pi Günü için tasarlanmıştır.</div>
-            </div>
-        </footer>
+    <!-- Geri dönüş butonu - Orijinal tasarıma ufak bir dokunuş -->
+    <div class="back-btn-container">
+        <a href="../../index.html" class="back-btn-raw">◂ ANA MENÜ</a>
     </div>
 
-    <!-- UTILS VE APP.JS -->
+    <div class="hdr">
+        <h1>Çemberi Ölçerek Gizemli Sayıyı Bul</h1>
+        <p>
+            Kullanılan araçlar: &nbsp;<code>y = √(r² − x²)</code> &nbsp;·&nbsp; <code>d = √(dx²+dy²)</code><br>
+            <strong style="color:var(--red)">Math.PI yok · Açı yok · Trigonometri yok</strong><br>
+            Çap büyüdükçe hata küçülür → daha fazla basamak!
+        </p>
+    </div>
+
+    <!-- Tab bar -->
+    <div class="tabs" id="tabBar">
+        <button class="tab active-0" onclick="switchPreset(0)">
+            🔵 KÜÇÜK<br><span style="font-size:0.65rem">r = 100 000</span>
+        </button>
+        <button class="tab" onclick="switchPreset(1)">
+            🟡 ORTA<br><span style="font-size:0.65rem">r = 1 000 000</span>
+        </button>
+        <button class="tab" onclick="switchPreset(2)">
+            🔴 BÜYÜK<br><span style="font-size:0.65rem">r = 10 000 000</span>
+        </button>
+    </div>
+
+    <!-- Main card -->
+    <div class="card" id="mainCard">
+
+        <!-- Preset info -->
+        <div class="preset-bar" id="presetBar"></div>
+
+        <!-- PHASE A: Compute -->
+        <div id="phaseA">
+            <p class="stitle">① Ölçümü Başlat</p>
+            <div class="prog-outer">
+                <div class="prog-inner" id="compProg"></div>
+            </div>
+            <div class="prog-label" id="compLabel">Hazır. Ölç düğmesine bas.</div>
+            <div class="btn-row">
+                <button class="btn go" id="compBtn" onclick="startCompute()">⚙ ÖLÇÜM BAŞLAT</button>
+            </div>
+        </div>
+
+        <!-- PHASE B: Animate -->
+        <div id="phaseB" style="display:none">
+            <p class="stitle">② Çember bir tur yuvarlanıyor</p>
+            <canvas id="rollCanvas" class="roll" height="220"></canvas>
+            <div class="anim-prog-wrap">
+                <div class="anim-prog-fill" id="animProg"></div>
+            </div>
+            <div class="anim-status" id="animStatus">—</div>
+            <div class="result-box" id="resultBox"></div>
+            <div class="btn-row">
+                <button class="btn" id="animBtn" onclick="toggleAnim()">▶ ANİMASYONU OYNAT</button>
+                <button class="btn" id="skipBtn" onclick="skipAnim()">⏭ ATLA</button>
+            </div>
+        </div>
+
+        <!-- PHASE C: Zoom -->
+        <div class="zoom-section" id="phaseC">
+            <p class="stitle" style="margin-top:18px">③ Cetveli yakınlaştır — her basamağı oku</p>
+            <div class="zoom-grid" id="zoomGrid"></div>
+            <div class="accum" id="accumBox">
+                <div class="accum-title">Şimdiye kadar okunan sayı</div>
+                <div class="accum-num" id="accumNum"></div>
+                <div class="accum-note" id="accumNote"></div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Comparison box -->
+    <div id="compareBox">
+        <div class="cmp-title">Karşılaştırma — Çap büyüdükçe ne olur?</div>
+        <div id="cmpRows"></div>
+    </div>
+
     <script src="../../js/utils.js"></script>
     <script src="app.js"></script>
 </body>
