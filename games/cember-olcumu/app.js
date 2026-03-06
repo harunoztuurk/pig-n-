@@ -214,16 +214,17 @@ function buildResultBox(id) {
 const rc = document.getElementById('rollCanvas');
 const rctx = rc.getContext('2d');
 const RULER_D = 4;
-const PAD_R = 36;
+const PAD_R = 46;
 
 function initRollCanvas() {
-  rc.width = Math.max(rc.parentElement.clientWidth - 44, 250); // Fallback for small mobile sizes
+  // Give the canvas a bit more breathing room on the right side so the circle doesn't clip
+  rc.width = Math.max(rc.parentElement.clientWidth - 50, 250);
   rc.height = 220;
   styleProgBar(currentP);
   drawRoll(animT < 0.5 ? 2 * animT * animT : -1 + (4 - 2 * animT) * animT);
 }
 window.addEventListener('resize', () => {
-  if (results[currentP]) { rc.width = Math.max(rc.parentElement.clientWidth - 44, 250); drawRoll(Math.min(animT, 1)); }
+  if (results[currentP]) { rc.width = Math.max(rc.parentElement.clientWidth - 50, 250); drawRoll(Math.min(animT, 1)); }
 });
 
 function drawRoll(te) {
