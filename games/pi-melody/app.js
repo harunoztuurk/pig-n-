@@ -165,11 +165,11 @@ function renderReferenceTable() {
     const c = document.getElementById("refItems");
     let html = "";
     Object.entries(NOTE_MAP).forEach(([d, v]) => {
-        html += `<div style="display: flex; align-items: center; gap: 4px; padding: 4px 7px; background: rgba(255,255,255,0.04); border-radius: 6px; font-size: 0.66rem;">
+        html += `<div style="display: flex; align-items: center; gap: 4px; padding: 4px 7px; background: rgba(255,255,255,0.04); border-radius: 6px; font-size: 0.85rem;">
             <span style="color: ${v.color}; font-weight: 700;">${d}</span>
             <span style="color: rgba(255,255,255,0.2);">→</span>
             <span style="color: rgba(255,255,255,0.75);">${v.sol}</span>
-            <span style="color: rgba(255,255,255,0.18); font-size: 0.54rem;">(${v.note})</span>
+            <span style="color: rgba(255,255,255,0.18); font-size: 0.7rem;">(${v.note})</span>
         </div>`;
     });
     c.innerHTML = html;
@@ -262,7 +262,7 @@ function renderVisualizer() {
         let transform = isActive ? "scale(1.22)" : "scale(1)";
         let shadow = isActive ? `0 0 18px ${v.color}88` : "none";
 
-        node.style = `width: 34px; height: 34px; border-radius: 8px; background: ${bg}; border: ${border}; display: flex; align-items: center; justify-content: center; font-size: 0.72rem; color: ${col}; transition: all 0.12s; transform: ${transform}; box-shadow: ${shadow};`;
+        node.style = `width: 34px; height: 34px; border-radius: 8px; background: ${bg}; border: ${border}; display: flex; align-items: center; justify-content: center; font-size: 1rem; color: ${col}; transition: all 0.12s; transform: ${transform}; box-shadow: ${shadow};`;
 
         node.textContent = isActive ? "♪" : (isDone ? "✓" : "·");
         c.appendChild(node);
@@ -316,7 +316,7 @@ function renderInputs(full = true) {
         }
 
         const cwN = document.getElementById(`cell-note-${i}`);
-        let nHtml = `<span style="font-size: 0.48rem; color: rgba(255,255,255,0.18);">${i + 1}</span>`;
+        let nHtml = `<span style="font-size: 0.85rem; color: rgba(255,255,255,0.18);">${i + 1}</span>`;
         if (state.inputMode === "select") {
             const disabled = state.stepMode && (i > state.currentStep || (!state.waitingInput && i === state.currentStep));
             let border = (isCurrentStep && state.waitingInput) ? "2px solid #E55039" : (resN === null ? "1px solid rgba(255,255,255,0.12)" : (resN ? "2px solid #00B894" : "2px solid #FF6B6B"));
@@ -335,7 +335,7 @@ function renderInputs(full = true) {
             let border = isListen ? "2px solid #E55039" : ((isCurrentStep && state.waitingInput) ? "2px solid #E55039" : (resN === null ? "1px solid rgba(255,255,255,0.12)" : (resN ? "2px solid #00B894" : "2px solid #FF6B6B")));
             let bg = isListen ? "rgba(229,80,57,0.2)" : (isFutureStep ? "rgba(255,255,255,0.02)" : (resN === null ? "rgba(255,255,255,0.05)" : (resN ? "rgba(0,184,148,0.15)" : "rgba(255,107,107,0.15)")));
             let txt = isListen ? "🎙" : (state.noteAnswers[i] ? state.noteAnswers[i] : "🎤");
-            let fz = (state.noteAnswers[i] && !isListen) ? "0.56rem" : "1rem";
+            let fz = (state.noteAnswers[i] && !isListen) ? "0.85rem" : "1.3rem";
             let cur = isFutureStep ? "not-allowed" : "pointer";
             let opc = isFutureStep ? 0.3 : 1;
             let cls = `note-mic ${isListen ? 'mic-pulse' : ''}`;
@@ -344,7 +344,7 @@ function renderInputs(full = true) {
         }
 
         if (state.checked && resN !== null) {
-            nHtml += `<span style="font-size: 0.52rem; color: ${resN ? '#00B894' : '#FF6B6B'}">${resN ? '✓' : NOTE_MAP[state.currentDigits[i]].sol}</span>`;
+            nHtml += `<span style="font-size: 0.85rem; color: ${resN ? '#00B894' : '#FF6B6B'}">${resN ? '✓' : NOTE_MAP[state.currentDigits[i]].sol}</span>`;
         }
         cwN.innerHTML = nHtml;
 
@@ -357,7 +357,7 @@ function renderInputs(full = true) {
             dg.appendChild(cwD);
         }
         const cwD = document.getElementById(`cell-dig-${i}`);
-        let dHtml = `<span style="font-size: 0.48rem; color: rgba(255,255,255,0.18);">${i + 1}</span>`;
+        let dHtml = `<span style="font-size: 0.85rem; color: rgba(255,255,255,0.18);">${i + 1}</span>`;
         let dBorder = resD === null ? "1px solid rgba(255,255,255,0.12)" : (resD ? "2px solid #00B894" : "2px solid #FF6B6B");
         let dBg = isFutureStep ? "rgba(255,255,255,0.02)" : (resD === null ? "rgba(255,255,255,0.05)" : (resD ? "rgba(0,184,148,0.15)" : "rgba(255,107,107,0.15)"));
         let cur = isFutureStep ? "not-allowed" : "text";
@@ -366,7 +366,7 @@ function renderInputs(full = true) {
         dHtml += `<input type="text" maxlength="1" class="digit-input" value="${state.digitAnswers[i]}" ${isFutureStep ? 'disabled' : ''} style="border:${dBorder};background:${dBg};opacity:${dOpc};cursor:${cur}" oninput="setDigit(${i}, this.value)" />`;
 
         if (state.checked && resD !== null) {
-            dHtml += `<span style="font-size: 0.52rem; color: ${resD ? '#00B894' : '#FF6B6B'}">${resD ? '✓' : state.currentDigits[i]}</span>`;
+            dHtml += `<span style="font-size: 0.85rem; color: ${resD ? '#00B894' : '#FF6B6B'}">${resD ? '✓' : state.currentDigits[i]}</span>`;
         }
         cwD.innerHTML = dHtml;
     }
@@ -651,3 +651,15 @@ window.startListening = function (cellIdx) {
     };
     try { rec.start(); } catch (e) { state.voiceStatus = "⚠ Mikrofon açılamadı"; renderMicState(); }
 };
+
+// --- Keyboard Event Listeners ---
+window.addEventListener('keydown', (e) => {
+    if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA' || e.target.tagName === 'SELECT') return;
+
+    if (e.key >= '0' && e.key <= '9') {
+        const num = parseInt(e.key, 10);
+        if (NOTE_MAP[num]) {
+            playTone(NOTE_MAP[num].freq, 0.4);
+        }
+    }
+});

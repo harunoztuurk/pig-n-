@@ -32,10 +32,10 @@
 
         <!-- Header -->
         <div style="text-align: center; margin-bottom: 22px;">
-            <div style="font-size: clamp(1.5rem,5vw,2.5rem); font-weight: 700; font-family: Georgia, serif;">
+            <div style="font-size: clamp(2rem,7vw,3.5rem); font-weight: 700; font-family: Georgia, serif;">
                 π <span style="color: #6C5CE7;">×</span> Müzik
             </div>
-            <div style="font-size: 0.7rem; color: rgba(255,255,255,0.28); margin-top: 5px; letter-spacing: 0.15em;">
+            <div style="font-size: 1.1rem; color: rgba(255,255,255,0.4); margin-top: 5px; letter-spacing: 0.15em;">
                 Pi'nin rakamlarını nota olarak dinle ve doğru bil
             </div>
         </div>
@@ -43,7 +43,7 @@
         <!-- Group Selector -->
         <div style="margin-bottom: 18px;">
             <div
-                style="font-size: 0.56rem; color: rgba(255,255,255,0.28); letter-spacing: 0.2em; text-align: center; margin-bottom: 7px;">
+                style="font-size: 0.85rem; color: rgba(255,255,255,0.4); letter-spacing: 0.2em; text-align: center; margin-bottom: 7px;">
                 BÖLÜM SEÇ</div>
             <div style="display: flex; gap: 6px; flex-wrap: wrap; justify-content: center;" id="groupBtns">
                 <!-- JS renders buttons here -->
@@ -53,7 +53,7 @@
         <!-- Reference Table -->
         <div
             style="background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); border-radius: 12px; padding: 12px 15px; margin-bottom: 16px; max-width: 620px; width: 100%;">
-            <div style="font-size: 0.56rem; letter-spacing: 0.2em; color: rgba(255,255,255,0.22); margin-bottom: 7px;">
+            <div style="font-size: 0.85rem; letter-spacing: 0.2em; color: rgba(255,255,255,0.4); margin-bottom: 7px;">
                 EŞLEŞME TABLOSU</div>
             <div style="display: flex; flex-wrap: wrap; gap: 5px;" id="refItems">
                 <!-- JS renders ref table here -->
@@ -63,24 +63,24 @@
         <!-- Play Buttons -->
         <div style="display: flex; gap: 10px; margin-bottom: 18px; flex-wrap: wrap; justify-content: center;">
             <button id="btnPlayAll" onclick="playAll()"
-                style="padding: 11px 28px; border-radius: 50px; border: none; background: linear-gradient(135deg,#6C5CE7,#a29bfe); color: #fff; font-size: 0.88rem; font-family: inherit; letter-spacing: 0.08em; cursor: pointer; box-shadow: 0 0 24px rgba(108,92,231,0.4);">
+                style="padding: 11px 28px; border-radius: 50px; border: none; background: linear-gradient(135deg,#6C5CE7,#a29bfe); color: #fff; font-size: 1rem; font-family: inherit; letter-spacing: 0.08em; cursor: pointer; box-shadow: 0 0 24px rgba(108,92,231,0.4);">
                 ▶ Tümünü Çal
             </button>
 
             <button id="btnStep" onclick="handleStepBtn()"
-                style="padding: 11px 22px; border-radius: 50px; border: none; background: linear-gradient(135deg,#E55039,#ff7675); color: #fff; font-size: 0.88rem; font-family: inherit; letter-spacing: 0.08em; cursor: pointer; box-shadow: 0 0 24px rgba(229,80,57,0.4);">
+                style="padding: 11px 22px; border-radius: 50px; border: none; background: linear-gradient(135deg,#E55039,#ff7675); color: #fff; font-size: 1rem; font-family: inherit; letter-spacing: 0.08em; cursor: pointer; box-shadow: 0 0 24px rgba(229,80,57,0.4);">
                 🎯 Adım Adım Çal
             </button>
 
             <button id="btnReset" onclick="resetAll()"
-                style="display:none; padding: 11px 18px; border-radius: 50px; border: 1px solid rgba(255,255,255,0.15); background: transparent; color: rgba(255,255,255,0.5); font-size: 0.8rem; font-family: inherit; cursor: pointer;">
+                style="display:none; padding: 11px 18px; border-radius: 50px; border: 1px solid rgba(255,255,255,0.15); background: transparent; color: rgba(255,255,255,0.5); font-size: 0.9rem; font-family: inherit; cursor: pointer;">
                 ✕ Sıfırla
             </button>
         </div>
 
         <!-- Adım Modu Bilgisi -->
         <div id="stepInfo"
-            style="display:none; margin-bottom: 16px; padding: 10px 18px; background: rgba(229,80,57,0.1); border: 1px solid rgba(229,80,57,0.3); border-radius: 10px; font-size: 0.7rem; color: rgba(255,255,255,0.65); max-width: 620px; width: 100%; text-align: center;">
+            style="display:none; margin-bottom: 16px; padding: 10px 18px; background: rgba(229,80,57,0.1); border: 1px solid rgba(229,80,57,0.3); border-radius: 10px; font-size: 0.95rem; color: rgba(255,255,255,0.8); max-width: 620px; width: 100%; text-align: center;">
             <!-- JS injects step text -->
         </div>
 
@@ -97,7 +97,7 @@
                 style="background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); border-radius: 14px; padding: 15px; margin-bottom: 12px;">
                 <div
                     style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; flex-wrap: wrap; gap: 8px;">
-                    <div style="font-size: 0.56rem; letter-spacing: 0.2em; color: rgba(255,255,255,0.28);">ADIM 1 — Nota
+                    <div style="font-size: 0.85rem; letter-spacing: 0.2em; color: rgba(255,255,255,0.4);">ADIM 1 — Nota
                         solfej adlarını gir</div>
                     <div id="micControls" style="display: flex; gap: 5px;">
                         <button class="mode-btn" id="btnModeSelect" onclick="setInputMode('select')"
@@ -108,14 +108,14 @@
                 </div>
 
                 <div id="voiceHelp"
-                    style="display:none; margin-bottom: 10px; padding: 9px 12px; background: rgba(229,80,57,0.08); border: 1px solid rgba(229,80,57,0.25); border-radius: 9px; font-size: 0.64rem; color: rgba(255,255,255,0.55); line-height: 1.7;">
-                    Kutuya tıkla → söyle: <strong style="color: rgba(255,255,255,0.85);">Do · Re · Mi · Fa · Sol · La ·
+                    style="display:none; margin-bottom: 10px; padding: 9px 12px; background: rgba(229,80,57,0.08); border: 1px solid rgba(229,80,57,0.25); border-radius: 9px; font-size: 0.85rem; color: rgba(255,255,255,0.7); line-height: 1.7;">
+                    Kutuya tıkla → söyle: <strong style="color: rgba(255,255,255,0.95);">Do · Re · Mi · Fa · Sol · La ·
                         Si · Do iki · Re iki · Mi iki</strong>
                     <div id="voiceStatus" style="margin-top: 6px; font-weight: 700; color: #aaa;"></div>
                 </div>
 
                 <div id="micError"
-                    style="display:none; margin-bottom: 10px; padding: 9px 12px; background: rgba(255,107,107,0.1); border: 1px solid rgba(255,107,107,0.3); border-radius: 9px; font-size: 0.62rem; color: #FF6B6B;">
+                    style="display:none; margin-bottom: 10px; padding: 9px 12px; background: rgba(255,107,107,0.1); border: 1px solid rgba(255,107,107,0.3); border-radius: 9px; font-size: 0.85rem; color: #FF6B6B;">
                     🔒 Mikrofon izni reddedildi. Tarayıcı adres çubuğundaki <strong>🔒 kilit simgesine</strong> tıklayıp
                     mikrofon iznini aç, sayfayı yenile.
                 </div>
@@ -127,31 +127,31 @@
             <div
                 style="background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); border-radius: 14px; padding: 15px; margin-bottom: 14px;">
                 <div
-                    style="font-size: 0.56rem; letter-spacing: 0.2em; color: rgba(255,255,255,0.28); margin-bottom: 12px;">
+                    style="font-size: 0.85rem; letter-spacing: 0.2em; color: rgba(255,255,255,0.4); margin-bottom: 12px;">
                     ADIM 2 — Karşılık gelen rakamı yaz (0–9)</div>
                 <div id="digitsGrid" style="display: flex; flex-wrap: wrap; gap: 6px;"></div>
             </div>
 
             <button onclick="checkAnswers()"
-                style="width: 100%; padding: 13px; border-radius: 12px; border: none; background: linear-gradient(135deg,#00B894,#00CEC9); color: #fff; font-size: 0.92rem; font-family: inherit; font-weight: 700; letter-spacing: 0.1em; cursor: pointer; box-shadow: 0 0 24px rgba(0,184,148,0.25);">
+                style="width: 100%; padding: 13px; border-radius: 12px; border: none; background: linear-gradient(135deg,#00B894,#00CEC9); color: #fff; font-size: 1.1rem; font-family: inherit; font-weight: 700; letter-spacing: 0.1em; cursor: pointer; box-shadow: 0 0 24px rgba(0,184,148,0.25);">
                 ✅ CEVAPLARI KONTROL ET
             </button>
 
             <!-- Result -->
             <div id="resultBox"
                 style="display:none; margin-top: 14px; padding: 18px; border-radius: 14px; text-align: center;">
-                <div id="resIcon" style="font-size: 1.8rem; margin-bottom: 6px;">🎉</div>
-                <div id="resScore" style="font-size: 1.4rem; font-weight: 700; margin-bottom: 5px;">28 / 28</div>
-                <div id="resMsg" style="font-size: 0.76rem; color: rgba(255,255,255,0.55);">Mükemmel! Tüm cevaplar
+                <div id="resIcon" style="font-size: 2.5rem; margin-bottom: 6px;">🎉</div>
+                <div id="resScore" style="font-size: 1.8rem; font-weight: 700; margin-bottom: 5px;">28 / 28</div>
+                <div id="resMsg" style="font-size: 1rem; color: rgba(255,255,255,0.9);">Mükemmel! Tüm cevaplar
                     doğru!</div>
-                <div id="resDetail" style="margin-top: 8px; font-size: 0.64rem; color: rgba(255,255,255,0.3);">Nota:
+                <div id="resDetail" style="margin-top: 8px; font-size: 0.9rem; color: rgba(255,255,255,0.6);">Nota:
                     14/14 | Rakam: 14/14</div>
-                <div id="resGroup" style="margin-top: 11px; font-size: 0.64rem; color: rgba(255,255,255,0.4);"></div>
+                <div id="resGroup" style="margin-top: 11px; font-size: 0.9rem; color: rgba(255,255,255,0.6);"></div>
             </div>
         </div>
 
         <div
-            style="margin-top: 30px; font-size: 0.55rem; color: rgba(255,255,255,0.1); letter-spacing: 0.1em; text-align: center;">
+            style="margin-top: 30px; font-size: 0.85rem; color: rgba(255,255,255,0.25); letter-spacing: 0.1em; text-align: center;">
             10 bölüm × 14 rakam = π'nin ilk 140 hanesi
         </div>
 
