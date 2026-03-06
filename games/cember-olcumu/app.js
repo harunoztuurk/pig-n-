@@ -1,14 +1,35 @@
 // ═══════════════════════════════════════════════════════════
+//  GLOBAL USER PROFILE INJECTION
+// ═══════════════════════════════════════════════════════════
+document.addEventListener("DOMContentLoaded", () => {
+  initGameProfile();
+});
+
+function initGameProfile() {
+  if (typeof GameUtils !== 'undefined') {
+    const p = document.getElementById("userProfile");
+    if (p) {
+      p.innerHTML = `
+                <span style="margin-right:8px;">👤 ${GameUtils.getUserName() || 'Misafir'}</span>
+                <span style="color:var(--gold, #F9CA24);">🏆 ${GameUtils.getScore("cember-olcumu")}</span>
+            `;
+    }
+  }
+}
+
+
+// ═══════════════════════════════════════════════════════════
 //  PRESET TANIMLARI
 // ═══════════════════════════════════════════════════════════
 const PRESETS = [
-  { id: 0, name: 'KÜÇÜK', r: 100_000, step: 0.5, color: '#3a78cc', textColor: '#fff' },
-  { id: 1, name: 'ORTA', r: 1_000_000, step: 0.5, color: '#c8992a', textColor: '#000' },
-  { id: 2, name: 'BÜYÜK', r: 10_000_000, step: 0.5, color: '#d93838', textColor: '#fff' },
+  { id: 0, name: 'KÜÇÜK', r: 100_000, step: 0.5, color: '#f0f0f0', textColor: '#111' },
+  { id: 1, name: 'ORTA', r: 1_000_000, step: 0.5, color: '#f5e642', textColor: '#111' },
+  { id: 2, name: 'BÜYÜK', r: 10_000_000, step: 0.5, color: '#7de87d', textColor: '#111' },
 ];
 
 // Sonuçları sakla
 const results = { 0: null, 1: null, 2: null };
+const REWARD_GRANTED_FLAGS = { 0: false, 1: false, 2: false }; // Oyun bitimi rozet ödülleri
 
 let currentP = 0;   // aktif preset
 let animT = 0;
@@ -16,22 +37,12 @@ let animId = null;
 let playing = false;
 const ANIM_MS = 5500;
 
-// Orijinal mantıkta utils.js ve puan sistemi var bunu bozmadan bırakalım
-document.addEventListener("DOMContentLoaded", () => {
-  // Sayfa yüklendiğinde skoru yansıtsın
-  setTimeout(() => {
-    if (typeof GameUtils !== 'undefined' && GameUtils.playSound) {
-      GameUtils.playSound('hover');
-    }
-  }, 500);
-});
-
 // ═══════════════════════════════════════════════════════════
 //  PRESET SWITCH
 // ═══════════════════════════════════════════════════════════
-function switchPreset(id) {
-  currentP = id;
+window.switchPreset = function (id) {
   if (typeof GameUtils !== 'undefined') GameUtils.playSound('click');
+  currentP = id;
   // Tab renkleri
   document.querySelectorAll('.tab').forEach((t, i) => {
     t.className = 'tab' + (i === id ? ` active-${id}` : '');
@@ -46,31 +57,31 @@ function renderPreset(id) {
 
   // Preset bar
   document.getElementById('presetBar').innerHTML = `
-    <div class="preset-cell">
-      <div class="label">YARICAP</div>
-      <div class="value col${id}">${p.r.toLocaleString()} px</div>
-    </div>
-    <div class="preset-cell">
-      <div class="label">ÇAP (2r)</div>
-      <div class="value col${id}">${(2 * p.r).toLocaleString()} px</div>
-    </div>
-    <div class="preset-cell">
-      <div class="label">ADIM</div>
-      <div class="value col${id}">${p.step} px</div>
-    </div>
-    <div class="preset-cell">
-      <div class="label">TOPLAM ADIM</div>
-      <div class="value col${id}">~${Math.round(2 * p.r / p.step / 1000)}k</div>
-    </div>
-    <div class="preset-cell">
-      <div class="label">BEKLENEN HATA</div>
-      <div class="value col${id}">~${(p.step * p.step / p.r).toExponential(1)}</div>
-    </div>
-  `;
+      <div class="preset-cell">
+        <div class="label">YARIÇAP</div>
+        <div class="value col${id}">${p.r.toLocaleString()} px</div>
+      </div>
+      <div class="preset-cell">
+        <div class="label">ÇAP (2r)</div>
+        <div class="value col${id}">${(2 * p.r).toLocaleString()} px</div>
+      </div>
+      <div class="preset-cell">
+        <div class="label">ADIM</div>
+        <div class="value col${id}">${p.step} px</div>
+      </div>
+      <div class="preset-cell">
+        <div class="label">TOPLAM ADIM</div>
+        <div class="value col${id}">~${Math.round(2 * p.r / p.step / 1000)}k</div>
+      </div>
+      <div class="preset-cell">
+        <div class="label">BEKLENEN HATA</div>
+        <div class="value col${id}">~${(p.step * p.step / p.r).toExponential(1)}</div>
+      </div>
+    `;
 
   // Buton renklerini güncelle
   document.querySelectorAll('.btn').forEach(b => {
-    b.className = b.className.replace(/btn-\d/g, '').trim() + ` btn-${id}`;
+    b.className = b.className.replace(/btn-\d/g, '') + ` btn-${id}`;
     if (b.classList.contains('go')) b.classList.add('go');
   });
 
@@ -116,7 +127,7 @@ function showComputedResult(id) {
 // ═══════════════════════════════════════════════════════════
 //  HESAPLAMA  —  Math.PI YOK
 // ═══════════════════════════════════════════════════════════
-async function startCompute() {
+window.startCompute = async function () {
   if (typeof GameUtils !== 'undefined') GameUtils.playSound('click');
   const p = PRESETS[currentP];
   const id = currentP;
@@ -130,6 +141,9 @@ async function startCompute() {
   let prevY = 0;
 
   for (let i = 0; i < TOTAL; i++) {
+    // Yield occasionally to avoid freezing UI for standard calculation runs.
+    if (i > 0 && i % (CHUNK * 2) === 0) await new Promise(r => setTimeout(r, 0));
+
     const x = p.r - (i + 1) * p.step;
     if (x < -p.r) break;
     // Çember denklemi: y = √(r² - x²)
@@ -145,7 +159,6 @@ async function startCompute() {
       document.getElementById('compProg').style.width = pct + '%';
       document.getElementById('compLabel').textContent =
         `Yürünüyor… ${(i / 1000).toFixed(0)}k / ${(TOTAL / 1000).toFixed(0)}k adım (${pct}%)`;
-      await new Promise(r => setTimeout(r, 0));
     }
   }
 
@@ -153,11 +166,11 @@ async function startCompute() {
   const ratio = circ / (2 * p.r);
   results[id] = { circ, ratio, r: p.r, step: p.step };
 
+  if (typeof GameUtils !== 'undefined') GameUtils.playSound('success');
+
   document.getElementById('compProg').style.width = '100%';
   document.getElementById('compLabel').textContent =
     `✓ Tamamlandı — çevre: ${circ.toFixed(4)} px → oran: ${ratio.toFixed(12)}`;
-
-  if (typeof GameUtils !== 'undefined') GameUtils.playSound('success');
 
   // Aşama B
   document.getElementById('phaseA').style.display = 'none';
@@ -166,6 +179,20 @@ async function startCompute() {
   animT = 0;
   initRollCanvas();
   updateCompareBox();
+
+  handleScoreAward(id);
+}
+
+function handleScoreAward(id) {
+  if (!REWARD_GRANTED_FLAGS[id]) {
+    if (typeof GameUtils !== 'undefined') {
+      const currentScore = GameUtils.getScore("cember-olcumu");
+      let awardInfo = id === 0 ? 10 : (id === 1 ? 50 : 200);
+      GameUtils.saveScore("cember-olcumu", currentScore + awardInfo);
+      initGameProfile();
+    }
+    REWARD_GRANTED_FLAGS[id] = true;
+  }
 }
 
 function buildResultBox(id) {
@@ -173,11 +200,11 @@ function buildResultBox(id) {
   const r = results[id];
   const c = p.color;
   document.getElementById('resultBox').innerHTML = `
-    <span class="sy">Ölçülen yarı çevre:</span> <span class="big" style="color:${c}">${(r.circ / 2).toFixed(4)} px</span><br>
-    <span class="sy">Çevre (2 × yarı):</span> <span class="big" style="color:${c}">${r.circ.toFixed(4)} px</span><br>
-    <span class="sy">Çap (2r):</span> <span class="big" style="color:${c}">${(2 * p.r).toLocaleString()} px</span><br>
-    <span class="sy">Çevre ÷ Çap =</span> <span class="big" style="color:${c}">${r.ratio.toFixed(12)}</span>
-  `;
+      <span class="sy">Ölçülen yarı çevre:</span> <span class="big" style="color:${c}">${(r.circ / 2).toFixed(4)} px</span><br>
+      <span class="sy">Çevre (2 × yarı):</span> <span class="big" style="color:${c}">${r.circ.toFixed(4)} px</span><br>
+      <span class="sy">Çap (2r):</span> <span class="big" style="color:${c}">${(2 * p.r).toLocaleString()} px</span><br>
+      <span class="sy">Çevre ÷ Çap =</span> <span class="big" style="color:${c}">${r.ratio.toFixed(12)}</span>
+    `;
   document.getElementById('resultBox').classList.add('vis');
 }
 
@@ -190,13 +217,13 @@ const RULER_D = 4;
 const PAD_R = 36;
 
 function initRollCanvas() {
-  rc.width = Math.max(rc.parentElement.clientWidth - 44, 500);
+  rc.width = Math.max(rc.parentElement.clientWidth - 44, 250); // Fallback for small mobile sizes
   rc.height = 220;
   styleProgBar(currentP);
   drawRoll(animT < 0.5 ? 2 * animT * animT : -1 + (4 - 2 * animT) * animT);
 }
 window.addEventListener('resize', () => {
-  if (results[currentP]) { rc.width = Math.max(rc.parentElement.clientWidth - 44, 500); drawRoll(Math.min(animT, 1)); }
+  if (results[currentP]) { rc.width = Math.max(rc.parentElement.clientWidth - 44, 250); drawRoll(Math.min(animT, 1)); }
 });
 
 function drawRoll(te) {
@@ -310,7 +337,7 @@ function drawRulerD(ppu, x0, y0, rw, rh, color) {
   rctx.fillText('d (çap birimi)', x0 + rw - 2, y0 + rh - 3);
 }
 
-function toggleAnim() {
+window.toggleAnim = function () {
   if (typeof GameUtils !== 'undefined') GameUtils.playSound('click');
   const id = currentP;
   if (animT >= 1) {
@@ -352,7 +379,7 @@ function toggleAnim() {
   animId = requestAnimationFrame(loop);
 }
 
-function skipAnim() {
+window.skipAnim = function () {
   if (typeof GameUtils !== 'undefined') GameUtils.playSound('click');
   cancelAnimationFrame(animId); playing = false; animT = 1;
   drawRoll(1);
@@ -385,19 +412,7 @@ function showZoom(id) {
 }
 
 function buildZRow(id, idx) {
-  if (idx >= MAX_ZL) {
-    // OYUNU TAMAMLAMA EKLENTİSİ: En büyük preset hesaplandıysa ve puan alınmadıysa 100 puan ver
-    if (id === 2 && typeof GameUtils !== 'undefined') {
-      let score = GameUtils.getScore("cember-olcumu");
-      if (score < 100) {
-        GameUtils.saveScore("cember-olcumu", 100);
-        setTimeout(() => {
-          GameUtils.showModal("SIR ÇÖZÜLDÜ", "Maksimum hassasiyette (10 milyon piksel) hesaplama yaptınız.\\nMatematiğin güzelliklerine tanık oldunuz!\\n\\n+100 Puan", true);
-        }, 1200);
-      }
-    }
-    return;
-  }
+  if (idx >= MAX_ZL) return;
   const p = PRESETS[id];
   const rat = results[id].ratio;
   const lv = getLevel(rat, idx);
@@ -421,12 +436,11 @@ function buildZRow(id, idx) {
   document.getElementById('zoomGrid').appendChild(row);
 
   setTimeout(() => {
-    zc.width = zc.offsetWidth || 680;
+    zc.width = zc.offsetWidth || Math.min(680, zc.parentElement.clientWidth - 100);
     drawZRuler(zc, lv, p.color, rat);
     dg.textContent = lv.digit;
     updateAccum(id, idx);
     requestAnimationFrame(() => row.classList.add('show'));
-    if (typeof GameUtils !== 'undefined') GameUtils.playSound('click');
     setTimeout(() => buildZRow(id, idx + 1), 650);
   }, 30);
 }
@@ -520,10 +534,10 @@ function updateCompareBox() {
       else { dhtml += `<span class="w m">${rat[i]}</span>`; break; }
     }
     return `
-      <div class="cmp-row">
-        <div class="cmp-label" style="color:${p.color}">${p.name}<br><span style="color:var(--dim);font-size:0.65rem">r=${p.r.toLocaleString()}</span></div>
-        <div class="cmp-digits">${dhtml}</div>
-      </div>`;
+        <div class="cmp-row">
+          <div class="cmp-label" style="color:${p.color}">${p.name}<br><span style="color:var(--dim);font-size:0.65rem">r=${p.r.toLocaleString()}</span></div>
+          <div class="cmp-digits">${dhtml}</div>
+        </div>`;
   }).join('');
 
   document.getElementById('cmpRows').innerHTML = rows;
@@ -532,5 +546,7 @@ function updateCompareBox() {
 // ═══════════════════════════════════════════════════════════
 //  BAŞLANGIÇ
 // ═══════════════════════════════════════════════════════════
-renderPreset(0);
-styleProgBar(0);
+window.onload = () => {
+  renderPreset(0);
+  styleProgBar(0);
+}

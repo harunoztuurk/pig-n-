@@ -20,11 +20,13 @@
 
 <body>
 
-    <!-- Geri dönüş butonu - Orijinal tasarıma ufak bir dokunuş -->
+    <!-- Geri dönüş butonu ve skor alanı -->
     <div class="back-btn-container">
         <a href="../../index.html" class="back-btn-raw">◂ ANA MENÜ</a>
+        <div id="userProfile" class="user-profile-mini"></div>
     </div>
 
+    <!-- Orijinal Oyun Yapısı -->
     <div class="hdr">
         <h1>Çemberi Ölçerek Gizemli Sayıyı Bul</h1>
         <p>
@@ -37,13 +39,13 @@
     <!-- Tab bar -->
     <div class="tabs" id="tabBar">
         <button class="tab active-0" onclick="switchPreset(0)">
-            🔵 KÜÇÜK<br><span style="font-size:0.65rem">r = 100 000</span>
+            ⚪ KÜÇÜK<br><span style="font-size:0.65rem">r = 100 000</span>
         </button>
         <button class="tab" onclick="switchPreset(1)">
             🟡 ORTA<br><span style="font-size:0.65rem">r = 1 000 000</span>
         </button>
         <button class="tab" onclick="switchPreset(2)">
-            🔴 BÜYÜK<br><span style="font-size:0.65rem">r = 10 000 000</span>
+            🟢 BÜYÜK<br><span style="font-size:0.65rem">r = 10 000 000</span>
         </button>
     </div>
 
