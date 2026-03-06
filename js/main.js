@@ -26,6 +26,13 @@ const games = [
         desc: 'Sadece cetvel kullanarak gizemli sayıyı (π) bul. Trigonometri veya hazır formüller yok!',
         icon: '⭘',
         url: 'games/cember-olcumu/index.html'
+    },
+    {
+        id: 'pi-melody',
+        title: 'π × MÜZİK',
+        desc: 'Pi\'nin rakamlarını nota olarak dinle ve solfej adlarını tahmin et.',
+        icon: '🎵',
+        url: 'games/pi-melody/index.html'
     }
 ];
 

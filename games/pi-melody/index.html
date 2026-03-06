@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Pi × Müzik - Pi Günü</title>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=JetBrains+Mono:wght@400;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="../../css/global.css">
+    <link rel="stylesheet" href="style.css">
+
+    <!-- Vercel Speed Insights -->
+    <script>
+        window.si = window.si || function () { (window.siq = window.siq || []).push(arguments); };
+    </script>
+    <script defer src="/_vercel/speed-insights/script.js"></script>
+</head>
+
+<body>
+
+    <div class="game-wrapper">
+        <!-- Header: Geri Dön & Başlık -->
+        <header class="game-header">
+            <a href="../../index.html" class="back-btn">◂ ANA MENÜ</a>
+            <div class="game-title">
+                <h1>π <span class="highlight">×</span> Müzik</h1>
+                <p>Pi'nin rakamlarını nota olarak dinle ve doğru bil</p>
+            </div>
+            <!-- Kullanıcı Puanı Enjeksiyon Alanı -->
+            <div id="userProfile" class="user-profile-mini"></div>
+        </header>
+
+        <main class="game-main">
+
+            <!-- BÖLÜM SEÇ -->
+            <div class="group-selector">
+                <div class="sec-label">BÖLÜM SEÇ</div>
+                <div class="group-btns" id="groupBtns">
+                    <!-- Butonlar JS ile eklenecek -->
+                </div>
+            </div>
+
+            <!-- EŞLEŞME TABLOSU -->
+            <div class="ref-table">
+                <div class="sec-label">EŞLEŞME TABLOSU</div>
+                <div class="ref-items" id="refItems">
+                    <!-- JS ile Doldurulacak -->
+                </div>
+            </div>
+
+            <!-- KONTROLLER (Tümünü Çal, Adım Adım, Sıfırla) -->
+            <div class="controls-row">
+                <button id="btnPlayAll" class="btn-main">▶ Tümünü Çal</button>
+                <button id="btnStep" class="btn-accent">🎯 Adım Adım Çal</button>
+                <button id="btnReset" class="btn-outline hidden">✕ Sıfırla</button>
+            </div>
+
+            <!-- ADIM MODU BİLGİSİ -->
+            <div id="stepInfo" class="step-info hidden">
+                <!-- JS ile mesaj yazılacak -->
+            </div>
+
+            <!-- NOTA GÖRSELLEŞTİRİCİ (Visualizer) -->
+            <div class="visualizer" id="visualizer">
+                <!-- JS ile eklenecek (14 nokta) -->
+            </div>
+
+            <div class="game-core">
+
+                <!-- ADIM 1: NOTA İSİMLERİ -->
+                <div class="step-box">
+                    <div class="step-header">
+                        <div class="sec-label">ADIM 1 — Nota solfej adlarını gir</div>
+                        <div class="sub-controls" id="micControls">
+                            <button id="btnModeSelect" class="mode-btn active">☰ Seç</button>
+                            <button id="btnModeVoice" class="mode-btn">🎙 Sesle</button>
+                        </div>
+                    </div>
+
+                    <div id="voiceHelp" class="voice-help hidden">
+                        Kutuya tıkla → söyle: <strong>Do · Re · Mi · Fa · Sol · La · Si · Do iki · Re iki · Mi
+                            iki</strong>
+                        <div id="voiceStatus" class="voice-status"></div>
+                    </div>
+
+                    <div id="micError" class="mic-error hidden">
+                        🔒 Mikrofon izni reddedildi. Tarayıcı adres çubuğundaki <strong>🔒 kilit simgesine</strong>
+                        tıklayıp mikrofon iznini aç, sayfayı yenile.
+                    </div>
+
+                    <div class="notes-grid" id="notesGrid">
+                        <!-- JS ile 14 select/mic butonu eklenecek -->
+                    </div>
+                </div>
+
+                <!-- ADIM 2: RAKAMLAR -->
+                <div class="step-box">
+                    <div class="sec-label" style="margin-bottom: 12px;">ADIM 2 — Karşılık gelen rakamı yaz (0–9)</div>
+                    <div class="digits-grid" id="digitsGrid">
+                        <!-- JS ile 14 input eklenecek -->
+                    </div>
+                </div>
+
+                <!-- OYNA / KONTROL ET BUTONU -->
+                <button id="btnCheck" class="btn-check">✅ CEVAPLARI KONTROL ET</button>
+
+                <!-- SONUÇ ALANI -->
+                <div id="resultBox" class="result-box hidden">
+                    <div id="resIcon" class="res-icon">🎉</div>
+                    <div id="resScore" class="res-score">28 / 28</div>
+                    <div id="resMsg" class="res-msg">Mükemmel! Tüm cevaplar doğru!</div>
+                    <div id="resDetail" class="res-detail">Nota: 14/14 | Rakam: 14/14</div>
+                    <div id="resGroup" class="res-group"></div>
+                </div>
+
+            </div>
+
+            <div class="footer-note">
+                10 bölüm × 14 rakam = π'nin ilk 140 hanesi
+            </div>
+
+        </main>
+    </div>
+
+    <script src="../../js/utils.js"></script>
+    <script src="app.js"></script>
+</body>
+
+</html>
