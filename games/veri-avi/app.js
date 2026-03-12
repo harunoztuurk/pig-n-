@@ -343,9 +343,9 @@ function finishGame(isPerfect, title, msg) {
     setTimeout(() => {
         let finalMsg = `${msg}\n\nÇözülen Basamak: ${currentIndex} / ${PI_DIGITS.length}\nToplam Kazanç: ${score} Puan\nGeçen Süre: ${document.getElementById('gameTimerDisplay').innerText}`;
 
-        if (score > 0) {
+        if (isPerfect) {
             if (typeof GameUtils !== 'undefined' && GameUtils.playSound) GameUtils.playSound('success');
-            GameUtils.showModal(title, finalMsg);
+            GameUtils.showModal(title, finalMsg, true);
             GameUtils.triggerSuccessEffect();
             if (typeof GameUtils !== 'undefined' && GameUtils.saveScore) {
                 GameUtils.saveScore(THIS_GAME_ID, score);
@@ -353,7 +353,12 @@ function finishGame(isPerfect, title, msg) {
             }
         } else {
             if (typeof GameUtils !== 'undefined' && GameUtils.playSound) GameUtils.playSound('error');
-            GameUtils.showModal(title, msg, false); // Kırmızı
+            GameUtils.showModal(title, finalMsg, false); // Kırmızı
+
+            if (score > 0 && typeof GameUtils !== 'undefined' && GameUtils.saveScore) {
+                GameUtils.saveScore(THIS_GAME_ID, score);
+                renderLocalLeaderboard();
+            }
         }
     }, 500);
 }
