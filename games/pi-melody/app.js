@@ -154,7 +154,7 @@ function renderGroups() {
         b.style = `border:${border}; background:${bg}; font-weight:${weight};`;
         b.textContent = i + 1;
         b.onclick = () => {
-            if (typeof GameUtils !== 'undefined') GameUtils.playSound('click');
+            // Ses kapalı: if (typeof GameUtils !== 'undefined') GameUtils.playSound('click');
             changeGroup(i);
         };
         c.appendChild(b);
@@ -411,7 +411,7 @@ window.changeGroup = function (i) {
 
 window.playAll = function () {
     if (state.isPlaying || state.stepMode) return;
-    if (typeof GameUtils !== 'undefined') GameUtils.playSound('click');
+    // Ses kapalı: if (typeof GameUtils !== 'undefined') GameUtils.playSound('click');
     clearTimeouts();
     state.isPlaying = true;
     state.activeIdx = null;
@@ -444,7 +444,7 @@ window.playAll = function () {
 
 window.startStepMode = async function () {
     if (state.isPlaying) return;
-    if (typeof GameUtils !== 'undefined') GameUtils.playSound('click');
+    // Ses kapalı: if (typeof GameUtils !== 'undefined') GameUtils.playSound('click');
     resetAll(false);
     state.stepMode = true;
     renderBoard();
@@ -467,7 +467,7 @@ window.playStepAt = async function (idx) {
 };
 
 window.continueStep = async function () {
-    if (typeof GameUtils !== 'undefined' && !state.inputMode.startsWith('voice')) GameUtils.playSound('click'); // Let voice handle own sound
+    // Ses kapalı: if (typeof GameUtils !== 'undefined' && !state.inputMode.startsWith('voice')) GameUtils.playSound('click'); // Let voice handle own sound
     const next = state.currentStep + 1;
     state.waitingInput = false;
     if (next >= 14) {
@@ -481,7 +481,7 @@ window.continueStep = async function () {
 
 window.replayStep = async function () {
     if (state.currentStep < 0) return;
-    if (typeof GameUtils !== 'undefined') GameUtils.playSound('click');
+    // Ses kapalı: if (typeof GameUtils !== 'undefined') GameUtils.playSound('click');
     state.activeIdx = state.currentStep;
     renderBoard();
     await playTone(NOTE_MAP[state.currentDigits[state.currentStep]].freq, 0.6);
@@ -512,7 +512,7 @@ window.setDigit = function (i, val) {
 };
 
 window.checkAnswers = function () {
-    if (typeof GameUtils !== 'undefined') GameUtils.playSound('click');
+    // Ses kapalı: if (typeof GameUtils !== 'undefined') GameUtils.playSound('click');
     stopListening();
     state.noteResults = state.currentDigits.map((d, i) => state.noteAnswers[i]?.trim() === NOTE_MAP[d].sol);
     state.digitResults = state.currentDigits.map((d, i) => state.digitAnswers[i]?.trim() === String(d));
@@ -530,11 +530,11 @@ window.checkAnswers = function () {
         if (addedScore > 0 && (currentScore + addedScore <= 500)) { // rough cap
             GameUtils.saveScore("pi-melody", currentScore + addedScore);
             initGameProfile();
-            GameUtils.playSound('success');
+            // GameUtils.playSound('success');
         } else if (totalCorrect === 28) {
-            GameUtils.playSound('success');
+            // GameUtils.playSound('success');
         } else {
-            GameUtils.playSound('error');
+            // GameUtils.playSound('error');
         }
     }
 };
