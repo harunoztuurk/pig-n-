@@ -62,23 +62,29 @@
                 </div>
 
                 <div class="section-label" style="margin-top: 25px;">[ İLERLEME DURUMU ]</div>
-                <div id="currentProgress" class="targets-list" style="padding: 15px; font-size: 1rem; color: #fff; position: relative;">
+                <div id="currentProgress" class="targets-list"
+                    style="padding: 15px; font-size: 1rem; color: #fff; position: relative;">
                     Sıradaki Beklenen Rakam: <span id="nextExpectedDigit"
                         style="color: var(--pink); font-size: 1.4rem; font-weight: bold; margin-left:10px;">3</span>
                     <br><br>
                     Anlık Kazanılan Puan: <span id="currentScoreDisplay"
                         style="color: var(--yellow); font-size: 1.4rem; font-weight: bold; margin-left:10px;">0</span>
-                    
+
                     <!-- Hız Bonusu Göstergesi -->
-                    <div id="comboIndicator" style="position: absolute; right: 15px; top: 15px; color: var(--yellow); font-weight: bold; font-size: 1.2rem; opacity: 0; transition: opacity 0.3s; pointer-events: none;">
+                    <div id="comboIndicator"
+                        style="position: absolute; right: 15px; top: 15px; color: var(--yellow); font-weight: bold; font-size: 1.2rem; opacity: 0; transition: opacity 0.3s; pointer-events: none;">
                         x2 HIZ!
                     </div>
                 </div>
 
                 <!-- YARDIM VE DİNAMİT SEÇENEKLERİ -->
                 <div style="margin-top: 20px; display: flex; gap: 10px; flex-wrap: wrap;">
-                    <button id="helpBtn" class="btn" style="flex: 1; border-color: var(--cyan); color: var(--cyan); font-size: 0.8rem;">YARDIM İSTE (-50P)</button>
-                    <button id="dynamiteBtn" class="btn" style="flex: 1; border-color: var(--yellow); color: var(--yellow); font-size: 0.8rem;">DİNAMİT (1)</button>
+                    <button id="helpBtn" class="btn"
+                        style="flex: 1; border-color: var(--cyan); color: var(--cyan); font-size: 0.8rem;">YARDIM İSTE
+                        (-50P)</button>
+                    <button id="dynamiteBtn" class="btn"
+                        style="flex: 1; border-color: var(--yellow); color: var(--yellow); font-size: 0.8rem;">DİNAMİT
+                        (1)</button>
                 </div>
 
                 <!-- LİDERLİK TABLOSU -->
@@ -102,17 +108,20 @@
     </div>
 
     <!-- Pİ BAŞLANGIÇ EKRANI (MODAL) -->
-    <div id="piStartModal" class="player-modal" style="display: flex;">
-        <div class="modal-content" style="max-width: 550px; text-align: center;">
-            <h2 class="modal-title" style="color: var(--pink);">SİSTEM BAŞLATILIYOR</h2>
-            <p class="modal-desc" style="color: var(--cyan); margin-bottom: 20px;">
-                Görev: Pi sayısının dizilimini kullanarak sisteme sızmak. 
-                Aşağıda hedefin ilk 25 basamağı gösterilmektedir. İhtiyacın olursa "Yardım" isteyebilir ya da "Dinamit" kullanabilirsin.
+    <div id="piStartModal" class="system-alert-overlay" style="display: flex;">
+        <div class="system-alert-box" style="max-width: 550px; border-color: var(--pink);">
+            <div class="system-alert-title" style="color: var(--pink);">SİSTEM BAŞLATILIYOR</div>
+            <p class="system-alert-msg" style="color: var(--cyan); margin-bottom: 20px; text-align: center;">
+                Görev: Pi sayısının dizilimini kullanarak sisteme sızmak.
+                Aşağıda hedefin ilk 25 basamağı gösterilmektedir. İhtiyacın olursa "Yardım" isteyebilir ya da "Dinamit"
+                kullanabilirsin.
             </p>
-            <div style="background: rgba(0,0,0,0.5); border: 1px dotted var(--yellow); padding: 15px; margin-bottom: 20px; font-size: 1.2rem; letter-spacing: 3px; word-break: break-all; color: #fff;">
+            <div
+                style="background: rgba(0,0,0,0.5); border: 1px dotted var(--yellow); padding: 15px; margin-bottom: 20px; font-size: 1.2rem; letter-spacing: 3px; word-break: break-all; color: #fff; text-align: center; border-radius: 4px;">
                 3.1415926535897932384626433
             </div>
-            <button id="startGameBtn" class="btn modal-btn">GÖREVİ BAŞLAT</button>
+            <button id="startGameBtn" class="system-alert-btn"
+                style="color: var(--cyan); border: 1px solid var(--cyan); width: 100%;">GÖREVİ BAŞLAT</button>
         </div>
     </div>
 
