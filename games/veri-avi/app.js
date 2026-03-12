@@ -150,7 +150,7 @@ function updateProgressUI() {
 
     if (nextEl) {
         if (currentIndex < PI_DIGITS.length) {
-            nextEl.innerText = PI_DIGITS[currentIndex];
+            nextEl.innerText = "?"; // Sadece yardım isteyince görünecek
         } else {
             nextEl.innerText = "SON"; // Çok zor ama dizilim biterse
         }
@@ -292,7 +292,14 @@ function handleCellClick(r, c) {
 
         // Eğer mevcut matris içinde gidilecek yol kalmadıysa veya 25 kere tıklandıysa, matrisi KİLİTLEME YENİLE!
         if (checkIfBlocked()) {
-            // Matrisi Yenile, Puanı ve duraklamayı koru
+            // Animasyon ekle ve Matrisi Yenile, Puanı koru
+            const gridEl = document.getElementById('matrixGrid');
+            if (gridEl) {
+                gridEl.classList.remove('anim-lock-flash');
+                void gridEl.offsetWidth; // trigger reflow
+                gridEl.classList.add('anim-lock-flash');
+            }
+
             setTimeout(() => {
                 generateMatrix();
                 selectedCells = [];
@@ -363,7 +370,7 @@ document.getElementById('startGameBtn')?.addEventListener('click', () => {
 
 document.getElementById('helpBtn')?.addEventListener('click', () => {
     if (gameOver || !gameStarted) return;
-    if (score < 50) {
+    if (score < 10) {
         if (typeof GameUtils !== 'undefined' && GameUtils.playSound) GameUtils.playSound('error');
         // Kırmızı uyarıyı bir süre sonra kapatacak geçici alert de kullanılabilir, veya ufak bir tooltip
         const pEl = document.getElementById('currentProgress');
@@ -373,11 +380,16 @@ document.getElementById('helpBtn')?.addEventListener('click', () => {
         return;
     }
 
-    score -= 50;
+    score -= 10;
     updateProgressUI();
     if (typeof GameUtils !== 'undefined' && GameUtils.playSound) GameUtils.playSound('click');
 
     const nextExpected = PI_DIGITS[currentIndex];
+    const nextEl = document.getElementById('nextExpectedDigit');
+    if (nextEl) {
+        nextEl.innerText = nextExpected;
+        setTimeout(() => { if (nextEl.innerText === String(nextExpected)) nextEl.innerText = "?"; }, 3000);
+    }
 
     for (let i = 0; i < GRID_SIZE; i++) {
         let rCheck = selectionMode === 'row' ? activeLineIndex : i;
@@ -398,10 +410,19 @@ document.getElementById('helpBtn')?.addEventListener('click', () => {
 });
 
 document.getElementById('dynamiteBtn')?.addEventListener('click', () => {
-    if (gameOver || !gameStarted || dynamiteCount <= 0) return;
+    if (gameOver || !gameStarted) return;
 
-    dynamiteCount--;
-    document.getElementById('dynamiteCount').innerText = dynamiteCount;
+    if (score < 50) {
+        if (typeof GameUtils !== 'undefined' && GameUtils.playSound) GameUtils.playSound('error');
+        const pEl = document.getElementById('currentProgress');
+        const oldBorder = pEl.style.borderColor;
+        pEl.style.borderColor = 'red';
+        setTimeout(() => pEl.style.borderColor = oldBorder, 1000);
+        return;
+    }
+
+    score -= 50;
+    updateProgressUI();
     if (typeof GameUtils !== 'undefined' && GameUtils.playSound) GameUtils.playSound('success'); // Patlama benzeri ses
 
     const nextExpected = PI_DIGITS[currentIndex];

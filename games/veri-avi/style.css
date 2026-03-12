@@ -189,9 +189,20 @@
 
 /* Animations for new mechanics */
 @keyframes flashScale {
-    0% { transform: scale(0.8); opacity: 0; }
-    30% { transform: scale(1.2); opacity: 1; }
-    100% { transform: scale(1); opacity: 0; }
+    0% {
+        transform: scale(0.8);
+        opacity: 0;
+    }
+
+    30% {
+        transform: scale(1.2);
+        opacity: 1;
+    }
+
+    100% {
+        transform: scale(1);
+        opacity: 0;
+    }
 }
 
 .anim-flash {
@@ -199,12 +210,42 @@
 }
 
 @keyframes highlightCell {
-    0% { background: rgba(255, 230, 0, 0.8); box-shadow: 0 0 20px rgba(255, 230, 0, 1); color: #000; }
-    100% { background: rgba(255, 230, 0, 0.3); box-shadow: 0 0 10px rgba(255, 230, 0, 0.5); color: var(--yellow); }
+    0% {
+        background: rgba(255, 230, 0, 0.8);
+        box-shadow: 0 0 20px rgba(255, 230, 0, 1);
+        color: #000;
+    }
+
+    100% {
+        background: rgba(255, 230, 0, 0.3);
+        box-shadow: 0 0 10px rgba(255, 230, 0, 0.5);
+        color: var(--yellow);
+    }
 }
 
 .highlight-dynamite {
     animation: highlightCell 0.5s infinite alternate !important;
     border-color: var(--yellow) !important;
     z-index: 10;
+}
+
+@keyframes lockRegenerate {
+    0% {
+        background-color: rgba(255, 45, 120, 0.5);
+        filter: hue-rotate(90deg) contrast(1.5);
+    }
+
+    50% {
+        background-color: rgba(0, 245, 255, 0.5);
+        filter: hue-rotate(180deg) invert(0.2);
+    }
+
+    100% {
+        background-color: transparent;
+        filter: none;
+    }
+}
+
+.anim-lock-flash {
+    animation: lockRegenerate 0.6s ease-in-out;
 }
