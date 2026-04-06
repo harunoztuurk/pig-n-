@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <!-- OYUN BAŞLIĞI BURAYA -->
+    <title>Alan Şekillendirici - Pi Günü</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Orbitron:wght@700;900&display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet" href="../../css/global.css">
+    <link rel="stylesheet" href="style.css">
+
+    <!-- Vercel Speed Insights -->
+    <script>
+        window.si = window.si || function () { (window.siq = window.siq || []).push(arguments); };
+    </script>
+    <script defer src="/_vercel/speed-insights/script.js"></script>
+</head>
+
+<body>
+    <div class="scanline"></div>
+    <div class="wrapper">
+        <nav class="back-nav">
+            <a href="../../index.html" class="btn back-btn">◂ ANA MENÜYE DÖN</a>
+        </nav>
+
+        <header class="header">
+            <h1 class="title">ALAN ŞEKİLLENDİRİCİ</h1>
+            <div class="subtitle">// İSTENEN ALANI OLUŞTUR //</div>
+        </header>
+
+        <div class="divider"></div>
+
+        <!-- ANA OYUN İSKELETİZİ BURAYA KURUN -->
+        <main class="game-container">
+            <div class="section-label">[ OYUN ALANI ]</div>
+
+            <div class="game-content alan-board">
+                <div class="task-box">
+                    <span style="color:var(--cyan);">GÖREV:</span> 
+                    <strong id="areaTask" style="font-size: 1.2rem; color:var(--pink);">Alanı 16 Birimkare olan bir şekil çiz.</strong>
+                </div>
+
+                <div class="canvas-info" style="display:flex; justify-content:space-between; width:100%; max-width:400px; margin-bottom:10px;">
+                    <span style="color:var(--yellow);">Çizilen Alan: <strong id="currentArea">0</strong></span>
+                    <button class="btn btn-small" onclick="clearCanvas()" style="padding:4px 8px; font-size:0.8rem;">TEMİZLE</button>
+                </div>
+
+                <div class="drawing-grid" id="drawingGrid">
+                    <!-- Javascript ile alan grid'i basılacak -->
+                </div>
+                
+                <div id="gameMessage" class="game-message" style="margin-top: 15px;"></div>
+            </div>
+
+            <div class="btn-row" style="margin-top:20px;">
+                <button class="btn check-btn" onclick="checkGame()">▸ KONTROL ET</button>
+            </div>
+        </main>
+
+        <div class="divider"></div>
+        <footer class="footer">
+            <div class="copyright-wrap" style="flex-direction: column; align-items: center; gap: 8px;">
+                <div class="copyright"><span class="tm">TM</span> <a href="#" target="_blank" class="author-link">Müfit
+                        ŞAN</a> tarafından tasarlanmıştır.</div>
+                <div class="copyright"><a href="https://www.zolak.com.tr/" target="_blank" class="author-link">Harun
+                        Öztürk</a> tarafından geliştirilmiştir.</div>
+            </div>
+        </footer>
+    </div>
+
+    <!-- UTILS VE APP.JS -->
+    <script src="../../js/utils.js"></script>
+    <script src="app.js"></script>
+</body>
+
+</html>

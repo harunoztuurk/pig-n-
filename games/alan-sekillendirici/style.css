@@ -1,0 +1,72 @@
+/* Alan Şekillendirici Stilleri */
+
+.alan-board {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px 0;
+}
+
+.task-box {
+    background: rgba(0, 0, 0, 0.4);
+    padding: 15px 30px;
+    border-radius: 8px;
+    border: 1px dashed var(--yellow);
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.drawing-grid {
+    display: grid;
+    /* 10x10 lik zemin */
+    grid-template-columns: repeat(10, 30px);
+    grid-template-rows: repeat(10, 30px);
+    gap: 2px;
+    background: rgba(0, 50, 50, 0.5);
+    padding: 10px;
+    border: 2px solid var(--purple);
+    border-radius: 5px;
+    box-shadow: inset 0 0 15px rgba(0,0,0,0.8), 0 0 15px rgba(0, 245, 255, 0.2);
+    user-select: none;
+}
+
+.draw-cell {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(0, 245, 255, 0.1);
+    cursor: pointer;
+    transition: all 0.1s;
+}
+
+.draw-cell:hover {
+    background: rgba(255, 45, 120, 0.4);
+}
+
+.draw-cell.active {
+    background: var(--pink);
+    border-color: var(--cyan);
+    box-shadow: 0 0 8px var(--pink);
+    transform: scale(1.05);
+    z-index: 2;
+}
+
+.game-message {
+    font-size: 1.2rem;
+    font-weight: bold;
+    text-align: center;
+    min-height: 30px;
+}
+
+.game-message.success { color: var(--cyan); text-shadow: 0 0 10px var(--cyan); }
+.game-message.error { color: var(--pink); text-shadow: 0 0 10px var(--pink); }
+
+.btn-small {
+    background: transparent;
+    border: 1px solid var(--pink);
+    color: var(--pink);
+    cursor: pointer;
+    transition: 0.2s;
+}
+.btn-small:hover {
+    background: var(--pink);
+    color: #fff;
+}

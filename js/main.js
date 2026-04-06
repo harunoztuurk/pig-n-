@@ -33,6 +33,41 @@ const games = [
         desc: 'Pi\'nin rakamlarını nota olarak dinle ve solfej adlarını tahmin et.',
         icon: '🎵',
         url: 'games/pi-melody/index.html'
+    },
+    {
+        id: 'islem-zinciri',
+        title: 'İŞLEM ZİNCİRİ',
+        desc: 'Matematiksel işlemleri doğru sıraya koyarak hedef sayıya ulaş!',
+        icon: '🔗',
+        url: 'games/islem-zinciri/index.html'
+    },
+    {
+        id: 'denge-terazisi',
+        title: 'DENGE TERAZİSİ',
+        desc: 'Kesirleri ve sayıları tahterevallide tartarak eşitliği sağla.',
+        icon: '⚖️',
+        url: 'games/denge-terazisi/index.html'
+    },
+    {
+        id: 'koordinat-kurtarma',
+        title: 'KOORDİNAT KURTARMA',
+        desc: 'X ve Y düzleminde verilen koordinatları bularak kayıp gemileri kurtar.',
+        icon: '🧭',
+        url: 'games/koordinat-kurtarma/index.html'
+    },
+    {
+        id: 'algoritma-fabrikasi',
+        title: 'ALGORİTMA FABRİKASI',
+        desc: 'İşlem önceliklerini makine mantığıyla sıralayarak doğru çıktıyı üret.',
+        icon: '⚙️',
+        url: 'games/algoritma-fabrikasi/index.html'
+    },
+    {
+        id: 'alan-sekillendirici',
+        title: 'ALAN ŞEKİLLENDİRİCİ',
+        desc: 'Grid zemininde istenen çevreyi düşünerek devasa alanlar yarat.',
+        icon: '📐',
+        url: 'games/alan-sekillendirici/index.html'
     }
 ];
 

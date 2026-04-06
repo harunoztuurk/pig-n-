@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <!-- OYUN BAŞLIĞI BURAYA -->
+    <title>İşlem Zinciri - Pi Günü</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Orbitron:wght@700;900&display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet" href="../../css/global.css">
+    <link rel="stylesheet" href="style.css">
+
+    <!-- Vercel Speed Insights -->
+    <script>
+        window.si = window.si || function () { (window.siq = window.siq || []).push(arguments); };
+    </script>
+    <script defer src="/_vercel/speed-insights/script.js"></script>
+</head>
+
+<body>
+    <div class="scanline"></div>
+    <div class="wrapper">
+        <nav class="back-nav">
+            <a href="../../index.html" class="btn back-btn">◂ ANA MENÜYE DÖN</a>
+        </nav>
+
+        <header class="header">
+            <h1 class="title">İŞLEM ZİNCİRİ</h1>
+            <div class="subtitle">// MATEMATİKSEL İŞLEMLERLE HEDEFE ULAŞ //</div>
+        </header>
+
+        <div class="divider"></div>
+
+        <!-- ANA OYUN İSKELETİZİ BURAYA KURUN -->
+        <main class="game-container">
+            <div class="section-label">[ OYUN ALANI ]</div>
+
+            <div class="game-content islem-zinciri-board">
+                <div class="target-section">
+                    <div class="target-label">HEDEF SAYI</div>
+                    <div class="target-number" id="targetNumber">?</div>
+                </div>
+
+                <div class="draggable-pool" id="numberPool">
+                    <!-- Numbers will be injected here -->
+                </div>
+
+                <div class="draggable-pool operator-pool" id="operatorPool">
+                    <div class="drag-item operator" draggable="true" data-type="operator" data-val="+">+</div>
+                    <div class="drag-item operator" draggable="true" data-type="operator" data-val="-">-</div>
+                    <div class="drag-item operator" draggable="true" data-type="operator" data-val="*">×</div>
+                    <div class="drag-item operator" draggable="true" data-type="operator" data-val="/">÷</div>
+                </div>
+
+                <div class="equation-builder" id="equationBuilder">
+                    <!-- Drop zones will be injected here -->
+                </div>
+                
+                <div id="gameMessage" class="game-message"></div>
+            </div>
+
+            <div class="btn-row" style="margin-top:20px;">
+                <button class="btn check-btn" onclick="checkGame()">▸ KONTROL ET</button>
+            </div>
+        </main>
+
+        <div class="divider"></div>
+        <footer class="footer">
+            <div class="copyright-wrap" style="flex-direction: column; align-items: center; gap: 8px;">
+                <div class="copyright"><span class="tm">TM</span> <a href="#" target="_blank" class="author-link">Müfit
+                        ŞAN</a> tarafından tasarlanmıştır.</div>
+                <div class="copyright"><a href="https://www.zolak.com.tr/" target="_blank" class="author-link">Harun
+                        Öztürk</a> tarafından geliştirilmiştir.</div>
+            </div>
+        </footer>
+    </div>
+
+    <!-- UTILS VE APP.JS -->
+    <script src="../../js/utils.js"></script>
+    <script src="app.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,122 @@
+/* Koordinat Kurtarma Stilleri */
+
+.koordinat-board {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    padding: 10px 0;
+}
+
+.radar-panel {
+    background: rgba(0, 0, 0, 0.6);
+    border: 2px solid var(--purple);
+    padding: 15px 30px;
+    border-radius: 8px;
+    box-shadow: inset 0 0 20px rgba(0,245,255,0.2), 0 0 10px rgba(255,45,120,0.3);
+    text-align: center;
+}
+
+.radar-task {
+    font-family: 'Share Tech Mono', monospace;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.grid-container {
+    position: relative;
+    width: 330px;
+    height: 330px;
+    background: rgba(0, 50, 50, 0.3);
+    border: 2px solid var(--cyan);
+    display: grid;
+    /* Görev için -5 ile +5 arası 11 hücre 30px grid */
+    grid-template-columns: repeat(11, 1fr);
+    grid-template-rows: repeat(11, 1fr);
+    box-shadow: 0 0 20px rgba(0, 245, 255, 0.15);
+}
+
+.axis {
+    position: absolute;
+    background: var(--pink);
+    z-index: 1;
+    pointer-events: none; /* Tıklamayı engellemesin */
+}
+
+/* X ekseni tam ortada (y=0 çizgisi) */
+.x-axis {
+    width: 100%;
+    height: 2px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+/* Y ekseni tam ortada (x=0 çizgisi) */
+.y-axis {
+    height: 100%;
+    width: 2px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.grid-cell {
+    border: 1px dashed rgba(0, 245, 255, 0.2);
+    cursor: crosshair;
+    position: relative;
+    transition: background 0.2s;
+    z-index: 2;
+}
+
+.grid-cell:hover {
+    background: rgba(255, 45, 120, 0.5);
+}
+
+.grid-cell.selected {
+    background: var(--pink);
+    box-shadow: 0 0 10px var(--pink);
+}
+
+.grid-cell.correct {
+    background: var(--cyan);
+    box-shadow: 0 0 15px var(--cyan);
+    animation: pulse 1s infinite alternate;
+}
+
+.grid-cell.wrong {
+    background: red;
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    100% { transform: scale(1.2); z-index: 10; }
+}
+
+/* Sayılar küçültüldü veya isteğe bağlı nokta hover'da bilgi verir */
+.cell-info {
+    display: none;
+    position: absolute;
+    top: -25px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #000;
+    color: #fff;
+    padding: 2px 6px;
+    font-size: 0.7rem;
+    border-radius: 4px;
+    border: 1px solid var(--cyan);
+    pointer-events: none;
+}
+
+.grid-cell:hover .cell-info {
+    display: block;
+}
+
+.game-message {
+    font-size: 1.2rem;
+    font-weight: bold;
+    text-align: center;
+    min-height: 30px;
+}
+.game-message.success { color: var(--cyan); text-shadow: 0 0 10px var(--cyan); }
+.game-message.error { color: var(--pink); text-shadow: 0 0 10px var(--pink); }
