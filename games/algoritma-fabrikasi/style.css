@@ -133,3 +133,4 @@
 }
 .game-message.success { color: var(--cyan); text-shadow: 0 0 10px var(--cyan); }
 .game-message.error { color: var(--pink); text-shadow: 0 0 10px var(--pink); }
+@media (max-width: 600px) { .algo-workspace { flex-direction: column; } .algo-blocks, .algo-sequence { width: 100%; } .block-item { padding: 8px; font-size: 0.9rem; } }

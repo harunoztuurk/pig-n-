@@ -42,6 +42,9 @@
 
             <div class="game-content alan-board">
                 <div class="task-box">
+                    <div style="margin-bottom: 10px; font-weight: bold; color: var(--yellow);">
+                        [ SEVİYE <span id="levelCounter">1</span>/50 ]
+                    </div>
                     <span style="color:var(--cyan);">GÖREV:</span> 
                     <strong id="areaTask" style="font-size: 1.2rem; color:var(--pink);">Alanı 16 Birimkare olan bir şekil çiz.</strong>
                 </div>
@@ -55,12 +58,13 @@
                     <!-- Javascript ile alan grid'i basılacak -->
                 </div>
                 
+                <div class="btn-row" style="margin-top:20px; margin-bottom:20px; display:flex; justify-content:center; width:100%;">
+                <button class="btn check-btn" onclick="checkGame()">▸ KONTROL ET</button>
+            </div>
                 <div id="gameMessage" class="game-message" style="margin-top: 15px;"></div>
             </div>
 
-            <div class="btn-row" style="margin-top:20px;">
-                <button class="btn check-btn" onclick="checkGame()">▸ KONTROL ET</button>
-            </div>
+            
         </main>
 
         <div class="divider"></div>

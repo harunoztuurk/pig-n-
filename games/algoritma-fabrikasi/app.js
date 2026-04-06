@@ -3,26 +3,1200 @@ const gameId = 'algoritma-fabrikasi';
 let draggedItem = null;
 
 const levels = [
-    { input: 5, target: 13, funcs: [{op:'*', val:2, display:'× 2'}, {op:'+', val:3, display:'+ 3'}, {op:'-', val:1, display:'- 1'}] }, // (5 * 2) + 3 = 13 (veya -1 kullanmayabilir vs, ama tam 3 slot var, (5+3)*2 -1 != 13, 5*2+3=13)
-    // Sadece hepsini doğru sıra ile kullanmalı.
-    // L1: Kural (5 * 2) = 10, 10 + 3 = 13
-    { 
-        input: 10, target: 9, 
-        slots: 3,
-        funcs: [
-            {op:'/', val:2, display:'÷ 2'}, 
-            {op:'+', val:4, display:'+ 4'},
-            {op:'*', val:1, display:'× 1'} // (10 / 2) + 4 = 9, 9 * 1 = 9
+    {
+        "input": 1,
+        "target": 39,
+        "slots": 3,
+        "funcs": [
+            {
+                "op": "+",
+                "val": 7,
+                "display": "+ 7"
+            },
+            {
+                "op": "*",
+                "val": 3,
+                "display": "× 3"
+            },
+            {
+                "op": "+",
+                "val": 17,
+                "display": "+ 17"
+            }
         ]
     },
-    { 
-        input: 3, target: 14, 
-        slots: 3,
-        funcs: [
-            {op:'+', val:4, display:'+ 4'}, 
-            {op:'*', val:2, display:'× 2'},
-            {op:'-', val:0, display:'- 0'} 
-        ] // (3 + 4)*2 = 14
+    {
+        "input": 2,
+        "target": 422,
+        "slots": 3,
+        "funcs": [
+            {
+                "op": "+",
+                "val": 10,
+                "display": "+ 10"
+            },
+            {
+                "op": "*",
+                "val": 7,
+                "display": "× 7"
+            },
+            {
+                "op": "*",
+                "val": 6,
+                "display": "× 6"
+            }
+        ]
+    },
+    {
+        "input": 18,
+        "target": 24,
+        "slots": 3,
+        "funcs": [
+            {
+                "op": "/",
+                "val": 9,
+                "display": "÷ 9"
+            },
+            {
+                "op": "*",
+                "val": 5,
+                "display": "× 5"
+            },
+            {
+                "op": "+",
+                "val": 14,
+                "display": "+ 14"
+            }
+        ]
+    },
+    {
+        "input": 11,
+        "target": 331,
+        "slots": 3,
+        "funcs": [
+            {
+                "op": "*",
+                "val": 10,
+                "display": "× 10"
+            },
+            {
+                "op": "*",
+                "val": 3,
+                "display": "× 3"
+            },
+            {
+                "op": "+",
+                "val": 1,
+                "display": "+ 1"
+            }
+        ]
+    },
+    {
+        "input": 2,
+        "target": -50,
+        "slots": 4,
+        "funcs": [
+            {
+                "op": "-",
+                "val": 16,
+                "display": "- 16"
+            },
+            {
+                "op": "*",
+                "val": 3,
+                "display": "× 3"
+            },
+            {
+                "op": "-",
+                "val": 18,
+                "display": "- 18"
+            },
+            {
+                "op": "+",
+                "val": 14,
+                "display": "+ 14"
+            }
+        ]
+    },
+    {
+        "input": 8,
+        "target": -16,
+        "slots": 3,
+        "funcs": [
+            {
+                "op": "-",
+                "val": 18,
+                "display": "- 18"
+            },
+            {
+                "op": "+",
+                "val": 10,
+                "display": "+ 10"
+            },
+            {
+                "op": "-",
+                "val": 16,
+                "display": "- 16"
+            }
+        ]
+    },
+    {
+        "input": 4,
+        "target": 19,
+        "slots": 3,
+        "funcs": [
+            {
+                "op": "*",
+                "val": 8,
+                "display": "× 8"
+            },
+            {
+                "op": "-",
+                "val": 14,
+                "display": "- 14"
+            },
+            {
+                "op": "+",
+                "val": 1,
+                "display": "+ 1"
+            }
+        ]
+    },
+    {
+        "input": 17,
+        "target": 89,
+        "slots": 4,
+        "funcs": [
+            {
+                "op": "+",
+                "val": 6,
+                "display": "+ 6"
+            },
+            {
+                "op": "*",
+                "val": 9,
+                "display": "× 9"
+            },
+            {
+                "op": "+",
+                "val": 2,
+                "display": "+ 2"
+            },
+            {
+                "op": "*",
+                "val": 9,
+                "display": "× 9"
+            }
+        ]
+    },
+    {
+        "input": 13,
+        "target": 13,
+        "slots": 3,
+        "funcs": [
+            {
+                "op": "-",
+                "val": 3,
+                "display": "- 3"
+            },
+            {
+                "op": "-",
+                "val": 7,
+                "display": "- 7"
+            },
+            {
+                "op": "+",
+                "val": 10,
+                "display": "+ 10"
+            }
+        ]
+    },
+    {
+        "input": 10,
+        "target": -7,
+        "slots": 3,
+        "funcs": [
+            {
+                "op": "-",
+                "val": 10,
+                "display": "- 10"
+            },
+            {
+                "op": "-",
+                "val": 11,
+                "display": "- 11"
+            },
+            {
+                "op": "+",
+                "val": 4,
+                "display": "+ 4"
+            }
+        ]
+    },
+    {
+        "input": 5,
+        "target": 57,
+        "slots": 3,
+        "funcs": [
+            {
+                "op": "-",
+                "val": 8,
+                "display": "- 8"
+            },
+            {
+                "op": "+",
+                "val": 20,
+                "display": "+ 20"
+            },
+            {
+                "op": "*",
+                "val": 3,
+                "display": "× 3"
+            }
+        ]
+    },
+    {
+        "input": 13,
+        "target": 71,
+        "slots": 4,
+        "funcs": [
+            {
+                "op": "*",
+                "val": 6,
+                "display": "× 6"
+            },
+            {
+                "op": "+",
+                "val": 4,
+                "display": "+ 4"
+            },
+            {
+                "op": "*",
+                "val": 2,
+                "display": "× 2"
+            },
+            {
+                "op": "-",
+                "val": 15,
+                "display": "- 15"
+            }
+        ]
+    },
+    {
+        "input": 2,
+        "target": 2,
+        "slots": 4,
+        "funcs": [
+            {
+                "op": "+",
+                "val": 3,
+                "display": "+ 3"
+            },
+            {
+                "op": "-",
+                "val": 4,
+                "display": "- 4"
+            },
+            {
+                "op": "+",
+                "val": 1,
+                "display": "+ 1"
+            },
+            {
+                "op": "/",
+                "val": 1,
+                "display": "÷ 1"
+            }
+        ]
+    },
+    {
+        "input": 6,
+        "target": 259,
+        "slots": 3,
+        "funcs": [
+            {
+                "op": "*",
+                "val": 7,
+                "display": "× 7"
+            },
+            {
+                "op": "*",
+                "val": 6,
+                "display": "× 6"
+            },
+            {
+                "op": "+",
+                "val": 7,
+                "display": "+ 7"
+            }
+        ]
+    },
+    {
+        "input": 6,
+        "target": 27,
+        "slots": 3,
+        "funcs": [
+            {
+                "op": "+",
+                "val": 1,
+                "display": "+ 1"
+            },
+            {
+                "op": "+",
+                "val": 5,
+                "display": "+ 5"
+            },
+            {
+                "op": "*",
+                "val": 4,
+                "display": "× 4"
+            }
+        ]
+    },
+    {
+        "input": 6,
+        "target": 195,
+        "slots": 3,
+        "funcs": [
+            {
+                "op": "+",
+                "val": 9,
+                "display": "+ 9"
+            },
+            {
+                "op": "*",
+                "val": 3,
+                "display": "× 3"
+            },
+            {
+                "op": "*",
+                "val": 7,
+                "display": "× 7"
+            }
+        ]
+    },
+    {
+        "input": 12,
+        "target": 16,
+        "slots": 4,
+        "funcs": [
+            {
+                "op": "-",
+                "val": 13,
+                "display": "- 13"
+            },
+            {
+                "op": "/",
+                "val": 1,
+                "display": "÷ 1"
+            },
+            {
+                "op": "+",
+                "val": 10,
+                "display": "+ 10"
+            },
+            {
+                "op": "+",
+                "val": 7,
+                "display": "+ 7"
+            }
+        ]
+    },
+    {
+        "input": 17,
+        "target": 13,
+        "slots": 3,
+        "funcs": [
+            {
+                "op": "-",
+                "val": 1,
+                "display": "- 1"
+            },
+            {
+                "op": "-",
+                "val": 11,
+                "display": "- 11"
+            },
+            {
+                "op": "+",
+                "val": 8,
+                "display": "+ 8"
+            }
+        ]
+    },
+    {
+        "input": 1,
+        "target": -69,
+        "slots": 3,
+        "funcs": [
+            {
+                "op": "/",
+                "val": 1,
+                "display": "÷ 1"
+            },
+            {
+                "op": "-",
+                "val": 7,
+                "display": "- 7"
+            },
+            {
+                "op": "*",
+                "val": 10,
+                "display": "× 10"
+            }
+        ]
+    },
+    {
+        "input": 13,
+        "target": 23,
+        "slots": 3,
+        "funcs": [
+            {
+                "op": "+",
+                "val": 4,
+                "display": "+ 4"
+            },
+            {
+                "op": "+",
+                "val": 5,
+                "display": "+ 5"
+            },
+            {
+                "op": "+",
+                "val": 1,
+                "display": "+ 1"
+            }
+        ]
+    },
+    {
+        "input": 19,
+        "target": 314,
+        "slots": 4,
+        "funcs": [
+            {
+                "op": "*",
+                "val": 2,
+                "display": "× 2"
+            },
+            {
+                "op": "*",
+                "val": 8,
+                "display": "× 8"
+            },
+            {
+                "op": "+",
+                "val": 2,
+                "display": "+ 2"
+            },
+            {
+                "op": "+",
+                "val": 8,
+                "display": "+ 8"
+            }
+        ]
+    },
+    {
+        "input": 11,
+        "target": 38,
+        "slots": 4,
+        "funcs": [
+            {
+                "op": "+",
+                "val": 18,
+                "display": "+ 18"
+            },
+            {
+                "op": "-",
+                "val": 13,
+                "display": "- 13"
+            },
+            {
+                "op": "+",
+                "val": 15,
+                "display": "+ 15"
+            },
+            {
+                "op": "+",
+                "val": 7,
+                "display": "+ 7"
+            }
+        ]
+    },
+    {
+        "input": 7,
+        "target": 6,
+        "slots": 3,
+        "funcs": [
+            {
+                "op": "*",
+                "val": 3,
+                "display": "× 3"
+            },
+            {
+                "op": "-",
+                "val": 11,
+                "display": "- 11"
+            },
+            {
+                "op": "-",
+                "val": 4,
+                "display": "- 4"
+            }
+        ]
+    },
+    {
+        "input": 10,
+        "target": 83,
+        "slots": 4,
+        "funcs": [
+            {
+                "op": "+",
+                "val": 13,
+                "display": "+ 13"
+            },
+            {
+                "op": "*",
+                "val": 7,
+                "display": "× 7"
+            },
+            {
+                "op": "-",
+                "val": 7,
+                "display": "- 7"
+            },
+            {
+                "op": "-",
+                "val": 11,
+                "display": "- 11"
+            }
+        ]
+    },
+    {
+        "input": 2,
+        "target": -9,
+        "slots": 4,
+        "funcs": [
+            {
+                "op": "/",
+                "val": 2,
+                "display": "÷ 2"
+            },
+            {
+                "op": "+",
+                "val": 5,
+                "display": "+ 5"
+            },
+            {
+                "op": "-",
+                "val": 19,
+                "display": "- 19"
+            },
+            {
+                "op": "+",
+                "val": 4,
+                "display": "+ 4"
+            }
+        ]
+    },
+    {
+        "input": 4,
+        "target": 27,
+        "slots": 4,
+        "funcs": [
+            {
+                "op": "+",
+                "val": 9,
+                "display": "+ 9"
+            },
+            {
+                "op": "+",
+                "val": 15,
+                "display": "+ 15"
+            },
+            {
+                "op": "+",
+                "val": 9,
+                "display": "+ 9"
+            },
+            {
+                "op": "-",
+                "val": 10,
+                "display": "- 10"
+            }
+        ]
+    },
+    {
+        "input": 4,
+        "target": 20,
+        "slots": 3,
+        "funcs": [
+            {
+                "op": "+",
+                "val": 1,
+                "display": "+ 1"
+            },
+            {
+                "op": "*",
+                "val": 1,
+                "display": "× 1"
+            },
+            {
+                "op": "+",
+                "val": 15,
+                "display": "+ 15"
+            }
+        ]
+    },
+    {
+        "input": 18,
+        "target": 210,
+        "slots": 3,
+        "funcs": [
+            {
+                "op": "*",
+                "val": 9,
+                "display": "× 9"
+            },
+            {
+                "op": "+",
+                "val": 16,
+                "display": "+ 16"
+            },
+            {
+                "op": "*",
+                "val": 3,
+                "display": "× 3"
+            }
+        ]
+    },
+    {
+        "input": 9,
+        "target": 30,
+        "slots": 3,
+        "funcs": [
+            {
+                "op": "+",
+                "val": 19,
+                "display": "+ 19"
+            },
+            {
+                "op": "+",
+                "val": 19,
+                "display": "+ 19"
+            },
+            {
+                "op": "-",
+                "val": 17,
+                "display": "- 17"
+            }
+        ]
+    },
+    {
+        "input": 5,
+        "target": -132,
+        "slots": 3,
+        "funcs": [
+            {
+                "op": "+",
+                "val": 3,
+                "display": "+ 3"
+            },
+            {
+                "op": "-",
+                "val": 20,
+                "display": "- 20"
+            },
+            {
+                "op": "*",
+                "val": 7,
+                "display": "× 7"
+            }
+        ]
+    },
+    {
+        "input": 1,
+        "target": 181,
+        "slots": 3,
+        "funcs": [
+            {
+                "op": "+",
+                "val": 2,
+                "display": "+ 2"
+            },
+            {
+                "op": "*",
+                "val": 9,
+                "display": "× 9"
+            },
+            {
+                "op": "*",
+                "val": 10,
+                "display": "× 10"
+            }
+        ]
+    },
+    {
+        "input": 11,
+        "target": 1,
+        "slots": 3,
+        "funcs": [
+            {
+                "op": "-",
+                "val": 14,
+                "display": "- 14"
+            },
+            {
+                "op": "+",
+                "val": 15,
+                "display": "+ 15"
+            },
+            {
+                "op": "-",
+                "val": 11,
+                "display": "- 11"
+            }
+        ]
+    },
+    {
+        "input": 7,
+        "target": 44,
+        "slots": 3,
+        "funcs": [
+            {
+                "op": "*",
+                "val": 10,
+                "display": "× 10"
+            },
+            {
+                "op": "/",
+                "val": 2,
+                "display": "÷ 2"
+            },
+            {
+                "op": "+",
+                "val": 9,
+                "display": "+ 9"
+            }
+        ]
+    },
+    {
+        "input": 20,
+        "target": -32,
+        "slots": 4,
+        "funcs": [
+            {
+                "op": "-",
+                "val": 15,
+                "display": "- 15"
+            },
+            {
+                "op": "*",
+                "val": 4,
+                "display": "× 4"
+            },
+            {
+                "op": "+",
+                "val": 6,
+                "display": "+ 6"
+            },
+            {
+                "op": "+",
+                "val": 2,
+                "display": "+ 2"
+            }
+        ]
+    },
+    {
+        "input": 5,
+        "target": 37,
+        "slots": 3,
+        "funcs": [
+            {
+                "op": "+",
+                "val": 6,
+                "display": "+ 6"
+            },
+            {
+                "op": "*",
+                "val": 6,
+                "display": "× 6"
+            },
+            {
+                "op": "-",
+                "val": 4,
+                "display": "- 4"
+            }
+        ]
+    },
+    {
+        "input": 3,
+        "target": -72,
+        "slots": 4,
+        "funcs": [
+            {
+                "op": "+",
+                "val": 6,
+                "display": "+ 6"
+            },
+            {
+                "op": "+",
+                "val": 3,
+                "display": "+ 3"
+            },
+            {
+                "op": "-",
+                "val": 12,
+                "display": "- 12"
+            },
+            {
+                "op": "*",
+                "val": 7,
+                "display": "× 7"
+            }
+        ]
+    },
+    {
+        "input": 15,
+        "target": 17,
+        "slots": 4,
+        "funcs": [
+            {
+                "op": "/",
+                "val": 3,
+                "display": "÷ 3"
+            },
+            {
+                "op": "+",
+                "val": 4,
+                "display": "+ 4"
+            },
+            {
+                "op": "+",
+                "val": 8,
+                "display": "+ 8"
+            },
+            {
+                "op": "*",
+                "val": 1,
+                "display": "× 1"
+            }
+        ]
+    },
+    {
+        "input": 3,
+        "target": 32,
+        "slots": 4,
+        "funcs": [
+            {
+                "op": "*",
+                "val": 9,
+                "display": "× 9"
+            },
+            {
+                "op": "+",
+                "val": 2,
+                "display": "+ 2"
+            },
+            {
+                "op": "+",
+                "val": 3,
+                "display": "+ 3"
+            },
+            {
+                "op": "/",
+                "val": 1,
+                "display": "÷ 1"
+            }
+        ]
+    },
+    {
+        "input": 3,
+        "target": 187,
+        "slots": 3,
+        "funcs": [
+            {
+                "op": "+",
+                "val": 20,
+                "display": "+ 20"
+            },
+            {
+                "op": "*",
+                "val": 9,
+                "display": "× 9"
+            },
+            {
+                "op": "+",
+                "val": 4,
+                "display": "+ 4"
+            }
+        ]
+    },
+    {
+        "input": 14,
+        "target": 10,
+        "slots": 3,
+        "funcs": [
+            {
+                "op": "+",
+                "val": 2,
+                "display": "+ 2"
+            },
+            {
+                "op": "+",
+                "val": 3,
+                "display": "+ 3"
+            },
+            {
+                "op": "-",
+                "val": 9,
+                "display": "- 9"
+            }
+        ]
+    },
+    {
+        "input": 2,
+        "target": 43,
+        "slots": 4,
+        "funcs": [
+            {
+                "op": "+",
+                "val": 2,
+                "display": "+ 2"
+            },
+            {
+                "op": "+",
+                "val": 20,
+                "display": "+ 20"
+            },
+            {
+                "op": "+",
+                "val": 9,
+                "display": "+ 9"
+            },
+            {
+                "op": "+",
+                "val": 10,
+                "display": "+ 10"
+            }
+        ]
+    },
+    {
+        "input": 19,
+        "target": -129,
+        "slots": 4,
+        "funcs": [
+            {
+                "op": "-",
+                "val": 17,
+                "display": "- 17"
+            },
+            {
+                "op": "*",
+                "val": 10,
+                "display": "× 10"
+            },
+            {
+                "op": "+",
+                "val": 13,
+                "display": "+ 13"
+            },
+            {
+                "op": "+",
+                "val": 9,
+                "display": "+ 9"
+            }
+        ]
+    },
+    {
+        "input": 6,
+        "target": 42,
+        "slots": 3,
+        "funcs": [
+            {
+                "op": "*",
+                "val": 6,
+                "display": "× 6"
+            },
+            {
+                "op": "*",
+                "val": 7,
+                "display": "× 7"
+            },
+            {
+                "op": "/",
+                "val": 6,
+                "display": "÷ 6"
+            }
+        ]
+    },
+    {
+        "input": 6,
+        "target": 16,
+        "slots": 3,
+        "funcs": [
+            {
+                "op": "+",
+                "val": 6,
+                "display": "+ 6"
+            },
+            {
+                "op": "+",
+                "val": 5,
+                "display": "+ 5"
+            },
+            {
+                "op": "-",
+                "val": 1,
+                "display": "- 1"
+            }
+        ]
+    },
+    {
+        "input": 1,
+        "target": 1,
+        "slots": 4,
+        "funcs": [
+            {
+                "op": "-",
+                "val": 12,
+                "display": "- 12"
+            },
+            {
+                "op": "+",
+                "val": 6,
+                "display": "+ 6"
+            },
+            {
+                "op": "+",
+                "val": 4,
+                "display": "+ 4"
+            },
+            {
+                "op": "+",
+                "val": 2,
+                "display": "+ 2"
+            }
+        ]
+    },
+    {
+        "input": 9,
+        "target": 53,
+        "slots": 3,
+        "funcs": [
+            {
+                "op": "*",
+                "val": 6,
+                "display": "× 6"
+            },
+            {
+                "op": "-",
+                "val": 4,
+                "display": "- 4"
+            },
+            {
+                "op": "+",
+                "val": 3,
+                "display": "+ 3"
+            }
+        ]
+    },
+    {
+        "input": 13,
+        "target": 4212,
+        "slots": 3,
+        "funcs": [
+            {
+                "op": "*",
+                "val": 4,
+                "display": "× 4"
+            },
+            {
+                "op": "*",
+                "val": 9,
+                "display": "× 9"
+            },
+            {
+                "op": "*",
+                "val": 9,
+                "display": "× 9"
+            }
+        ]
+    },
+    {
+        "input": 4,
+        "target": 44,
+        "slots": 4,
+        "funcs": [
+            {
+                "op": "+",
+                "val": 14,
+                "display": "+ 14"
+            },
+            {
+                "op": "+",
+                "val": 10,
+                "display": "+ 10"
+            },
+            {
+                "op": "+",
+                "val": 6,
+                "display": "+ 6"
+            },
+            {
+                "op": "+",
+                "val": 10,
+                "display": "+ 10"
+            }
+        ]
+    },
+    {
+        "input": 18,
+        "target": -1,
+        "slots": 4,
+        "funcs": [
+            {
+                "op": "-",
+                "val": 7,
+                "display": "- 7"
+            },
+            {
+                "op": "-",
+                "val": 7,
+                "display": "- 7"
+            },
+            {
+                "op": "-",
+                "val": 7,
+                "display": "- 7"
+            },
+            {
+                "op": "+",
+                "val": 2,
+                "display": "+ 2"
+            }
+        ]
+    },
+    {
+        "input": 13,
+        "target": 27,
+        "slots": 3,
+        "funcs": [
+            {
+                "op": "-",
+                "val": 10,
+                "display": "- 10"
+            },
+            {
+                "op": "+",
+                "val": 12,
+                "display": "+ 12"
+            },
+            {
+                "op": "+",
+                "val": 12,
+                "display": "+ 12"
+            }
+        ]
     }
 ];
 
@@ -149,17 +1323,17 @@ window.checkGame = function() {
         return;
     }
 
-    // Sırayla uygula
+    // Matematiksel işlem önceliği (Order of Operations) ile hesapla
+    let expression = currentPuzzle.input.toString();
     slots.forEach(slot => {
         const item = slot.children[0];
         const op = item.dataset.op;
-        const val = parseFloat(item.dataset.val);
+        const val = item.dataset.val;
         
-        if (op === '+') currentVal += val;
-        if (op === '-') currentVal -= val;
-        if (op === '*') currentVal *= val;
-        if (op === '/') currentVal /= val;
+        expression += ` ${op} ${val}`;
     });
+
+    currentVal = eval(expression);
 
     if (currentVal === currentPuzzle.target) {
         msg.textContent = 'ALGORİTMA DOĞRU! ÇIKTI ELDE EDİLDİ.';

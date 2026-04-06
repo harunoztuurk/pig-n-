@@ -183,3 +183,4 @@
 }
 .game-message.success { color: var(--cyan); text-shadow: 0 0 10px var(--cyan); }
 .game-message.error { color: var(--pink); text-shadow: 0 0 10px var(--pink); }
+@media (max-width: 600px) { .scale-container { transform: scale(0.8); transform-origin: top center; } .pan-tray { width: 80px; height: 30px; } }

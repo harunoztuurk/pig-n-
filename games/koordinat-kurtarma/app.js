@@ -35,17 +35,27 @@ function createGrid() {
 }
 
 function loadLevel() {
-    // Rastgele hedefler oluştur
-    let randX = Math.floor(Math.random() * 11) - 5; // -5 to 5
-    let randY = Math.floor(Math.random() * 11) - 5; // -5 to 5
-    
-    // Aynı yeri tekrar sormasın (0,0 vb)
-    if (randX === 0 && randY === 0) randX = 2; 
+    if (currentLevelIndex >= gameLevels.length) {
+        document.getElementById('targetCoordinate').textContent = `[ X: - , Y: - ]`;
+        const msg = document.getElementById('gameMessage');
+        msg.textContent = 'OYUN TAMAMLANDI! TEBRİKLER!';
+        msg.className = 'game-message success';
+        const cells = document.querySelectorAll('.grid-cell');
+        cells.forEach(c => c.style.pointerEvents = 'none');
+        return;
+    }
 
+    const level = gameLevels[currentLevelIndex];
+    let randX = level.x;
+    let randY = level.y;
+    
     currentTarget = { x: randX, y: randY };
     document.getElementById('targetCoordinate').textContent = `[ X: ${randX} , Y: ${randY} ]`;
     document.getElementById('selectedDisplay').textContent = "Seçtiğin: [ -- , -- ]";
-    document.getElementById('gameMessage').textContent = '';
+    
+    const msg = document.getElementById('gameMessage');
+    msg.textContent = `SEVİYE ${currentLevelIndex + 1} / ${gameLevels.length}`;
+    msg.className = 'game-message info';
     
     // Önceki seçimleri temizle
     const cells = document.querySelectorAll('.grid-cell');

@@ -141,3 +141,4 @@
     color: var(--pink);
     text-shadow: 0 0 10px var(--pink);
 }
+@media (max-width: 600px) { .equation-builder { flex-wrap: wrap; } .drag-item { width: 40px; height: 40px; font-size: 1.2rem; } .drop-zone { width: 50px; height: 50px; } }

@@ -70,3 +70,4 @@
     background: var(--pink);
     color: #fff;
 }
+@media (max-width: 600px) { .board-grid { max-width: 100%; } .grid-cell { width: 30px; height: 30px; } }
