@@ -31,10 +31,10 @@ let finalPos = { x: 300, y: 300 };
 // Target Definitions
 const CENTER = { x: 300, y: 300 };
 const TARGET_RINGS = [
-    { name: 'Kırmızı (Merkez)', radius: 20, points: 100, color: '#ff2d78', areaProb: 0.01 },
-    { name: 'Sarı', radius: 60, points: 50, color: '#ffcc00', areaProb: 0.08 },
-    { name: 'Mavi', radius: 120, points: 20, color: '#00f5ff', areaProb: 0.27 },
-    { name: 'Beyaz', radius: 200, points: 10, color: '#ffffff', areaProb: 0.64 }
+    { name: 'Kırmızı (Merkez)', radius: 30, points: 100, color: '#ff2d78', areaProb: 0.02 },
+    { name: 'Sarı', radius: 80, points: 50, color: '#ffcc00', areaProb: 0.14 },
+    { name: 'Mavi', radius: 140, points: 20, color: '#00f5ff', areaProb: 0.33 },
+    { name: 'Beyaz', radius: 200, points: 10, color: '#ffffff', areaProb: 0.51 }
 ];
 const TOTAL_RADIUS = 200;
 const TOTAL_AREA_PI = TOTAL_RADIUS * TOTAL_RADIUS; // 40000
@@ -61,17 +61,17 @@ function startTurn() {
     resultBox.style.display = 'none';
     gameMessage.textContent = '';
     
-    // Rastgele rüzgar -100 ile +100 arası (zorluk için)
-    wind.x = (Math.random() * 200 - 100);
-    wind.y = (Math.random() * 200 - 100);
+    // Daha kolay oyun için rüzgar şiddetini düşürdük (-40 ile +40 arası)
+    wind.x = (Math.random() * 80 - 40);
+    wind.y = (Math.random() * 80 - 40);
     windDisplay.textContent = `${wind.x.toFixed(1)}`;
     
     crosshair.x = 0;
     crosshair.y = 300;
     lockedPos = { x: 300, y: 300 };
     
-    // Hız her el biraz daha artsın
-    let speed = 4 + (currentTurn * 0.5);
+    // Hız daha yavaş ve kontrollü artsın
+    let speed = 3 + (currentTurn * 0.3);
     crosshair.speedX = speed;
     crosshair.speedY = speed;
 }
