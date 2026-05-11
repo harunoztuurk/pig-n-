@@ -1,0 +1,226 @@
+.hub-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 30px;
+    padding: 20px 0;
+}
+
+.game-card {
+    background: rgba(0, 245, 255, 0.03);
+    border: 1px solid rgba(0, 245, 255, 0.12);
+    border-radius: 8px;
+    padding: 20px;
+    backdrop-filter: blur(4px);
+    transition: all 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    text-decoration: none;
+    color: inherit;
+    position: relative;
+    overflow: hidden;
+}
+
+.game-card:hover {
+    transform: translateY(-5px);
+    border-color: var(--cyan);
+    box-shadow: 0 10px 20px rgba(0, 245, 255, 0.15);
+    background: rgba(0, 245, 255, 0.08);
+}
+
+.game-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background: var(--cyan);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.3s ease;
+}
+
+.game-card:hover::before {
+    transform: scaleX(1);
+}
+
+.game-icon {
+    font-size: 2.5rem;
+    margin-bottom: 15px;
+    color: var(--pink);
+    text-shadow: 0 0 15px var(--pink);
+}
+
+.game-title {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 1.1rem;
+    color: var(--cyan);
+    margin-bottom: 10px;
+    letter-spacing: 1px;
+}
+
+.game-desc {
+    font-size: 0.85rem;
+    color: rgba(0, 245, 255, 0.6);
+    line-height: 1.4;
+    margin-bottom: 20px;
+    flex-grow: 1;
+}
+
+.play-btn {
+    align-self: flex-start;
+    padding: 8px 16px;
+    font-size: 0.7rem;
+    border-color: var(--yellow);
+    color: var(--yellow);
+}
+
+.game-card:hover .play-btn {
+    background: rgba(255, 230, 0, 0.1);
+    box-shadow: 0 0 15px rgba(255, 230, 0, 0.4);
+}
+
+/* --------------- MODAL STYLES --------------- */
+.player-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.85);
+    backdrop-filter: blur(6px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+}
+
+.modal-content {
+    background: #0d0d1e;
+    border: 2px solid var(--cyan);
+    box-shadow: 0 0 30px rgba(0, 245, 255, 0.3);
+    padding: 35px;
+    border-radius: 12px;
+    text-align: center;
+    width: 90%;
+    max-width: 420px;
+    transform: translateY(0);
+    animation: modalSlide 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+@keyframes modalSlide {
+    from {
+        opacity: 0;
+        transform: translateY(-50px) scale(0.9);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+.modal-title {
+    color: var(--pink);
+    font-family: 'Orbitron', sans-serif;
+    font-size: 1.6rem;
+    margin-bottom: 15px;
+    letter-spacing: 2px;
+    text-shadow: 0 0 10px var(--pink);
+}
+
+.modal-desc {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 0.95rem;
+    margin-bottom: 25px;
+}
+
+.modal-input {
+    width: 100%;
+    background: rgba(0, 245, 255, 0.05);
+    border: 1px solid var(--cyan);
+    padding: 14px 15px;
+    color: #fff;
+    font-family: inherit;
+    font-size: 1.1rem;
+    border-radius: 6px;
+    margin-bottom: 25px;
+    outline: none;
+    box-sizing: border-box;
+    transition: all 0.3s;
+    text-align: center;
+}
+
+.modal-input:focus {
+    box-shadow: 0 0 15px rgba(0, 245, 255, 0.4);
+    border-color: var(--pink);
+}
+
+.modal-btn {
+    width: 100%;
+    padding: 14px;
+    font-size: 1.1rem;
+    letter-spacing: 2px;
+    background: rgba(0, 245, 255, 0.1);
+    box-shadow: 0 0 10px rgba(0, 245, 255, 0.2);
+}
+
+.modal-btn:hover {
+    background: rgba(0, 245, 255, 0.2);
+    box-shadow: 0 0 20px rgba(0, 245, 255, 0.6);
+}
+
+/* Modal Tabs & Errors */
+.modal-tabs {
+    display: flex;
+    margin-bottom: 25px;
+    background: rgba(0, 245, 255, 0.05);
+    border-radius: 8px;
+    padding: 4px;
+}
+
+.modal-tab {
+    flex: 1;
+    background: transparent;
+    border: none;
+    color: rgba(255, 255, 255, 0.5);
+    padding: 10px;
+    font-family: inherit;
+    font-size: 0.9rem;
+    cursor: pointer;
+    border-radius: 6px;
+    transition: all 0.3s;
+}
+
+.modal-tab.active {
+    background: rgba(0, 245, 255, 0.15);
+    color: var(--cyan);
+    font-weight: bold;
+    box-shadow: 0 0 10px rgba(0, 245, 255, 0.2);
+}
+
+.modal-error {
+    color: var(--pink);
+    font-size: 0.85rem;
+    margin-bottom: 15px;
+    margin-top: -15px;
+    text-shadow: 0 0 5px rgba(255, 0, 128, 0.5);
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+    .hub-grid {
+        grid-template-columns: 1fr;
+    }
+
+    #user-profile {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+    }
+
+    #user-profile button {
+        margin-left: 0 !important;
+    }
+}

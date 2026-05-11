@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Hedef Tahtası - Pi Günü</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Orbitron:wght@700;900&display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet" href="../../css/global.css">
+    <link rel="stylesheet" href="style.css">
+
+    <!-- Vercel Speed Insights -->
+    <script>
+        window.si = window.si || function () { (window.siq = window.siq || []).push(arguments); };
+    </script>
+    <script defer src="/_vercel/speed-insights/script.js"></script>
+</head>
+
+<body>
+    <div class="scanline"></div>
+    <div class="wrapper">
+        <nav class="back-nav">
+            <a href="../../index.html" class="btn back-btn">◂ ANA MENÜYE DÖN</a>
+        </nav>
+
+        <header class="header">
+            <h1 class="title">HEDEF TAHTASI</h1>
+            <div class="subtitle">// OLASILIK VE BEKLENEN DEĞER //</div>
+        </header>
+
+        <div class="divider"></div>
+
+        <main class="game-container">
+            <div class="section-label">[ SİMÜLASYON EKRANI ]</div>
+
+            <div class="game-content">
+                <div class="task-box">
+                    <div style="margin-bottom: 10px; font-weight: bold; color: var(--yellow);">
+                        [ ATIŞ HAKKI <span id="levelCounter">1</span>/10 ]
+                    </div>
+                    <span style="color:var(--cyan);">GÖREV:</span> 
+                    <strong id="taskDescription" style="font-size: 1.1rem; color:var(--pink);">Beklenen değeri (Expected Value) maksimize et!</strong>
+                </div>
+
+                <div class="stats-row">
+                    <div class="stat-card">
+                        <span class="stat-label">Toplam Puan</span>
+                        <span class="stat-value" id="scoreDisplay">0</span>
+                    </div>
+                    <div class="stat-card">
+                        <span class="stat-label">Rüzgar (X)</span>
+                        <span class="stat-value" id="windDisplay">0.0</span>
+                    </div>
+                </div>
+
+                <div class="canvas-container" id="canvasWrapper">
+                    <canvas id="gameCanvas" width="600" height="600"></canvas>
+                </div>
+                
+                <div class="controls-row">
+                    <button id="actionBtn" class="btn play-btn" style="width: 200px; font-size: 1.2rem;">X Eksenini Kilitle</button>
+                </div>
+
+                <div class="formula-box" id="resultBox" style="display: none;">
+                    <div style="color:var(--cyan); margin-bottom:5px;">Vurulan Bölge: <span id="hitRegion" style="color:#fff;">Merkez</span></div>
+                    <div style="color:var(--yellow); font-family: 'Share Tech Mono', monospace; font-size: 0.9rem;">
+                        Alan = <span id="hitArea"></span> br²<br>
+                        Olasılık P(A) = <span id="hitProb"></span><br>
+                        Kazanılan Puan = <span id="hitPoints"></span>
+                    </div>
+                </div>
+
+                <div id="gameMessage" class="game-message" style="margin-top: 15px;"></div>
+            </div>
+        </main>
+
+        <div class="divider"></div>
+        <footer class="footer">
+            <div class="copyright-wrap" style="flex-direction: column; align-items: center; gap: 8px;">
+                <div class="copyright"><span class="tm">TM</span> <a href="#" target="_blank" class="author-link">Müfit
+                        ŞAN</a> tarafından tasarlanmıştır.</div>
+                <div class="copyright"><a href="https://www.zolak.com.tr/" target="_blank" class="author-link">Harun
+                        Öztürk</a> tarafından geliştirilmiştir.</div>
+            </div>
+        </footer>
+    </div>
+
+    <script src="../../js/utils.js"></script>
+    <script src="app.js"></script>
+</body>
+
+</html>

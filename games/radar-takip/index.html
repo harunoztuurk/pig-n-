@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Radarlı Takip Işını - Pi Günü</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Orbitron:wght@700;900&display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet" href="../../css/global.css">
+    <link rel="stylesheet" href="style.css">
+
+    <!-- Vercel Speed Insights -->
+    <script>
+        window.si = window.si || function () { (window.siq = window.siq || []).push(arguments); };
+    </script>
+    <script defer src="/_vercel/speed-insights/script.js"></script>
+</head>
+
+<body>
+    <div class="scanline"></div>
+    <div class="wrapper">
+        <nav class="back-nav">
+            <a href="../../index.html" class="btn back-btn">◂ ANA MENÜYE DÖN</a>
+        </nav>
+
+        <header class="header">
+            <h1 class="title">RADARLI TAKİP IŞINI</h1>
+            <div class="subtitle">// BİRİM ÇEMBER VE TRİGONOMETRİ //</div>
+        </header>
+
+        <div class="divider"></div>
+
+        <main class="game-container">
+            <div class="section-label">[ SİMÜLASYON EKRANI ]</div>
+
+            <div class="game-content">
+                <div class="task-box">
+                    <div style="margin-bottom: 10px; font-weight: bold; color: var(--yellow);">
+                        [ SEVİYE <span id="levelCounter">1</span>/50 ]
+                    </div>
+                    <span style="color:var(--cyan);">HEDEF AÇI:</span> 
+                    <strong id="targetAngleDisplay" style="font-size: 1.2rem; color:var(--pink);">?°</strong>
+                </div>
+
+                <div class="formula-box">
+                    <span style="color:var(--cyan);">Anlık Konum:</span> 
+                    <strong id="equationDisplay" style="font-size: 1.1rem; color:var(--yellow); font-family: 'Share Tech Mono', monospace;">
+                        x = cos(0°) = 1.00<br>
+                        y = sin(0°) = 0.00
+                    </strong>
+                </div>
+
+                <div class="canvas-container" id="canvasWrapper">
+                    <canvas id="gameCanvas" width="400" height="400"></canvas>
+                </div>
+                
+                <div class="controls-container">
+                    <div class="control-row" id="buttonsRow1">
+                        <!-- Javascript ile butonlar eklenecek -->
+                    </div>
+                    <div class="control-row" id="buttonsRow2">
+                        <!-- Javascript ile butonlar eklenecek -->
+                    </div>
+                    <button id="lockBtn" class="btn check-btn" style="width: 100%; max-width:400px; margin-top:15px; font-size: 1.2rem;">KİLİTLEN (ATEŞLE)</button>
+                </div>
+
+                <div id="gameMessage" class="game-message" style="margin-top: 15px;"></div>
+            </div>
+        </main>
+
+        <div class="divider"></div>
+        <footer class="footer">
+            <div class="copyright-wrap" style="flex-direction: column; align-items: center; gap: 8px;">
+                <div class="copyright"><span class="tm">TM</span> <a href="#" target="_blank" class="author-link">Müfit
+                        ŞAN</a> tarafından tasarlanmıştır.</div>
+                <div class="copyright"><a href="https://www.zolak.com.tr/" target="_blank" class="author-link">Harun
+                        Öztürk</a> tarafından geliştirilmiştir.</div>
+            </div>
+        </footer>
+    </div>
+
+    <script src="../../js/utils.js"></script>
+    <script src="app.js"></script>
+</body>
+
+</html>

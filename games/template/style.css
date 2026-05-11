@@ -1,0 +1,15 @@
+/* YENİ OYUNA ÖZEL STİLLER */
+/* Global.css zaten projeye dahil, sadece bu oyunla alakalı renk ve şekilleri buraya yazın. */
+
+.game-container {
+    padding: 20px;
+}
+
+.game-content {
+    background: rgba(0, 245, 255, 0.03);
+    border-radius: 8px;
+    min-height: 300px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

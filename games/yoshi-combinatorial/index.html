@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kombinatorik Bulmacalar</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="waves-bg"></div>
+    
+    <div class="container">
+        <header>
+            <h1>Kombinatorik Akıl</h1>
+            <div class="level-info" id="levelInfo">Düğüm 1 / 3</div>
+        </header>
+
+        <div class="brain-panel">
+            <div class="story-box">
+                <h2 id="questionTitle">Nehri Geçiş (Soyut)</h2>
+                <p id="questionText">Öğeleri sol yakadan sağ yakaya kurallara uygun olarak taşıyın.</p>
+                <div class="controls">
+                    <button id="hintBtn" class="comic-btn secondary">İpucu?</button>
+                </div>
+                <div id="hintContainer" class="hint-container"></div>
+            </div>
+
+            <!-- Etkileşim Alanı -->
+            <div class="interaction-area" id="interactionArea">
+                <div class="zone" id="zoneA">
+                    <div class="zone-title">A Bölgesi (Başlangıç)</div>
+                    <div class="slots-container" id="slotsA"></div>
+                </div>
+                
+                <div class="bridge">
+                    <div class="bridge-anim"></div>
+                </div>
+
+                <div class="zone" id="zoneB">
+                    <div class="zone-title">B Bölgesi (Hedef)</div>
+                    <div class="slots-container" id="slotsB"></div>
+                </div>
+            </div>
+
+            <div class="controls center">
+                <button id="verifyBtn" class="comic-btn primary">Kombinasyonu Doğrula</button>
+                <button id="resetBtn" class="comic-btn warning">Başa Sar</button>
+                <button class="comic-btn default" onclick="window.location.href='../../index.html'">Menü</button>
+            </div>
+            
+            <div id="feedbackMessage" class="feedback-message"></div>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div id="endModal" class="modal">
+        <div class="modal-content">
+            <h2>Algoritma Tamamlandı!</h2>
+            <p>Olasılıkları en iyi şekilde hesapladınız ve tüm kombinasyon bulmacalarını çözdünüz!</p>
+            <button id="restartBtn" class="comic-btn primary">Başa Dön</button>
+        </div>
+    </div>
+
+    <script src="levels.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>

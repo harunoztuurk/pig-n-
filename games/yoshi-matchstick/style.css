@@ -1,0 +1,124 @@
+/* Premium Matchstick Styles */
+.glass-panel {
+    background: rgba(20, 25, 35, 0.7);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(0, 255, 255, 0.2);
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+    border-radius: 12px;
+    padding: 30px;
+    margin: 20px 0;
+    width: 100%;
+}
+
+.puzzle-title {
+    font-family: 'Orbitron', sans-serif;
+    color: var(--cyan);
+    font-size: 1.5rem;
+    margin-bottom: 15px;
+    text-transform: uppercase;
+    text-shadow: 0 0 10px rgba(0, 255, 255, 0.3);
+}
+
+.puzzle-text {
+    font-family: 'Inter', sans-serif;
+    color: #e0e0e0;
+    font-size: 1.1rem;
+    line-height: 1.6;
+    margin-bottom: 25px;
+}
+
+/* Matchstick Board */
+.matchstick-board-container {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 25px;
+}
+
+.matchstick-board {
+    position: relative;
+    background: rgba(0,0,0,0.4);
+    border: 2px dashed rgba(0, 255, 255, 0.2);
+    border-radius: 8px;
+    margin: 0 auto;
+}
+
+.moves-indicator {
+    text-align: center;
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 1.2rem;
+    color: var(--pink);
+    margin-bottom: 20px;
+}
+
+/* Slots and Matchsticks */
+.slot {
+    position: absolute;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    z-index: 10;
+}
+
+.slot:hover {
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
+}
+
+.slot.empty {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px dotted rgba(255, 255, 255, 0.2);
+}
+
+.slot.empty:hover {
+    background: rgba(0, 255, 255, 0.2);
+}
+
+.slot.filled {
+    background: linear-gradient(90deg, #d32f2f 10%, #ffcc80 15%, #ffb74d 95%, #795548 100%);
+    box-shadow: 2px 2px 5px rgba(0,0,0,0.5);
+    border: 1px solid #000;
+}
+
+.slot.filled.selected {
+    box-shadow: 0 0 15px var(--pink), inset 0 0 10px var(--pink);
+    border-color: var(--pink);
+    z-index: 20;
+    animation: pulseObj 1s infinite;
+}
+
+/* Orientations */
+.slot.type-h { width: 50px; height: 10px; margin-top: -5px; margin-left: 0; }
+.slot.type-v { width: 10px; height: 50px; margin-top: 0; margin-left: -5px; }
+
+/* In a real vertical matchstick, the red tip should be on top */
+.slot.type-v.filled {
+    background: linear-gradient(180deg, #d32f2f 10%, #ffcc80 15%, #ffb74d 95%, #795548 100%);
+}
+
+.slot.type-d1 { width: 60px; height: 10px; transform: rotate(-45deg); margin-top: -5px; margin-left: -5px;}
+.slot.type-d2 { width: 60px; height: 10px; transform: rotate(45deg); margin-top: -5px; margin-left: -5px;}
+
+@keyframes pulseObj {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+    100% { transform: scale(1); }
+}
+
+/* Animations & UI */
+.input-container { display: none; }
+.hint-btn { background: transparent; border: 1px solid var(--orange); color: var(--orange); }
+.check-btn { width: 100%; background: transparent; border: 1px solid var(--cyan); color: var(--cyan); margin-bottom: 10px;}
+.reset-btn { width: 100%; background: transparent; border: 1px dashed #ffeb3b; color: #ffeb3b;}
+.next-btn { background: var(--green); border: 1px solid #fff; color: white; width: 100%; animation: pulse 2s infinite; }
+
+.success-glow {
+    box-shadow: 0 0 30px rgba(76, 175, 80, 0.8) !important;
+    border-color: #4caf50 !important;
+}
+.message-area {
+    margin-top: 15px; height: 30px; text-align: center;
+    font-family: 'Share Tech Mono', monospace; font-size: 1.2rem; font-weight: bold;
+}
+.hint-text {
+    margin-top: 15px; color: var(--orange); padding: 10px;
+    border-left: 3px solid var(--orange); background: rgba(255, 152, 0, 0.1);
+}

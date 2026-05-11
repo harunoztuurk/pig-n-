@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Labirent Bulmacaları (Synthwave)</title>
+    <!-- 80s Retrowave font -->
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="synth-bg">
+        <div class="sun"></div>
+        <div class="grid-floor"></div>
+    </div>
+
+    <div class="container">
+        <header>
+            <h1 class="neon-text">LABİRENT</h1>
+            <div class="level-info" id="levelInfo">STG - 01</div>
+        </header>
+
+        <div class="arcade-panel">
+            <div class="instruction-box">
+                <h2 id="questionTitle">Arrow Maze</h2>
+                <p id="questionText">Sadece okların gösterdiği yönde ilerleyebilirsiniz.</p>
+                <div class="hint-wrap">
+                    <button id="hintBtn" class="arcade-btn small secondary">Yardım?</button>
+                    <div id="hintContainer" class="hint-container"></div>
+                </div>
+            </div>
+
+            <!-- Labirent Izgarası -->
+            <div class="maze-container">
+                <div id="mazeGrid" class="maze-grid">
+                    <!-- Hücreler (Cells) JS ile oluşturulacak -->
+                </div>
+            </div>
+
+            <!-- Mobil Kontroller / Klavye de (W A S D / Ok tuşları) desteklenecek -->
+            <div class="dpad">
+                <div class="dbtn up" id="btnUp">W</div>
+                <div class="dbtn left" id="btnLeft">A</div>
+                <div class="dbtn down" id="btnDown">S</div>
+                <div class="dbtn right" id="btnRight">D</div>
+            </div>
+
+            <div class="controls">
+                <button id="resetBtn" class="arcade-btn warning">Tekrar Dene</button>
+                <button class="arcade-btn default" onclick="window.location.href='../../index.html'">Menü</button>
+            </div>
+            
+            <div id="feedbackMessage" class="feedback-message"></div>
+        </div>
+    </div>
+
+    <div id="endModal" class="modal">
+        <div class="modal-content retro-border">
+            <h2 class="neon-text pink">GAME OVER?</h2>
+            <br>
+            <h3 class="neon-text blue">NO, YOU WON!</h3>
+            <p>Tüm labirent kurallarını çözdünüz.</p>
+            <br>
+            <button id="restartBtn" class="arcade-btn primary">Yeniden Oyna</button>
+        </div>
+    </div>
+
+    <script src="levels.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>

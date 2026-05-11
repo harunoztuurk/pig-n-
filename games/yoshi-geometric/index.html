@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Geometrik Bulmacalar - Görsel Etkileşim</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="blueprint-bg"></div>
+    
+    <div class="container">
+        <header>
+            <h1>Geometrik Bulmacalar</h1>
+            <div class="level-info" id="levelInfo">Seviye 1 / 4</div>
+        </header>
+
+        <div class="game-panel">
+            <div class="instruction-box">
+                <h2 id="questionTitle">T-Bulmacası (T-Puzzle)</h2>
+                <p id="questionText">Aşağıdaki parçaları sürükleyerek ortadaki hedef alana kusursuz bir 'T' harfi oluşturacak şekilde yerleştir.</p>
+                <button id="hintBtn" class="hint-btn">İpucu Göster</button>
+                <div id="hintContainer" class="hint-container"></div>
+            </div>
+
+            <!-- Drag and Drop Workspace -->
+            <div class="workspace" id="workspace">
+                <div class="target-zone" id="targetZone">
+                    <!-- Hedef taslağı (Ghost) app.js tarafından yüklenecek -->
+                </div>
+                
+                <div class="pieces-container" id="piecesContainer">
+                    <!-- Sürüklenebilir parçalar app.js tarafından yüklenecek -->
+                </div>
+            </div>
+
+            <div class="controls">
+                <button id="verifyBtn" class="action-button verify">Geometriyi Kontrol Et</button>
+                <button id="resetBtn" class="action-button reset">Parçaları Sıfırla</button>
+            </div>
+            
+            <div id="feedbackMessage" class="feedback-message"></div>
+            <button id="homeBtn" class="action-button home-btn">Menüye Dön</button>
+        </div>
+    </div>
+
+    <!-- Oyun Bitiş Modalı -->
+    <div id="endModal" class="modal">
+        <div class="modal-content">
+            <h2>Mimari Zeka!</h2>
+            <p>Tüm geometrik bulmacaları görsel olarak çözdünüz. Üstün uzamsal zekanızı tebrik ederiz!</p>
+            <div class="modal-actions">
+                <button id="restartBtn" class="action-button">Baştan Başla</button>
+                <button class="action-button home-btn" onclick="window.location.href='../../index.html'">Menüye Dön</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="levels.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>

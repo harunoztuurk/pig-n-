@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dijital Bulmacalar (Cyberpunk)</title>
+    <!-- Sci-fi font -->
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="matrix-bg"></div>
+
+    <div class="container">
+        <header>
+            <h1 class="glitch" data-text="DİJİTAL SİSTEM">DİJİTAL SİSTEM</h1>
+            <div class="level-info" id="levelInfo">Düğüm // 01</div>
+        </header>
+
+        <div class="cyber-panel">
+            <div class="instruction-box">
+                <h2 id="questionTitle">Sistem Arızası</h2>
+                <p id="questionText">Yanlış yanan LED çubuklarına (segmentlere) tıklayarak göstergeyi istenilen hale dönüştürün.</p>
+                <button id="hintBtn" class="hacker-btn secondary">Şifre Çözücü (İpucu)</button>
+                <div id="hintContainer" class="hint-container"></div>
+            </div>
+
+            <!-- Interaktif 7-Segment Ekran Kartı -->
+            <div class="digital-display" id="displayArea">
+                <!-- Dijitler app.js tarafından buraya üretilecek -->
+            </div>
+
+            <div class="controls">
+                <button id="verifyBtn" class="hacker-btn primary">KOMUTU ÇALIŞTIR_</button>
+                <button id="resetBtn" class="hacker-btn warning">SİFİRLA</button>
+                <button class="hacker-btn default" onclick="window.location.href='../../index.html'">BAĞLANTIYI KES (Menü)</button>
+            </div>
+            
+            <div id="feedbackMessage" class="feedback-message"></div>
+        </div>
+    </div>
+
+    <!-- Oyun Sonu Modalı -->
+    <div id="endModal" class="modal">
+        <div class="modal-content cyber-border">
+            <h2 class="glitch" data-text="GİRİŞ BAŞARILI">GİRİŞ BAŞARILI</h2>
+            <p>Sistem tamamen restore edildi. Hacker seviyesine ulaştınız.</p>
+            <br>
+            <button id="restartBtn" class="hacker-btn primary">SİSTEMİ YENİDEN BAŞLAT_</button>
+        </div>
+    </div>
+
+    <script src="levels.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>

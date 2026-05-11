@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>MATCHSTICK PUZZLES</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Orbitron:wght@700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../css/global.css">
+    <link rel="stylesheet" href="style.css">
+    <script> window.si = window.si || function () { (window.siq = window.siq || []).push(arguments); }; </script>
+    <script defer src="/_vercel/speed-insights/script.js"></script>
+</head>
+<body>
+    <div class="scanline"></div>
+    <div class="wrapper">
+        <nav class="back-nav">
+            <a href="../../index.html" class="btn back-btn" id="nav-back-btn">◂ ANA MENÜYE DÖN</a>
+        </nav>
+        <header class="header">
+            <h1 class="title" id="main-title">MATCHSTICK PUZZLES</h1>
+            <div class="subtitle" id="level-indicator">// SEVİYE 1 //</div>
+        </header>
+        <div class="divider"></div>
+        <main class="game-container">
+            <div id="puzzle-view-screen" style="width: 100%;">
+                <div class="section-label">[ BULMACA GÖSTERGESİ ]</div>
+                <div class="game-content glass-panel" id="game-panel">
+                    <h2 id="puzzle-title" class="puzzle-title">Yükleniyor...</h2>
+                    <div class="progress-bar-container">
+                        <div id="puzzle-progress-bar" class="progress-bar" style="width: 0%;"></div>
+                    </div>
+                    <div id="puzzle-question" class="puzzle-text">Lütfen bekleyin...</div>
+                    <div id="moves-indicator" class="moves-indicator">KALAN HAMLE: ?</div>
+                    
+                    <div id="matchstick-board-container" class="matchstick-board-container">
+                        <div id="matchstick-board" class="matchstick-board">
+                           <!-- Kibritler JS ile yüklenecek -->
+                        </div>
+                    </div>
+                    
+                    <div class="input-container" style="display: none;">
+                        <input type="text" id="answer-input" autocomplete="off">
+                    </div>
+                    
+                    <div id="hint-text" class="hint-text" style="display: none;"></div>
+                </div>
+
+                <div class="message-area" id="message-area"></div>
+
+                <div class="btn-row" style="margin-top:20px; gap: 15px;" id="action-btns">
+                    <button class="btn check-btn" onclick="checkAnswer()">▸ CEVABI KONTROL ET</button>
+                    <button class="btn reset-btn" onclick="resetBoardView()">↺ SIFIRLA</button>
+                    <button class="btn hint-btn" onclick="showHint()">? İPUCU</button>
+                </div>
+                <div class="btn-row" style="margin-top:15px; display: none;" id="next-btn-container">
+                    <button class="btn next-btn" onclick="nextPuzzle()">▸ SONRAKİ BULMACA</button>
+                </div>
+            </div>
+        </main>
+        <div class="divider"></div>
+        <footer class="footer">
+            <div class="copyright-wrap" style="flex-direction: column; align-items: center; gap: 8px;">
+                <div class="copyright"><span class="tm">TM</span> <a href="#" target="_blank" class="author-link">Müfit ŞAN</a></div>
+            </div>
+        </footer>
+    </div>
+    <audio id="success-sound" src="https://assets.mixkit.co/active_storage/sfx/2013/2013-preview.mp3"></audio>
+    <audio id="error-sound" src="https://assets.mixkit.co/active_storage/sfx/2573/2573-preview.mp3"></audio>
+    <script src="../../js/utils.js"></script>
+    <script src="levels.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Algoritmik Bulmacalar (Dev Console)</title>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="terminal-bg"></div>
+
+    <div class="container">
+        <header>
+            <h1>> ALGORİTMA_</h1>
+            <div class="level-info" id="levelInfo">Proses 1 / 3</div>
+        </header>
+
+        <div class="code-panel">
+            <div class="instruction-box">
+                <h2 id="questionTitle">Syntax Header</h2>
+                <div class="io-display">
+                    <div class="io-box">
+                        <span class="label">INPUT</span>
+                        <div class="value" id="inputValue">0</div>
+                    </div>
+                    <div class="io-box">
+                        <span class="label">HEDEF OUTPUT</span>
+                        <div class="value" id="targetValue">0</div>
+                    </div>
+                </div>
+                <p id="questionText" class="comment">/* Girdiyi hedefe ulaştırmak için komut bloklarını sırayla dizin. */</p>
+                
+                <button id="hintBtn" class="term-btn secondary">--help</button>
+                <div id="hintContainer" class="hint-container"></div>
+            </div>
+
+            <!-- Kullanıcının Komutları Bırakacağı Alan -->
+            <div class="algorithm-container">
+                <div class="command-palette" id="commandPalette">
+                    <!-- Sürüklenebilir Komut Blokları JS ile Doldurulacak -->
+                </div>
+
+                <div class="execution-pipeline" id="executionPipeline">
+                    <div class="pipeline-title">// EXECUTION PIPELINE (Max limit)</div>
+                    <div class="slots-container" id="pipelineSlots">
+                        <!-- Boş Komut Tuvaletleri -->
+                    </div>
+                </div>
+            </div>
+
+            <div class="controls">
+                <button id="verifyBtn" class="term-btn primary">./run_compiler.sh</button>
+                <button id="resetBtn" class="term-btn warning">clear()</button>
+                <button class="term-btn default" onclick="window.location.href='../../index.html'">exit</button>
+            </div>
+            
+            <div id="feedbackMessage" class="feedback-message"></div>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div id="endModal" class="modal">
+        <div class="modal-content">
+            <h2 class="success-text">BUILD SUCCESSFUL</h2>
+            <p>Tüm algoritmik problemleri başarıyla derlediniz.</p>
+            <br>
+            <button id="restartBtn" class="term-btn primary">reboot</button>
+        </div>
+    </div>
+
+    <script src="levels.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>

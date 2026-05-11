@@ -1,0 +1,125 @@
+/* TERMINAL / IDE THEME - YOSHI-ALGORITHMIC */
+:root {
+    --bg-dark: #0f172a;
+    --term-bg: #1e293b;
+    --text-main: #38bdf8;
+    --text-comment: #64748b;
+    --text-string: #a3e635;
+    --text-error: #ef4444;
+    --text-keyword: #c084fc;
+    --border-color: #334155;
+}
+
+body {
+    background-color: var(--bg-dark);
+    color: var(--text-main);
+    font-family: 'Fira Code', monospace;
+    margin: 0; padding: 0;
+    min-height: 100vh;
+}
+
+.terminal-bg {
+    position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+    background: radial-gradient(circle at center, rgba(56, 189, 248, 0.05) 0%, transparent 70%);
+    z-index: -1; pointer-events: none;
+}
+
+.container {
+    max-width: 900px; margin: 0 auto; padding: 2rem;
+}
+
+header h1 {
+    font-size: 2rem; color: var(--text-keyword); margin: 0 0 10px;
+    text-shadow: 0 0 10px rgba(192, 132, 252, 0.3);
+}
+
+.level-info { color: var(--text-comment); font-size: 1.1rem; }
+
+.code-panel {
+    background: var(--term-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 8px; padding: 2rem;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    margin-top: 1rem;
+}
+
+.instruction-box h2 { color: var(--text-string); font-size: 1.5rem; margin-top: 0; }
+.comment { color: var(--text-comment); margin-bottom: 1.5rem; }
+
+.io-display {
+    display: flex; gap: 2rem; margin: 1.5rem 0; justify-content: center;
+}
+
+.io-box {
+    background: #0f172a; border: 2px solid var(--border-color);
+    padding: 1rem 2rem; border-radius: 8px; text-align: center;
+    box-shadow: inset 0 0 10px rgba(0,0,0,0.5);
+}
+
+.io-box .label {
+    display: block; color: var(--text-comment); font-size: 0.9rem; margin-bottom: 5px;
+}
+.io-box .value {
+    font-size: 2.5rem; color: var(--text-string); font-weight: bold;
+}
+
+.hint-container {
+    display: none; background: rgba(0,0,0,0.3); border-left: 4px solid var(--text-keyword);
+    padding: 10px; margin-top: 10px; color: #cbd5e1; white-space: pre-wrap;
+}
+
+/* Algoritma Konteynerleri */
+.algorithm-container { margin: 2rem 0; display: flex; flex-direction: column; gap: 2rem; }
+
+.command-palette {
+    display: flex; gap: 10px; flex-wrap: wrap; justify-content: center;
+    padding: 1rem; background: rgba(0,0,0,0.2); border-radius: 8px;
+}
+
+.cmd-block {
+    background: var(--bg-dark); border: 1px solid var(--text-main);
+    color: var(--text-main); padding: 10px 20px; border-radius: 4px;
+    cursor: grab; font-weight: bold; user-select: none; transition: 0.2s;
+}
+.cmd-block:active { cursor: grabbing; transform: scale(1.05); border-color: var(--text-keyword); color: var(--text-keyword); }
+
+.execution-pipeline {
+    background: #000; border: 1px solid var(--border-color); border-radius: 8px; padding: 1rem;
+}
+
+.pipeline-title { color: var(--text-comment); margin-bottom: 1rem; font-size: 0.9rem; }
+
+.slots-container {
+    display: flex; gap: 10px; flex-wrap: wrap; min-height: 50px;
+}
+
+.pipe-slot {
+    width: 80px; height: 50px; border: 2px dashed var(--border-color);
+    border-radius: 4px; display: flex; align-items: center; justify-content: center;
+    transition: 0.3s;
+}
+.pipe-slot.drag-over { border-color: var(--text-keyword); background: rgba(192,132,252,0.1); }
+
+/* Buttons */
+.controls { display: flex; gap: 15px; justify-content: center; margin-top: 2rem; flex-wrap: wrap; }
+
+.term-btn {
+    background: transparent; border: 1px solid var(--border-color); color: var(--text-main);
+    padding: 10px 20px; font-family: 'Fira Code', monospace; cursor: pointer; border-radius: 4px; transition: 0.3s;
+}
+.term-btn:hover { background: rgba(255,255,255,0.1); }
+.term-btn.primary { border-color: var(--text-string); color: var(--text-string); }
+.term-btn.primary:hover { background: var(--text-string); color: #000; }
+.term-btn.warning { border-color: var(--text-error); color: var(--text-error); }
+.term-btn.warning:hover { background: var(--text-error); color: #fff; }
+.term-btn.default { border-color: var(--text-comment); color: var(--text-comment); }
+
+.feedback-message { text-align: center; margin-top: 1rem; min-height: 24px; }
+.feedback-message.success { color: var(--text-string); }
+.feedback-message.error { color: var(--text-error); }
+
+/* Modal */
+.modal { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0,0,0,0.8); display: flex; justify-content: center; align-items: center; opacity: 0; pointer-events: none; transition: 0.3s; }
+.modal.active { opacity: 1; pointer-events: all; }
+.modal-content { background: var(--term-bg); border: 2px solid var(--text-keyword); padding: 3rem; text-align: center; border-radius: 8px; }
+.success-text { color: var(--text-string); margin-bottom: 1rem; }

@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Bowling ve Kombinasyon - Pi Günü</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Orbitron:wght@700;900&display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet" href="../../css/global.css">
+    <link rel="stylesheet" href="style.css">
+
+    <!-- Vercel Speed Insights -->
+    <script>
+        window.si = window.si || function () { (window.siq = window.siq || []).push(arguments); };
+    </script>
+    <script defer src="/_vercel/speed-insights/script.js"></script>
+</head>
+
+<body>
+    <div class="scanline"></div>
+    <div class="wrapper">
+        <nav class="back-nav">
+            <a href="../../index.html" class="btn back-btn">◂ ANA MENÜYE DÖN</a>
+        </nav>
+
+        <header class="header">
+            <h1 class="title">BOWLING VE KOMBİNASYON</h1>
+            <div class="subtitle">// 2D ÇARPIŞMA FİZİĞİ VE C(N,R) MATEMATİĞİ //</div>
+        </header>
+
+        <div class="divider"></div>
+
+        <main class="game-container">
+            <div class="section-label">[ SİMÜLASYON EKRANI ]</div>
+
+            <div class="game-content">
+                <div class="task-box">
+                    <div style="margin-bottom: 10px; font-weight: bold; color: var(--yellow);">
+                        [ SEVİYE <span id="levelCounter">1</span>/50 ]
+                    </div>
+                    <span style="color:var(--cyan);">GÖREV:</span> 
+                    <strong style="font-size: 1.1rem; color:var(--pink);">Topu fırlat! Devrilen lobutlar için kombinasyon C(10, r) değerini hesapla.</strong>
+                </div>
+
+                <div class="formula-box">
+                    <span style="color:#aaa;">Hesaplanan:</span>
+                    <strong id="comboDisplay" style="color:var(--cyan); margin-left:10px;">Bekleniyor...</strong>
+                </div>
+
+                <div class="game-layout">
+                    <!-- Sol: Bowling Yolu -->
+                    <div class="canvas-container" id="canvasWrapper">
+                        <canvas id="gameCanvas" width="300" height="500"></canvas>
+                    </div>
+
+                    <!-- Sağ: Atış Kontrolleri ve Soru Cevap -->
+                    <div class="controls-panel">
+                        <div class="bar-container">
+                            <div class="bar-label">YÖN (AÇI) <span id="dirValue">0°</span></div>
+                            <div class="bar-wrap"><div class="bar-fill bg-cyan" id="dirBar"></div></div>
+                        </div>
+                        
+                        <div class="bar-container">
+                            <div class="bar-label">HIZ (GÜÇ) <span id="speedValue">50%</span></div>
+                            <div class="bar-wrap"><div class="bar-fill bg-pink" id="speedBar"></div></div>
+                        </div>
+
+                        <div class="bar-container">
+                            <div class="bar-label">FALSO (SPİN) <span id="spinValue">0</span></div>
+                            <div class="bar-wrap"><div class="bar-fill bg-yellow" id="spinBar"></div></div>
+                        </div>
+                        
+                        <button id="actionBtn" class="btn check-btn" style="width: 100%; margin-top:15px;">DURDUR / AT (Boşluk)</button>
+
+                        <div id="questionArea" style="display:none; margin-top:20px; text-align:center;">
+                            <div style="color:var(--yellow); margin-bottom:10px;" id="questionText">10 Lobuttan ?'si devrildi. C(10, ?) kaçtır?</div>
+                            <input type="number" id="answerInput" class="form-input" placeholder="Cevap">
+                            <button id="checkAnswerBtn" class="btn check-btn" style="width: 100%; margin-top:10px;">YANITLA</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="gameMessage" class="game-message" style="margin-top: 15px;"></div>
+            </div>
+        </main>
+
+        <div class="divider"></div>
+        <footer class="footer">
+            <div class="copyright-wrap" style="flex-direction: column; align-items: center; gap: 8px;">
+                <div class="copyright"><span class="tm">TM</span> <a href="#" target="_blank" class="author-link">Müfit
+                        ŞAN</a> tarafından tasarlanmıştır.</div>
+                <div class="copyright"><a href="https://www.zolak.com.tr/" target="_blank" class="author-link">Harun
+                        Öztürk</a> tarafından geliştirilmiştir.</div>
+            </div>
+        </footer>
+    </div>
+
+    <script src="../../js/utils.js"></script>
+    <script src="app.js"></script>
+</body>
+
+</html>

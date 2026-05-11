@@ -1,0 +1,97 @@
+/* DISSECTION THEME (LASER CUTTING) */
+:root {
+    --bg-dark: #000000;
+    --lazer-red: #ff003c;
+    --glass-blue: #0ae;
+    --text-white: #f8f8f8;
+}
+
+body {
+    background: var(--bg-dark);
+    color: var(--text-white);
+    font-family: 'Teko', sans-serif;
+    margin: 0; padding: 0;
+    min-height: 100vh;
+}
+
+.laser-bg {
+    position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+    background: radial-gradient(circle at 50% 50%, rgba(255, 0, 60, 0.05) 0%, transparent 60%);
+    z-index: -1;
+}
+
+.container {
+    max-width: 800px; margin: 0 auto; padding: 2rem;
+    display: flex; flex-direction: column; align-items: center;
+}
+
+header { text-align: center; margin-bottom: 1rem; }
+h1 { font-size: 3.5rem; letter-spacing: 5px; color: var(--lazer-red); margin: 0; text-shadow: 0 0 20px rgba(255,0,60,0.5); }
+.level-info { font-size: 1.5rem; color: #555; letter-spacing: 2px; }
+
+.glass-panel {
+    background: rgba(10, 10, 15, 0.9);
+    border: 1px solid #333;
+    border-radius: 4px;
+    padding: 2rem; width: 100%;
+    box-shadow: 0 0 30px rgba(0,0,0,1);
+    display: flex; flex-direction: column; align-items: center;
+}
+
+.instruction-box { text-align: center; margin-bottom: 2rem; width: 100%; }
+.instruction-box h2 { color: var(--glass-blue); font-size: 2rem; margin: 0; }
+.instruction-box p { font-size: 1.2rem; font-family: sans-serif; color: #ccc; }
+
+.hint-container { display: none; color: #777; font-size: 1.1rem; margin-top: 10px; font-family: sans-serif; }
+
+.canvas-container {
+    position: relative; width: 400px; height: 400px;
+    background: #050505; border: 2px solid #222;
+    border-radius: 50%; /* Saat veya dairesel his için */
+    overflow: hidden;
+    box-shadow: inset 0 0 50px rgba(0,170,238,0.1);
+    cursor: crosshair;
+}
+
+.shape-layer {
+    position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+}
+
+.clock-number {
+    position: absolute;
+    width: 30px; height: 30px;
+    margin-left: -15px; margin-top: -15px;
+    display: flex; justify-content: center; align-items: center;
+    font-size: 1.5rem; font-family: sans-serif; font-weight: bold;
+    color: var(--glass-blue);
+    text-shadow: 0 0 5px var(--glass-blue);
+    user-select: none; pointer-events: none;
+}
+
+canvas {
+    position: absolute; top: 0; left: 0; z-index: 10;
+}
+
+.controls { margin-top: 2rem; display: flex; gap: 15px; flex-wrap: wrap; justify-content: center; }
+
+.laser-btn {
+    background: transparent; border: 1px solid #555; color: #aaa;
+    font-family: 'Teko', sans-serif; font-size: 1.5rem; letter-spacing: 1px;
+    padding: 5px 20px; cursor: pointer; transition: 0.3s;
+}
+.laser-btn:hover { background: #222; color: #fff; }
+.laser-btn.primary { border-color: var(--lazer-red); color: var(--lazer-red); }
+.laser-btn.primary:hover { background: var(--lazer-red); color: #000; box-shadow: 0 0 20px var(--lazer-red); }
+.laser-btn.warning { border-color: #f90; color: #f90; }
+.laser-btn.warning:hover { background: #f90; color: #000; }
+.laser-btn.secondary { border-color: var(--glass-blue); color: var(--glass-blue); }
+.laser-btn.secondary:hover { background: var(--glass-blue); color: #000; }
+
+.feedback-message { text-align: center; font-size: 1.5rem; margin-top: 1rem; min-height: 30px; }
+.feedback-message.success { color: var(--lazer-red); text-shadow: 0 0 10px var(--lazer-red); }
+.feedback-message.error { color: #555; }
+
+.modal { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); display: flex; justify-content: center; align-items: center; opacity: 0; pointer-events: none; transition: 0.3s; z-index: 100; }
+.modal.active { opacity: 1; pointer-events: all; }
+.modal-content { background: #111; padding: 4rem; text-align: center; border: 1px solid var(--lazer-red); }
+.laser-glow { color: var(--lazer-red); font-size: 3rem; text-shadow: 0 0 20px var(--lazer-red); margin: 0; }

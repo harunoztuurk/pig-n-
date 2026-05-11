@@ -1,0 +1,230 @@
+/* Soft Pastel & Modern UI (Kombinatorik Tema) */
+:root {
+    --bg-color: #f8fafc;
+    --panel-bg: #ffffff;
+    --text-primary: #334155;
+    --zone-a-bg: #e0f2fe;
+    --zone-b-bg: #dcfce7;
+    --primary-btn: #3b82f6;
+    --warning-btn: #f59e0b;
+    --shadow: 0 10px 25px rgba(0,0,0,0.05);
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-primary);
+    font-family: 'Outfit', sans-serif;
+    margin: 0; padding: 0;
+}
+
+.waves-bg {
+    position: fixed;
+    top: 0; left: 0; width: 100vw; height: 100vh;
+    background: radial-gradient(circle at top left, #e0f2fe, transparent 70%),
+                radial-gradient(circle at bottom right, #fce7f3, transparent 70%);
+    z-index: -1;
+}
+
+.container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 2rem;
+}
+
+header {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+h1 {
+    font-size: 3rem;
+    color: #0f172a;
+    margin: 0;
+}
+
+.level-info {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: var(--primary-btn);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+.brain-panel {
+    background: var(--panel-bg);
+    border-radius: 20px;
+    padding: 2rem;
+    box-shadow: var(--shadow);
+}
+
+.story-box {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.story-box h2 {
+    color: #475569;
+    margin-top: 0;
+}
+
+.story-box p {
+    font-size: 1.2rem;
+    color: #64748b;
+}
+
+.hint-container {
+    display: none;
+    margin-top: 1rem;
+    background: #fef3c7;
+    color: #b45309;
+    padding: 10px;
+    border-radius: 8px;
+}
+
+/* Oyun Alanı (Zone) */
+.interaction-area {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 2rem;
+    padding: 2rem;
+    background: #f1f5f9;
+    border-radius: 16px;
+}
+
+.zone {
+    flex: 1;
+    min-height: 250px;
+    border-radius: 12px;
+    padding: 1rem;
+    border: 2px dashed #cbd5e1;
+    display: flex;
+    flex-direction: column;
+}
+
+#zoneA { background: var(--zone-a-bg); }
+#zoneB { background: var(--zone-b-bg); }
+
+.zone-title {
+    text-align: center;
+    font-weight: bold;
+    margin-bottom: 1rem;
+    color: #475569;
+}
+
+.slots-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+    align-items: center;
+    flex: 1;
+}
+
+.bridge {
+    width: 60px;
+    height: 10px;
+    background: #94a3b8;
+    position: relative;
+    border-radius: 5px;
+}
+
+/* Sürüklenebilir Öğeler (Bloklar) */
+.item-block {
+    width: 60px;
+    height: 60px;
+    background: white;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    cursor: grab;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    transition: transform 0.2s, background 0.2s;
+    user-select: none;
+}
+
+.item-block:active {
+    cursor: grabbing;
+    transform: scale(1.1);
+}
+
+.item-block.type-1 { background: #fee2e2; border: 2px solid #ef4444; }
+.item-block.type-2 { background: #e0e7ff; border: 2px solid #6366f1; }
+.item-block.type-3 { background: #fef08a; border: 2px solid #eab308; }
+
+/* Slot Kutuları (Bırakma Ekranı) */
+.drop-slot {
+    width: 70px;
+    height: 70px;
+    background: rgba(255,255,255,0.5);
+    border: 2px solid rgba(0,0,0,0.1);
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Butonlar */
+.comic-btn {
+    border: none;
+    padding: 12px 24px;
+    border-radius: 30px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    font-family: inherit;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+    display: inline-block;
+    margin: 0 10px;
+}
+
+.comic-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.comic-btn.primary { background: var(--primary-btn); color: white; }
+.comic-btn.warning { background: var(--warning-btn); color: white; }
+.comic-btn.secondary { background: #e2e8f0; color: #475569; }
+.comic-btn.default { background: transparent; border: 2px solid #cbd5e1; }
+
+.controls.center {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.feedback-message {
+    text-align: center;
+    font-size: 1.2rem;
+    font-weight: bold;
+    min-height: 24px;
+    margin-top: 1.5rem;
+}
+
+.feedback-message.success { color: #10b981; }
+.feedback-message.error { color: #ef4444; }
+
+/* Modal */
+.modal {
+    position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+    background: rgba(0,0,0,0.5);
+    backdrop-filter: blur(5px);
+    display: flex; align-items: center; justify-content: center;
+    opacity: 0; pointer-events: none; transition: opacity 0.3s;
+    z-index: 100;
+}
+.modal.active { opacity: 1; pointer-events: all; }
+.modal-content {
+    background: white; padding: 3rem; border-radius: 24px; text-align: center;
+    max-width: 500px;
+}
+
+@media(max-width: 768px) {
+    .interaction-area { flex-direction: column; }
+    .bridge { width: 10px; height: 40px; }
+}

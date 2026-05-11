@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diğer Bulmacalar (Optik İllüzyonlar)</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Roboto:wght@300;400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="void-bg"></div>
+
+    <div class="container">
+        <header>
+            <h1>O T H E R</h1>
+            <div class="level-info" id="levelInfo">Illusio // 01</div>
+        </header>
+
+        <div class="mystery-panel">
+            <div class="instruction-box">
+                <h2 id="questionTitle">Görsel Algı Testi</h2>
+                <p id="questionText">Siyah çizgiyi, kırmızı çizgiyle tam olarak AYNI uzunluğa getirin.</p>
+                <div class="hint-container" id="hintContainer"></div>
+                <button id="hintBtn" class="void-btn secondary" style="margin-top:10px;">Yardım</button>
+            </div>
+
+            <!-- İnteraktif İllüzyon Alanı -->
+            <div class="illusion-container" id="illusionContainer">
+                <!-- HTML yapısı app.js'ten doldurulacak -->
+            </div>
+
+            <!-- Kaydırıcı Kontrol -->
+            <div class="slider-container" id="sliderGroup" style="display: none;">
+                <input type="range" min="10" max="200" value="50" class="void-slider" id="illusionSlider">
+                <div class="slider-value" id="sliderValue">50%</div>
+            </div>
+
+            <div class="controls">
+                <button id="verifyBtn" class="void-btn primary">Gözlerime Güveniyorum</button>
+                <button class="void-btn default" onclick="window.location.href='../../index.html'">Uyan</button>
+            </div>
+            
+            <div id="feedbackMessage" class="feedback-message"></div>
+        </div>
+    </div>
+
+    <div id="endModal" class="modal">
+        <div class="modal-content">
+            <h2>HAYALLERİN ÖTESİNDE</h2>
+            <p>Zihniniz yanılsamaların ötesini gördü. Tebrikler.</p>
+            <br>
+            <button id="restartBtn" class="void-btn primary">Sonsuzluğa Dön</button>
+        </div>
+    </div>
+
+    <script src="levels.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>

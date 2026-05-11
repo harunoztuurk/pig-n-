@@ -1,0 +1,234 @@
+/* Blueprint Tema (Geometrik/Mimarî) */
+:root {
+    --blueprint-blue: #1e3a8a;
+    --blueprint-grid: rgba(255, 255, 255, 0.2);
+    --blueprint-line: rgba(255, 255, 255, 0.5);
+    --text-light: #f0fdfa;
+    --accent-yellow: #fde047;
+    --shape-color-1: #ef4444; /* Kırmızı */
+    --shape-color-2: #3b82f6; /* Mavi */
+    --shape-color-3: #10b981; /* Yeşil */
+    --shape-color-4: #f59e0b; /* Turuncu */
+    --shape-color-5: #8b5cf6; /* Mor */
+}
+
+body {
+    background-color: var(--blueprint-blue);
+    color: var(--text-light);
+    font-family: 'Inter', sans-serif;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+    min-height: 100vh;
+}
+
+/* Blueprint Izgara Arkaplanı */
+.blueprint-bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-image: 
+        linear-gradient(var(--blueprint-grid) 1px, transparent 1px),
+        linear-gradient(90deg, var(--blueprint-grid) 1px, transparent 1px),
+        linear-gradient(var(--blueprint-line) 2px, transparent 2px),
+        linear-gradient(90deg, var(--blueprint-line) 2px, transparent 2px);
+    background-size: 20px 20px, 20px 20px, 100px 100px, 100px 100px;
+    z-index: -1;
+    pointer-events: none;
+}
+
+.container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+header {
+    text-align: center;
+    margin-bottom: 1rem;
+}
+
+header h1 {
+    font-size: 2.5rem;
+    color: #fff;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+    margin: 0 0 10px 0;
+}
+
+.level-info {
+    font-size: 1.2rem;
+    color: var(--accent-yellow);
+    font-weight: 600;
+}
+
+.game-panel {
+    background: rgba(15, 23, 42, 0.8);
+    border: 2px solid var(--blueprint-line);
+    border-radius: 12px;
+    padding: 2rem;
+    width: 100%;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+}
+
+.instruction-box {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.instruction-box h2 {
+    color: var(--accent-yellow);
+    margin-top: 0;
+}
+
+.instruction-box p {
+    font-size: 1.1rem;
+    line-height: 1.5;
+}
+
+.hint-btn {
+    background: transparent;
+    border: 1px dashed var(--accent-yellow);
+    color: var(--accent-yellow);
+    padding: 5px 15px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    margin-top: 10px;
+}
+
+.hint-container {
+    display: none;
+    margin-top: 10px;
+    color: #93c5fd;
+    font-style: italic;
+}
+
+/* Oyun Alanı (Workspace) */
+.workspace {
+    position: relative;
+    width: 100%;
+    height: 500px;
+    background: rgba(255,255,255,0.05);
+    border: 1px solid var(--blueprint-line);
+    border-radius: 8px;
+    overflow: hidden;
+    margin-bottom: 2rem;
+}
+
+/* Hedef Bölge (Hayalet Çizim) */
+.target-zone {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    pointer-events: none; /* Hedefe tıklanmasını engelle */
+}
+
+/* Sürüklenebilir Geometrik Parçalar */
+.geo-piece {
+    position: absolute;
+    cursor: grab;
+    transition: filter 0.2s;
+    user-select: none;
+    touch-action: none; /* Mobil için önemli */
+}
+
+.geo-piece:active {
+    cursor: grabbing;
+    filter: drop-shadow(0 10px 15px rgba(0,0,0,0.5)) brightness(1.2);
+    z-index: 100;
+}
+
+/* Kontroller */
+.controls {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.action-button {
+    background: rgba(255,255,255,0.1);
+    border: 2px solid #fff;
+    color: #fff;
+    padding: 12px 24px;
+    border-radius: 6px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+    text-transform: uppercase;
+}
+
+.action-button:hover {
+    background: #fff;
+    color: var(--blueprint-blue);
+}
+
+.verify {
+    border-color: var(--shape-color-3);
+    color: var(--shape-color-3);
+}
+.verify:hover {
+    background: var(--shape-color-3);
+    color: #fff;
+}
+
+.reset {
+    border-color: var(--shape-color-4);
+    color: var(--shape-color-4);
+}
+.reset:hover {
+    background: var(--shape-color-4);
+    color: #fff;
+}
+
+.home-btn {
+    border-color: var(--shape-color-2);
+    color: var(--shape-color-2);
+    display: block;
+    margin: 1rem auto 0;
+}
+.home-btn:hover {
+    background: var(--shape-color-2);
+    color: #fff;
+}
+
+.feedback-message {
+    text-align: center;
+    font-size: 1.2rem;
+    font-weight: bold;
+    min-height: 1.5rem;
+    margin-top: 1rem;
+}
+.feedback-message.success { color: var(--shape-color-3); }
+.feedback-message.error { color: var(--shape-color-1); }
+
+/* Modal */
+.modal {
+    position: fixed;
+    top: 0; left: 0; width: 100vw; height: 100vh;
+    background: rgba(0,0,0,0.8);
+    display: flex; align-items: center; justify-content: center;
+    z-index: 1000;
+    opacity: 0; pointer-events: none; transition: opacity 0.3s;
+}
+.modal.active { opacity: 1; pointer-events: all; }
+.modal-content {
+    background: var(--blueprint-blue);
+    border: 4px solid var(--accent-yellow);
+    padding: 3rem;
+    text-align: center;
+    border-radius: 12px;
+}
+.modal-actions {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    margin-top: 2rem;
+}

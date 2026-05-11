@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Renk Kodlama - Pi Günü</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Orbitron:wght@700;900&family=Segoe+UI:wght@400;600;700;900&display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet" href="../../css/global.css">
+    <link rel="stylesheet" href="style.css">
+
+    <!-- Vercel Speed Insights -->
+    <script>
+        window.si = window.si || function () { (window.siq = window.siq || []).push(arguments); };
+    </script>
+    <script defer src="/_vercel/speed-insights/script.js"></script>
+</head>
+
+<body class="pi-body">
+    <div class="wrapper pi-wrapper">
+        <nav class="back-nav">
+            <a href="../../index.html" class="btn back-btn">◂ ANA MENÜYE DÖN</a>
+        </nav>
+
+        <div class="pi-header">
+            <h1 class="pi-title">🌈 Renk Kodlama</h1>
+            <p class="pi-subtitle">Renkleri keşfet → Karıştır → Şifreyi çöz!</p>
+
+            <!-- KRONOMETRE -->
+            <div
+                style="margin-top: 15px; font-size: 1.2rem; color: var(--yellow); text-shadow: 0 0 10px rgba(255, 230, 0, 0.4); text-align: center;">
+                [ GEÇEN SÜRE: <span id="gameTimerDisplay">00:00</span> ]
+            </div>
+        </div>
+
+        <div class="pi-tabs">
+            <button class="pi-tab active" data-phase="0">🎨 Temel Renkler</button>
+            <button class="pi-tab" data-phase="1">🔬 Karışımlar</button>
+            <button class="pi-tab" data-phase="2">🔑 Renk Şifresi</button>
+        </div>
+
+        <main class="pi-container">
+            <!-- AŞAMA 1 -->
+            <div id="phase-0" class="phase-panel active">
+                <h2 class="phase-title">🎨 Temel Renkler</h2>
+                <p class="phase-desc">Bu 4 temel rengi ve sayı karşılıklarını ezberle. Diğerlerini kendin keşfedeceksin!
+                </p>
+                <div class="colors-grid" id="phase1-grid">
+                    <!-- JS ile doldurulacak -->
+                </div>
+            </div>
+
+            <!-- AŞAMA 2 -->
+            <div id="phase-1" class="phase-panel">
+                <h2 class="phase-title">🔬 Renk Karışımları</h2>
+                <p class="phase-desc" style="margin-bottom:6px;">Soldaki renkli kutu <strong
+                        style="color:#FFD700;">sonuç rengidir</strong>. Boşlukları doldur ve ✓ tuşuna bas!</p>
+                <p style="color:#555; font-size:12px; margin-bottom:24px; text-align:center;">
+                    Renk kutularına <span style="color:#88aaff;">renk adı</span>, sayı kutularına <span
+                        style="color:#ffaa44;">rakam</span> yaz.
+                </p>
+                <div class="mixes-list" id="phase2-list">
+                    <!-- JS ile doldurulacak -->
+                </div>
+
+                <div id="phase2-success" class="phase-success" style="display:none;">
+                    🎉 Tüm renkleri keşfettin! Sıradaki aşamaya geçebilirsin!
+                </div>
+            </div>
+
+            <!-- AŞAMA 3 -->
+            <div id="phase-2" class="phase-panel">
+                <h2 class="phase-title">🔑 Renk Şifresi</h2>
+                <p class="phase-desc" style="margin-bottom:30px;">Her kutucuğun rengine bak, sayı karşılığını yaz!</p>
+
+                <div class="pi-inputs-grid" id="phase3-grid">
+                    <!-- JS ile doldurulacak -->
+                </div>
+
+                <div style="text-align: center; margin-top: 20px;">
+                    <button id="checkPiBtn" class="pi-check-btn" disabled>Kontrol Et ✔</button>
+                </div>
+
+                <div id="phase3-result" class="phase-result" style="display:none;"></div>
+            </div>
+        </main>
+
+        <div class="pi-actions">
+            <button id="btnPrev" class="pi-nav-btn prev" style="display:none;">← Geri</button>
+            <button id="btnNext" class="pi-nav-btn next">Devam →</button>
+        </div>
+
+        <!-- Sağ Taraftaki Renk Referans Tablosu -->
+        <div id="colorRefBox" class="color-ref-box" style="display:flex; flex-direction:column; gap:20px;">
+            <div>
+                <div class="ref-title">TABLO</div>
+                <div id="colorRefList" class="ref-list"></div>
+            </div>
+
+            <!-- LİDERLİK TABLOSU -->
+            <div>
+                <div class="ref-title" style="color:var(--yellow); border-bottom-color:var(--yellow); margin-top:10px;">
+                    DİĞER AJANLAR</div>
+                <div id="leaderboardList" class="ref-list"
+                    style="margin-top:10px; max-height: 150px; overflow-y: auto;">
+                    <div
+                        style="color: rgba(255, 255, 255, 0.5); font-size: 0.85rem; padding: 10px; text-align: center;">
+                        Şifrelenmiş veritabanı taranıyor...</div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <script src="../../js/utils.js"></script>
+    <script src="app.js"></script>
+</body>
+
+</html>

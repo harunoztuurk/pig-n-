@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Dijital Tangram - Pi Günü</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Orbitron:wght@700;900&display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet" href="../../css/global.css">
+    <link rel="stylesheet" href="style.css">
+
+    <!-- Vercel Speed Insights -->
+    <script>
+        window.si = window.si || function () { (window.siq = window.siq || []).push(arguments); };
+    </script>
+    <script defer src="/_vercel/speed-insights/script.js"></script>
+</head>
+
+<body>
+    <div class="scanline"></div>
+    <div class="wrapper">
+        <nav class="back-nav">
+            <a href="../../index.html" class="btn back-btn">◂ ANA MENÜYE DÖN</a>
+        </nav>
+
+        <header class="header">
+            <h1 class="title">DİJİTAL TANGRAM</h1>
+            <div class="subtitle">// ALAN KORUNUMU VE ÇOKGEN İNŞASI //</div>
+        </header>
+
+        <div class="divider"></div>
+
+        <main class="game-container">
+            <div class="section-label">[ 2D İNŞA EKRANI ]</div>
+
+            <div class="game-content">
+                <div class="task-box">
+                    <div style="margin-bottom: 10px; font-weight: bold; color: var(--yellow);">
+                        [ SEVİYE <span id="levelCounter">1</span>/50 ]
+                    </div>
+                    <span style="color:var(--cyan);">GÖREV:</span> 
+                    <strong style="font-size: 1.1rem; color:var(--pink);">Parçaları hedef iskelete yerleştir. Döndürmek için çift tıkla!</strong>
+                </div>
+
+                <div class="formula-box" id="formulaBox">
+                    <span style="color:#aaa; font-size:0.9rem;">Alan Toplamı (Sürüklerken Güncellenmez):</span><br>
+                    <strong id="areaFormula" style="color:var(--cyan); font-size:1.1rem;">A_toplam = ?</strong>
+                </div>
+
+                <div class="canvas-container" id="canvasWrapper">
+                    <canvas id="gameCanvas" width="600" height="500"></canvas>
+                </div>
+                
+                <div class="controls-row">
+                    <button id="resetBtn" class="btn check-btn" style="width: 200px;">PARÇALARI DAĞIT</button>
+                </div>
+
+                <div id="gameMessage" class="game-message" style="margin-top: 15px;"></div>
+            </div>
+        </main>
+
+        <div class="divider"></div>
+        <footer class="footer">
+            <div class="copyright-wrap" style="flex-direction: column; align-items: center; gap: 8px;">
+                <div class="copyright"><span class="tm">TM</span> <a href="#" target="_blank" class="author-link">Müfit
+                        ŞAN</a> tarafından tasarlanmıştır.</div>
+                <div class="copyright"><a href="https://www.zolak.com.tr/" target="_blank" class="author-link">Harun
+                        Öztürk</a> tarafından geliştirilmiştir.</div>
+            </div>
+        </footer>
+    </div>
+
+    <script src="../../js/utils.js"></script>
+    <script src="app.js"></script>
+</body>
+
+</html>

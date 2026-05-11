@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sayı Bulmacaları - Yoshigahara Puzzles</title>
+    <!-- Modern Fontlar -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Arkada Uçuşan Sayılar (DOM manipülasyonu ile app.js üzerinden artırılabilir) -->
+    <div class="background-numbers-container" id="bgNumbers">
+        <span class="floating-number" style="left: 10%; animation-delay: 0s;">0</span>
+        <span class="floating-number" style="left: 20%; animation-delay: 2s;">1</span>
+        <span class="floating-number" style="left: 35%; animation-delay: 4s;">5</span>
+        <span class="floating-number" style="left: 50%; animation-delay: 1s;">8</span>
+        <span class="floating-number" style="left: 65%; animation-delay: 5s;">3</span>
+        <span class="floating-number" style="left: 80%; animation-delay: 3s;">9</span>
+        <span class="floating-number" style="left: 90%; animation-delay: 6s;">2</span>
+    </div>
+
+    <div class="container">
+        <header>
+            <h1>Sayı Bulmacaları</h1>
+            <div class="level-info" id="levelInfo">Seviye 1 / 10</div>
+        </header>
+
+        <div class="glass-panel main-game-card">
+            <div class="question-container">
+                <h2 id="questionTitle">Soru Başlığı</h2>
+                <div class="question-text" id="questionText">
+                    <!-- Soru metni app.js ile buraya yüklenecek -->
+                </div>
+            </div>
+
+            <div class="input-section">
+                <!-- Özel Numara Girişi Alanı -->
+                <input type="text" id="answerInput" class="cyber-input" placeholder="..." autocomplete="off" inputmode="numeric">
+                <button id="submitBtn" class="cyber-button">Cevapla</button>
+            </div>
+            
+            <div id="feedbackMessage" class="feedback-message"></div>
+
+            <div class="controls">
+                <button id="homeBtn" class="btn-secondary">Menüye Dön</button>
+                <button id="hintBtn" class="btn-secondary">İpucu Al</button>
+            </div>
+
+            <div id="hintContainer" class="hint-container">
+                <!-- İpucu metni app.js ile buraya yüklenecek -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Oyun Bitiş Modalı -->
+    <div id="endModal" class="modal">
+        <div class="modal-content">
+            <h2>Tebrikler!</h2>
+            <p>Tüm sayı bulmacalarını başarıyla tamamladınız. Zihniniz harika çalışıyor!</p>
+            <br>
+            <button id="restartBtn" class="cyber-button">Tekrar Oyna</button>
+            <br><br>
+            <button class="btn-secondary" onclick="window.location.href='../../index.html'">Menüye Dön</button>
+        </div>
+    </div>
+
+    <!-- Veri ve Mantık Katmanı -->
+    <script src="levels.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>

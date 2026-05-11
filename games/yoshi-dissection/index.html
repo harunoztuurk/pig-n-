@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Parçalama Bulmacaları (Lazer Kesim)</title>
+    <link href="https://fonts.googleapis.com/css2?family=Teko:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="laser-bg"></div>
+
+    <div class="container">
+        <header>
+            <h1>[ D I S S E C T I O N ]</h1>
+            <div class="level-info" id="levelInfo">Kesim = 01</div>
+        </header>
+
+        <div class="glass-panel">
+            <div class="instruction-box">
+                <h2 id="questionTitle">Lazer Operasyonu</h2>
+                <p id="questionText">Sistemi başlat.</p>
+                <button id="hintBtn" class="laser-btn secondary">Analiz Raporu</button>
+                <div id="hintContainer" class="hint-container"></div>
+            </div>
+
+            <!-- Etkileşim Tuvali -->
+            <div class="canvas-container" id="canvasContainer">
+                <!-- Arkaplan Şekilleri (CSS) -->
+                <div id="shapeLayer" class="shape-layer"></div>
+                <!-- Çizim Katmanı -->
+                <canvas id="laserCanvas" width="500" height="500"></canvas>
+            </div>
+
+            <div class="controls">
+                <button id="verifyBtn" class="laser-btn primary">Kesimi Onayla</button>
+                <button id="resetBtn" class="laser-btn warning">Lazerleri Temizle</button>
+                <button class="laser-btn default" onclick="window.location.href='../../index.html'">Ayrıl</button>
+            </div>
+            
+            <div id="feedbackMessage" class="feedback-message"></div>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div id="endModal" class="modal">
+        <div class="modal-content">
+            <h2 class="laser-glow">KUSURSUZ KESİM</h2>
+            <p>Parçalama algılarınız mükemmel.</p>
+            <br>
+            <button id="restartBtn" class="laser-btn primary">Reset System</button>
+        </div>
+    </div>
+
+    <script src="levels.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
