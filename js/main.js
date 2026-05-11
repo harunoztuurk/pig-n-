@@ -149,6 +149,7 @@ const games = [
     { id: 'yoshi-geometric', title: 'GEOMETRIC PUZZLES', desc: 'Şekillerin arasındaki gizli formülleri hesaplayın.', icon: '📐', url: 'games/yoshi-geometric/index.html' },
     { id: 'yoshi-dissection', title: 'DISSECTION PUZZLES', desc: 'Şekilleri parçalama ve birleştirme üzerine zeka soruları.', icon: '✂️', url: 'games/yoshi-dissection/index.html' },
     { id: 'yoshi-other', title: 'OTHER PUZZLES', desc: 'Nobuyuki Yoshigahara\'dan ilginç tasarımlar.', icon: '🧩', url: 'games/yoshi-other/index.html' }
+    }
 ];
 
 // Global scope variables for modal state
