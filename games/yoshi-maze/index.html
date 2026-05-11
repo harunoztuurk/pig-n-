@@ -7,8 +7,11 @@
     <!-- 80s Retrowave font -->
     <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Orbitron:wght@700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../css/global.css">
 </head>
 <body>
+    <div class="scanline"></div>
     <div class="synth-bg">
         <div class="sun"></div>
         <div class="grid-floor"></div>
@@ -25,7 +28,7 @@
                 <h2 id="questionTitle">Arrow Maze</h2>
                 <p id="questionText">Sadece okların gösterdiği yönde ilerleyebilirsiniz.</p>
                 <div class="hint-wrap">
-                    <button id="hintBtn" class="arcade-btn small secondary">Yardım?</button>
+                    <button id="hintBtn" class="btn back-btn">Yardım?</button>
                     <div id="hintContainer" class="hint-container"></div>
                 </div>
             </div>
@@ -46,8 +49,8 @@
             </div>
 
             <div class="controls">
-                <button id="resetBtn" class="arcade-btn warning">Tekrar Dene</button>
-                <button class="arcade-btn default" onclick="window.location.href='../../index.html'">Menü</button>
+                <button id="resetBtn" class="btn check-btn">Tekrar Dene</button>
+                <button class="btn back-btn" onclick="window.location.href='../../index.html'">Menü</button>
             </div>
             
             <div id="feedbackMessage" class="feedback-message"></div>
@@ -61,7 +64,7 @@
             <h3 class="neon-text blue">NO, YOU WON!</h3>
             <p>Tüm labirent kurallarını çözdünüz.</p>
             <br>
-            <button id="restartBtn" class="arcade-btn primary">Yeniden Oyna</button>
+            <button id="restartBtn" class="btn check-btn">Yeniden Oyna</button>
         </div>
     </div>
 

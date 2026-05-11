@@ -139,16 +139,16 @@ const games = [
         icon: '🧩',
         url: 'games/dijital-tangram/index.html'
     },
-    { id: 'yoshi-introductory', title: 'INTRODUCTORY PUZZLES', desc: 'Temel mantık ve sayısal bulmacalarla tanışın.', icon: '🎲', url: 'games/yoshi-introductory/index.html' },
-    { id: 'yoshi-matchstick', title: 'MATCHSTICK PUZZLES', desc: 'Kibrit çöpleriyle görsel uzamsal yeteneğinizi zorlayın.', icon: '🔥', url: 'games/yoshi-matchstick/index.html' },
-    { id: 'yoshi-maze', title: 'MAZE PUZZLES', desc: 'Karmaşık yollardan çıkış noktasını bulun.', icon: '🌀', url: 'games/yoshi-maze/index.html' },
-    { id: 'yoshi-algorithmic', title: 'ALGORITHMIC PUZZLES', desc: 'Mantık kapıları ve algoritmik düşünce testleri.', icon: '⚙️', url: 'games/yoshi-algorithmic/index.html' },
-    { id: 'yoshi-combinatorial', title: 'COMBINATORIAL PUZZLES', desc: 'Olasılıklar ve kombinasyonlarla uğraşın.', icon: '🔄', url: 'games/yoshi-combinatorial/index.html' },
-    { id: 'yoshi-digital', title: 'DIGITAL PUZZLES', desc: 'Rakamların dans ettiği elektronik paneller.', icon: '📟', url: 'games/yoshi-digital/index.html' },
-    { id: 'yoshi-number', title: 'NUMBER PUZZLES', desc: 'Matematik temelli sayı dizileri ve ilişkileri.', icon: '🔢', url: 'games/yoshi-number/index.html' },
-    { id: 'yoshi-geometric', title: 'GEOMETRIC PUZZLES', desc: 'Şekillerin arasındaki gizli formülleri hesaplayın.', icon: '📐', url: 'games/yoshi-geometric/index.html' },
-    { id: 'yoshi-dissection', title: 'DISSECTION PUZZLES', desc: 'Şekilleri parçalama ve birleştirme üzerine zeka soruları.', icon: '✂️', url: 'games/yoshi-dissection/index.html' },
-    { id: 'yoshi-other', title: 'OTHER PUZZLES', desc: 'Nobuyuki Yoshigahara\'dan ilginç tasarımlar.', icon: '🧩', url: 'games/yoshi-other/index.html' }
+    { id: 'yoshi-introductory', title: 'GİRİŞ BULMACALARI', desc: 'Temel mantık ve sayısal bulmacalarla tanışın.', icon: '🎲', url: 'games/yoshi-introductory/index.html' },
+    { id: 'yoshi-matchstick', title: 'KİBRİT ÇÖPÜ BULMACALARI', desc: 'Kibrit çöpleriyle görsel uzamsal yeteneğinizi zorlayın.', icon: '🔥', url: 'games/yoshi-matchstick/index.html' },
+    { id: 'yoshi-maze', title: 'LABİRENT BULMACALARI', desc: 'Karmaşık yollardan çıkış noktasını bulun.', icon: '🌀', url: 'games/yoshi-maze/index.html' },
+    { id: 'yoshi-algorithmic', title: 'ALGORİTMİK BULMACALAR', desc: 'Mantık kapıları ve algoritmik düşünce testleri.', icon: '⚙️', url: 'games/yoshi-algorithmic/index.html' },
+    { id: 'yoshi-combinatorial', title: 'KOMBİNASYON BULMACALARI', desc: 'Olasılıklar ve kombinasyonlarla uğraşın.', icon: '🔄', url: 'games/yoshi-combinatorial/index.html' },
+    { id: 'yoshi-digital', title: 'DİJİTAL BULMACALAR', desc: 'Rakamların dans ettiği elektronik paneller.', icon: '📟', url: 'games/yoshi-digital/index.html' },
+    { id: 'yoshi-number', title: 'SAYI BULMACALARI', desc: 'Matematik temelli sayı dizileri ve ilişkileri.', icon: '🔢', url: 'games/yoshi-number/index.html' },
+    { id: 'yoshi-geometric', title: 'GEOMETRİ BULMACALARI', desc: 'Şekillerin arasındaki gizli formülleri hesaplayın.', icon: '📐', url: 'games/yoshi-geometric/index.html' },
+    { id: 'yoshi-dissection', title: 'PARÇALAMA BULMACALARI', desc: 'Şekilleri parçalama ve birleştirme üzerine zeka soruları.', icon: '✂️', url: 'games/yoshi-dissection/index.html' },
+    { id: 'yoshi-other', title: 'DİĞER BULMACALAR', desc: 'Nobuyuki Yoshigahara\'dan ilginç tasarımlar.', icon: '🧩', url: 'games/yoshi-other/index.html' }
 ];
 
 // Global scope variables for modal state
