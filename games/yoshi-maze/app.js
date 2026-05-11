@@ -18,6 +18,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // State Variables
     let playerPos = { r: 0, c: 0 };
     let playerEl = null;
+    let isMoving = false; // Prevent multiple inputs while sliding
 
     function loadLevel(index) {
         if (index >= totalLevels) {
@@ -89,6 +90,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Hareket Motoru
     function handleMove(dr, dc) {
+        if (isMoving) return;
         const level = levelsData[currentLevelIndex];
         const currentVal = level.grid[playerPos.r][playerPos.c];
 
@@ -129,6 +131,7 @@ document.addEventListener('DOMContentLoaded', () => {
             return showError("O yönde hemen duvar var.");
         }
 
+        isMoving = true;
         // Kayabildiği kadar kaysın
         const slideInterval = setInterval(() => {
             let nextR = playerPos.r + dr;
@@ -142,11 +145,13 @@ document.addEventListener('DOMContentLoaded', () => {
                 // Kayarken hedefin üzerine gelirse doğrudan bitir
                 if (level.grid[playerPos.r][playerPos.c] === 'G') {
                     clearInterval(slideInterval);
+                    isMoving = false;
                     checkWinCondition();
                 }
             } else {
                 // Duvara veya sınıra çarptık, dur
                 clearInterval(slideInterval);
+                isMoving = false;
             }
         }, 100); // 100ms hızla kare kare kaydır
     }
